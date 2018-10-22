@@ -1,0 +1,72 @@
+<div class="card login-card">
+  <div class="card-body input-body">
+    <form #userLogin (ngSubmit) = "login()">
+
+      <h2 class="headline">Login</h2>
+      <p *ngIf="loginFinished">{{callbackMessage}}</p>
+      <p class="input-headline">Username</p>
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i>
+        <input mdbInputDirective
+               data-error="wrong email"
+               [formControl]="emailFormEx"
+               data-success="valid email"
+               minLength="8"
+               maxLength="25"
+               type="email"
+               class="form-control"
+               id="login"
+               name="name"
+               mdbInputDirective
+               [(ngModel)]="model.username">
+        <label for="login" class="small-text">Type your username</label>
+      </div>
+      <p class="input-headline">Password</p>
+      <div class="md-form">
+        <i class="fa fa-lock prefix"></i>
+        <input mdbInputDirective
+               data-error="wrong password"
+               [formControl]="passwordFormEx"
+               data-success="valid password"
+               minLength="10"
+               maxLength="25"
+               type="password"
+               class="form-control"
+               id="pass"
+               name="password"
+               [(ngModel)]="model.password">
+        <label for="pass"
+               class="small-text">Type your password</label>
+        <a href="#" class="forgot-pass gray-text">Forgot password?</a>
+      </div>
+      <mat-spinner class="loadingSpinner" [diameter]="50" [strokeWidth]="5"  *ngIf="loginStarted"></mat-spinner>
+      <button mdbBtn
+              *ngIf="!loginStarted"
+              class="login-button"
+              type="submit"
+              gradient="purple"
+              mdbWavesEffect
+              (click)="login()">Login</button>
+    </form>
+
+  </div>
+  <p class="center-text">Or sing in using</p>
+  <div class="row ">
+    <div class="social-button">
+      <a class="btn btn-social-icon btn-twitter twt">
+        <span class="fa fa-twitter"></span>
+      </a>
+      <a class="btn btn-social-icon btn-facebook fb">
+        <span class="fa fa-facebook "></span>
+      </a>
+      <a class="btn btn-social-icon btn-google gp">
+        <span class="fa fa-google-plus"></span>
+      </a>
+    </div>
+  </div>
+  <p class="center-text gray-text top-space-lg">Have no account yet?</p>
+  <a href="#" class="center-text bottom-space-md">SIGN UP</a>
+
+
+</div>
+

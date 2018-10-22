@@ -1,0 +1,12 @@
+<div *ngIf="pageLoaded">
+  <div [hidden]="!authenticated()">
+    <p>Hi {{userName}}!</p>
+    <p>You are logged in</p>
+  </div>
+  <div [hidden]="authenticated()">
+    <p>Hi! Login to see your greeting</p>
+  </div>
+  <p><a [routerLink]="['/login']" (click)="logout()" >Logout</a></p>
+</div>
+<mat-spinner class="loadingSpinner" [diameter]="150" [strokeWidth]="5"  *ngIf="!pageLoaded"></mat-spinner>
+
