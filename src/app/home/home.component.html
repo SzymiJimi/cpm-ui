@@ -1,12 +1,58 @@
-<div *ngIf="pageLoaded">
-  <div [hidden]="!authenticated()">
-    <p>Hi {{userName}}!</p>
-    <p>You are logged in</p>
-  </div>
-  <div [hidden]="authenticated()">
-    <p>Hi! Login to see your greeting</p>
-  </div>
-  <p><a [routerLink]="['/login']" (click)="logout()" >Logout</a></p>
-</div>
-<mat-spinner class="loadingSpinner" [diameter]="150" [strokeWidth]="5"  *ngIf="!pageLoaded"></mat-spinner>
+<div class="container-fluid font main-card">
+    <div class="card">
+      <div class="card-body">
+        <p class="subpage-info">>Dashboard </p>
+        <div class="today-calendar">
+          <p class="today-date">Today: <span class="format-date">{{dateToShow}}</span></p>
+        </div>
+        <div class="row">
+          <div class="card card-style">
+            <div class="card-header">
+              Open reservations
+            </div>
+            <div class="card-body">
+              <p class="card-text">In this window you will see your opened reservations.</p>
+            </div>
+            <div class="card-footer text-muted"><a href="#" class="btn btn-primary btn-md">Go to reservations</a></div>
+          </div>
+          <div class="card card-style">
+            <div class="card-header">
+              Reservations
+            </div>
+            <div class="card-body">
+              <p class="info-digit centered">0</p>
+              <p class="centered">booked</p>
+              <p class="info-digit centered">0</p>
+              <p class="centered">previous</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card card-style">
+            <div class="card-header">
+              Open chech-outs
+            </div>
+            <div class="card-body">
+              <p class="card-text">In this window you will see your opened reservations.</p>
+            </div>
+            <div class="card-footer text-muted"><a href="#" class="btn btn-primary btn-md">Go to check-outs</a>
+            </div>
+          </div>
+          <div class="card card-style">
+            <div class="card-header">
+              Check-outs
+            </div>
+            <div class="card-body">
+              <p class="info-digit centered">0</p>
+              <p class="centered">open</p>
+              <p class="info-digit centered">0</p>
+              <p class="centered">previous</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--</div>-->
 
+  </div>
+
+</div>

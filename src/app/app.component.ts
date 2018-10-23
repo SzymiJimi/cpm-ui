@@ -4,29 +4,32 @@ import { HttpClient } from '@angular/common/http';
 import {Router} from '@angular/router';
 import '../../node_modules/rxjs/add/operator/finally';
 import {UserService} from './shared/services/user.service';
+import {LoginService} from './shared/services/login.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [LoginService]
 })
 export class AppComponent implements OnInit{
-  title = 'cpm-ui';
-  constructor(private app: AppService, private userService: UserService, private router: Router) {
 
+  constructor(private app: AppService, private userService: UserService, private router: Router) {
   }
 
   dataChecked = false;
+  personData:string ='';
 
   ngOnInit(){
     this.userService.loadUser().subscribe(
       ()=>{
-      this.app.authenticated = true;
+        this.app.changeAuthenticated(true);
         this.dataChecked = true;
+        this.personData= this.userService.user.idPersonaldata.name + ' ' + this.userService.user.idPersonaldata.surname;
     },
       ()=>{
-        this.app.authenticated = false;
+        this.app.changeAuthenticated(false);
         this.dataChecked = true;
       } );
   }

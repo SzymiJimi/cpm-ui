@@ -1,3 +1,41 @@
+
+
 .loadingSpinner {
   margin: 15% auto 0 auto;
+}
+
+.card-style{
+  margin: 2%;
+  width: 45%;
+  height: 350px;
+}
+
+.info-digit{
+  font-size: 34pt;
+}
+
+.centered{
+  text-align: center;
+}
+
+.today-calendar{
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  width: 30%;
+  margin-left: 67%;
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  background-color: rgba(0,0,0,0.03);
+}
+
+.today-date{
+  margin-top: 8px;
+  text-align: center;
+  vertical-align: center;
+}
+
+.format-date{
+  margin-left: 15px;
+  font-size: 16pt;
+  font-weight: bold;
 }

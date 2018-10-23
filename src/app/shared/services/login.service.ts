@@ -21,7 +21,6 @@ export class LoginService{
   login(credentials: {username: string, password: string}){
 
     let url = environment.endpointBase + 'login';
-
     this.http.post<Observable<boolean>>(url, {
       username: credentials.username,
       password: credentials.password
@@ -35,18 +34,19 @@ export class LoginService{
   }
 
   private failLogIn(){
-    this.app.authenticated = false;
+    this.app.changeAuthenticated(false);
     this.callback.next('error');
   }
 
   private logUserIn(credentials: {username: string, password: string}){
     this.callback.next('success');
-    this.app.authenticated = true;
+    this.app.changeAuthenticated(true);
     sessionStorage.setItem(
       'token',
       btoa(credentials.username + ':' + credentials.password)
     );
-    this.userService.loadUser().subscribe((user)=> {
+
+    this.userService.loadUser().subscribe(()=> {
       this.router.navigate(['']);
     });
   }

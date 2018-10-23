@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map'
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [LoginService]
+  providers: []
 })
 export class LoginComponent implements OnInit {
   emailFormEx: FormControl;

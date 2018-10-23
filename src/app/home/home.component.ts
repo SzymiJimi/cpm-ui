@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from '../shared/services/user.service';
 import {AppService} from '../shared/services/app.service';
 import {Subscriber, Subscription} from 'rxjs';
+import {UserModel} from '../shared/models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ import {Subscriber, Subscription} from 'rxjs';
 export class HomeComponent implements OnInit{
 
   pageLoaded = true;
-  userName: string;
+
+  dateToShow;
 
   constructor(private userService: UserService,
               private app: AppService) {
@@ -19,16 +21,15 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.userName = this.userService.userString;
-    console.log(this.userService.userString);
+    let date = new Date();
+    this.dateToShow = "  "+date.getDate()+" / "+date.getMonth()+" / "+date.getFullYear();
   }
 
   logout() {
-    this.app.authenticated = false;
-    this.userService.userString = '';
+    this.app.changeAuthenticated(false);
+    this.userService.user = new UserModel();
     sessionStorage.setItem('token', '');
   }
-
 
   authenticated() { return this.app.authenticated; }
 

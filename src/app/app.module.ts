@@ -12,6 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AppService} from './shared/services/app.service';
 import {UserService} from './shared/services/user.service';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AuthorizedDirective } from './shared/directives/authorized.directive';
+import { UnauthorizedDirective } from './shared/directives/unauthorized.directive';
 
 
 
@@ -19,7 +22,10 @@ import {UserService} from './shared/services/user.service';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent,
+    AuthorizedDirective,
+    UnauthorizedDirective
   ],
   exports: [
     MatProgressSpinnerModule

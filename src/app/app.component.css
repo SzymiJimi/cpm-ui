@@ -9,3 +9,14 @@
   background-size: cover;
 }
 
+.font{
+  font-family: 'Poppins', sans-serif;
+}
+
+.main-card{
+  width: 80%;
+}
+
+.subpage-info{
+  font-size: 20pt;
+}
