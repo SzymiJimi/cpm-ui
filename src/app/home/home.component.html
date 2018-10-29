@@ -1,6 +1,6 @@
 <div class="container-fluid font main-card">
     <div class="card">
-      <div class="card-body">
+      <div *appAuthorized class="card-body">
         <p class="subpage-info">>Dashboard </p>
         <div class="today-calendar">
           <p class="today-date">Today: <span class="format-date">{{dateToShow}}</span></p>
@@ -50,6 +50,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div *appUnauthorized class="card-body">
+        Welcome on our page sign in to see the content.
       </div>
     <!--</div>-->
 

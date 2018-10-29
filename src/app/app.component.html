@@ -1,6 +1,7 @@
 <div class="bg-image">
   <app-navbar ></app-navbar>
   <div style="height: 100%;">
-    <router-outlet *ngIf="dataChecked"></router-outlet>
+    <router-outlet *ngIf="dataChecked || !authenticated" ></router-outlet>
+    <!---->
   </div>
 </div>

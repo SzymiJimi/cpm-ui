@@ -6,7 +6,38 @@ import { LoginComponent } from './login/login.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatNativeDateModule, MatProgressSpinnerModule} from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatBadgeModule,
+  MatBottomSheetModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule, MatSortModule,
+  MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
+} from '@angular/material';
 import { HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -15,6 +46,12 @@ import {UserService} from './shared/services/user.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthorizedDirective } from './shared/directives/authorized.directive';
 import { UnauthorizedDirective } from './shared/directives/unauthorized.directive';
+import { ItemsComponent } from './items/items.component';
+import { ManagerDirective } from './shared/directives/manager.directive';
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import { SimpleDatePipe } from './shared/pipes/simple-date.pipe';
+import { ItemDetailsComponent } from './items/item-details/item-details.component';
 
 
 
@@ -25,7 +62,11 @@ import { UnauthorizedDirective } from './shared/directives/unauthorized.directiv
     HomeComponent,
     NavbarComponent,
     AuthorizedDirective,
-    UnauthorizedDirective
+    UnauthorizedDirective,
+    ItemsComponent,
+    ManagerDirective,
+    SimpleDatePipe,
+    ItemDetailsComponent
   ],
   exports: [
     MatProgressSpinnerModule
@@ -35,9 +76,47 @@ import { UnauthorizedDirective } from './shared/directives/unauthorized.directiv
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatFormFieldModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
+    CdkTableModule,
+    CdkTreeModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
     AppRoutingModule

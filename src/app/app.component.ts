@@ -20,8 +20,11 @@ export class AppComponent implements OnInit{
 
   dataChecked = false;
   personData:string ='';
+  authenticated= false;
 
   ngOnInit(){
+    this.app.authenticatedSubject.next(false);
+    this.checkAuth();
     this.userService.loadUser().subscribe(
       ()=>{
         this.app.changeAuthenticated(true);
@@ -32,6 +35,10 @@ export class AppComponent implements OnInit{
         this.app.changeAuthenticated(false);
         this.dataChecked = true;
       } );
+  }
+
+  checkAuth(){
+    this.authenticated =  this.app.authenticated;
   }
 
 }

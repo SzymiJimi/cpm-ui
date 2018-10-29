@@ -11,19 +11,30 @@ export class UnauthorizedDirective implements OnInit{
   showed=false;
 
   ngOnInit(){
+    if(this.appService.authenticated===false){
+      this.show();
+    }
     this.appService.authenticatedSubject.subscribe((value => {
       if(!value){
         if(this.showed === false)
         {
-          this.vcRef.createEmbeddedView(this.templateRef);
-          this.showed = true;
+          this.show();
         }
       }else{
-        this.vcRef.clear();
-        this.showed = false;
+         this.clear();
       }
     }));
 
+  }
+
+  private show(){
+    this.vcRef.createEmbeddedView(this.templateRef);
+    this.showed = true;
+  }
+
+  private clear(){
+    this.vcRef.clear();
+    this.showed = false;
   }
 
 }

@@ -35,4 +35,8 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['login']);
   }
 
+  navigateItems()
+  {
+    this.router.navigate(['items']);
+  }
 }

@@ -1,7 +1,7 @@
 <ul class="font">
   <li class="site-name">Company property management</li>
   <div *appAuthorized>
-    <li><a href="#home">Items</a></li>
+    <li><a routerLink="items">Items</a></li>
     <li><a href="#news">Reservations</a></li>
     <li><a href="#contact">My Items</a></li>
     <li><a href="#contact">Reports</a></li>
@@ -11,7 +11,7 @@
     <li style="float:right"><a class="active" href="#about">{{personData}}</a></li>
   </div>
   <div *appUnauthorized>
-    <li style="float:right"><a class="active" (click)="navigateLogin()">Sign in</a></li>
+    <li style="float:right"><a class="active" routerLink="login">Sign in</a></li>
   </div>
 
 </ul>
