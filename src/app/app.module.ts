@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
-
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  DateAdapter,
   MatAutocompleteModule,
   MatBadgeModule,
   MatBottomSheetModule,
@@ -52,6 +53,12 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import { SimpleDatePipe } from './shared/pipes/simple-date.pipe';
 import { ItemDetailsComponent } from './items/item-details/item-details.component';
+import { ItemNewComponent } from './items/item-new/item-new.component';
+import { DateFormat } from './date-format';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { LocationComponent } from './location/location.component';
+import { ItemDetailInfoComponent } from './items/item-details/item-detail-info/item-detail-info.component';
+
 
 
 
@@ -66,12 +73,16 @@ import { ItemDetailsComponent } from './items/item-details/item-details.componen
     ItemsComponent,
     ManagerDirective,
     SimpleDatePipe,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    ItemNewComponent,
+    LocationComponent,
+    ItemDetailInfoComponent
   ],
   exports: [
     MatProgressSpinnerModule
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -125,4 +136,11 @@ import { ItemDetailsComponent } from './items/item-details/item-details.componen
   providers: [AppService, UserService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private dateAdapter:DateAdapter<Date>) {
+    dateAdapter.setLocale('en-in'); // DD/MM/YYYY
+  }
+
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule);

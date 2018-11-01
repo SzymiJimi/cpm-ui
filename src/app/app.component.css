@@ -20,3 +20,39 @@
 .subpage-info{
   font-size: 20pt;
 }
+
+
+.side-extra-bar {
+  margin-top: 2px;
+  /*min-height: 200px;*/
+  padding: 0;
+  width: 10.70%;
+  background-color: #333;
+  /*height: 30%; !* Full height *!*/
+  border-bottom-right-radius: 9px;
+  border-top-right-radius: 9px;
+  position: absolute;
+  overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+
+
+
+.option-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+  overflow: auto;
+}
+
+.element-list {
+  display: block;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.element-list:hover {
+  background-color: #fdffee;
+  color: #9c46ff;
+}

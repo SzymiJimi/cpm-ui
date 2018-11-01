@@ -5,13 +5,15 @@ import {Router} from '@angular/router';
 import '../../node_modules/rxjs/add/operator/finally';
 import {UserService} from './shared/services/user.service';
 import {LoginService} from './shared/services/login.service';
+import {LocationService} from './location/location.service';
+import {Roles} from './shared/enums/roles.enum';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.None,
-  providers: [LoginService]
+  providers: [LoginService, LocationService]
 })
 export class AppComponent implements OnInit{
 
@@ -40,5 +42,18 @@ export class AppComponent implements OnInit{
   checkAuth(){
     this.authenticated =  this.app.authenticated;
   }
+
+  // showItemSideBar(){
+  //   if(this.userService.user!==undefined){
+  //     if(this.userService.user.idRole.name===Roles.MANAGER)
+  //     {
+  //       if(this.router.url.includes('item')){
+  //         return true;
+  //       }
+  //     }
+  //   }
+  //   return false;
+  //
+  // }
 
 }

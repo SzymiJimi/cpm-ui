@@ -3,6 +3,7 @@ import {UserModel} from '../shared/models/user.model';
 import {AppService} from '../shared/services/app.service';
 import {UserService} from '../shared/services/user.service';
 import {Router} from '@angular/router';
+import {Roles} from '../shared/enums/roles.enum';
 
 @Component({
   selector: 'app-navbar',
@@ -39,4 +40,19 @@ export class NavbarComponent implements OnInit{
   {
     this.router.navigate(['items']);
   }
+
+  showItemSideBar(){
+    if(this.userService.user!==undefined){
+      if(this.userService.user.idRole.name===Roles.MANAGER)
+      {
+        if(this.router.url.includes('item')){
+          return true;
+        }
+      }
+    }
+    return false;
+
+  }
+
+
 }

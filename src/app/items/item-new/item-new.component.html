@@ -1,0 +1,162 @@
+<div class="container-fluid font main-card">
+  <div class="card">
+    <div *appAuthorized class="card-body">
+      <div *appManager>
+        <p class="subpage-info">>Item </p>
+        <hr>
+        <div class="button-row float-right manage-btn">
+          <button mat-raised-button class="add-button" (click)="addItem()">Add</button>
+        </div>
+        <hr style="margin-top: 70px">
+        <div class="item-add-box">
+          <div class="item-info">
+            <div class="row">
+              <div class="input-label">
+                <h5>Item general information</h5>
+                <p>Write a brand, model, value of item</p>
+              </div>
+              <div class="card input-card">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="inputBrand">Brand</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputBrand"
+                      [(ngModel)]="newItem.brand"
+                      placeholder="e.g. Lenovo">
+                  </div>
+                  <div class="form-group">
+                    <label for="inputModel">Model</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputModel"
+                      [(ngModel)]="newItem.model"
+                      placeholder="e.g. Omen 15">
+                  </div>
+                  <div class="form-group">
+                    <label for="inputValue">Value</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="newItem.value"
+                      id="inputValue"
+                      placeholder="USD">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="input-label">
+                <h5>Item details</h5>
+                <p>Input date of purchase and provide warranty info</p>
+              </div>
+              <div class="card input-card">
+                <div class="card-body">
+
+                  <div class="form-group">
+                    <label for="inputPurchaseDate">Purchase date</label>
+                    <div class="input-group">
+                      <div class="input-date">
+                        <input class="form-control"
+                               placeholder="dd/mm/yyyy"
+                               name="dp"
+                               [(ngModel)]="newItem.purchaseDate"
+                               [matDatepicker]="pickerPurchase"
+                               id="inputPurchaseDate">
+                      </div>
+                      <div class="input-group-append">
+                        <mat-datepicker-toggle matSuffix [for]="pickerPurchase"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerPurchase></mat-datepicker>
+                      </div>
+                      <button mat-stroked-button class="select-today" (click)="selectToday()">Select Today</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputWarrantyDate">Warranty date</label>
+                    <div class="input-group">
+                      <div class="input-date">
+                        <input class="form-control"
+                               placeholder="dd/mm/yyyy"
+                               name="dp"
+                               [(ngModel)]="newItem.warrantyDate"
+                               [matDatepicker]="pickerWarranty"
+                               id="inputWarrantyDate">
+                      </div>
+                      <div class="input-group-append">
+                        <mat-datepicker-toggle matSuffix [for]="pickerWarranty"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerWarranty></mat-datepicker>
+                      </div>
+                    </div>
+                    <div class="warranty-select">
+                      <button mat-stroked-button class="select-period" (click)="selectWarrantyDate(2)">2 years form
+                        purchase
+                      </button>
+                      <button mat-stroked-button class="select-period" (click)="selectWarrantyDate(3)">3 years from
+                        purchase
+                      </button>
+                      <button mat-stroked-button class="select-period" (click)="selectWarrantyDate(5)">5 years from
+                        purchase
+                      </button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSerial">Serial number</label>
+                    <input type="text"
+                           class="form-control"
+                           [(ngModel)]="newItem.serialNumber"
+                           id="inputSerial">
+                  </div>
+                  <div class="form-group">
+                    <label for="inputLocation">Location</label>
+                    <select
+                      class="form-control"
+                      id="inputLocation"
+                      [(ngModel)]="locationSet"
+                    >
+                      <option selected>Choose...</option>
+                      <option *ngFor="let location of locations" [value]="location.idLocation">{{location.name + ' '+
+                        location.address}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="input-label">
+                <h5>Item description</h5>
+                <p>Write description of an item.</p>
+              </div>
+              <div class="card input-card">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="inputDescription">Description</label>
+                    <textarea
+                      class="form-control"
+                      id="inputDescription"
+                      [(ngModel)]="newItem.description"
+                      rows="4"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="button-row float-right manage-btn">
+              <mat-spinner class="loadingSpinner" [diameter]="50" [strokeWidth]="5" *ngIf="addingStarted"></mat-spinner>
+              <button mat-raised-button *ngIf="!addingStarted" class="add-button" (click)="addItem()">Add</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div *appUnauthorized class="card-body">
+        Welcome on our page sign in to see the content.
+      </div>
+
+    </div>
+
+  </div>

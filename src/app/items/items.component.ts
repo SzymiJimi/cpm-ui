@@ -1,8 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ItemsService} from './items.service';
 import {ItemModel} from '../shared/models/item.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {LocationService} from '../location/location.service';
+import {LocationModel} from '../shared/models/location.model';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -10,6 +13,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss'],
   providers: [ItemsService],
+  // encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
@@ -20,8 +24,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class ItemsComponent implements OnInit {
 
-  displayedColumns: string[] = ['idItem', 'brand', 'model', 'value'];
-  displayedColumnsNames: string[] = ['ID', 'Brand', 'Model', 'Value'];
+  displayedColumns: string[] = ['idItem', 'brand', 'model', 'value','description'];
+  displayedColumnsNames: string[] = ['ID', 'Brand', 'Model', 'Value','Description'];
+
+
 
   dataLoaded = false;
 
@@ -47,7 +53,7 @@ export class ItemsComponent implements OnInit {
     }
   }
 
-  constructor(private itemService: ItemsService) {
+  constructor(private itemService: ItemsService, private router: Router ) {
     this.itemService.getItems().subscribe((items) => {
         this.dataLoaded = true;
         this.dataSource = new MatTableDataSource<ItemModel>(items);
@@ -84,7 +90,7 @@ export class ItemsComponent implements OnInit {
 
 
   loadDetails(element) {
-    console.log(element);
+    this.router.navigateByUrl("item/"+element.idItem);
   }
 
   applyFilter(filterValue: string) {
@@ -94,5 +100,7 @@ export class ItemsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+
 }
 
