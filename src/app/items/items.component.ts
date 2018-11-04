@@ -6,6 +6,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {LocationService} from '../location/location.service';
 import {LocationModel} from '../shared/models/location.model';
 import {Router} from '@angular/router';
+import {AppService} from '../shared/services/app.service';
 
 
 @Component({
@@ -53,7 +54,23 @@ export class ItemsComponent implements OnInit {
     }
   }
 
-  constructor(private itemService: ItemsService, private router: Router ) {
+  constructor(private itemService: ItemsService, private router: Router, private app: AppService) {
+
+    if(this.app.authenticated===true){
+      this.getItemList();
+    }else{
+      this.app.authenticatedSubject.subscribe(()=>{
+          this.getItemList();
+        }
+      );
+    }
+  }
+
+  ngOnInit() {
+
+  }
+
+  private getItemList(){
     this.itemService.getItems().subscribe((items) => {
         this.dataLoaded = true;
         this.dataSource = new MatTableDataSource<ItemModel>(items);
@@ -62,10 +79,6 @@ export class ItemsComponent implements OnInit {
       (error) => {
 
       });
-  }
-
-  ngOnInit() {
-
   }
 
   setDataSourceAttributes() {

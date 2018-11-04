@@ -6,6 +6,7 @@ import {HomeComponent} from './home/home.component';
 import {ItemsComponent} from './items/items.component';
 import {ItemDetailsComponent} from './items/item-details/item-details.component';
 import {ItemNewComponent} from './items/item-new/item-new.component';
+import {ReservationsComponent} from './reservations/reservations.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,6 +14,9 @@ const appRoutes: Routes = [
   { path: 'items', component: ItemsComponent },
   { path: 'item/new', component: ItemNewComponent },
   { path: 'item/:id', component: ItemDetailsComponent },
+  { path: 'my/reservations', component: ReservationsComponent },
+  { path: 'reservation/new', component: ReservationsComponent },
+  { path: 'reservations/all', component: ReservationsComponent },
   { path: '**', redirectTo: '' }
 ];
 

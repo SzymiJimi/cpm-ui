@@ -40,6 +40,7 @@ export class LoginService{
 
   private logUserIn(credentials: {username: string, password: string}){
     this.callback.next('success');
+
     this.app.changeAuthenticated(true);
     sessionStorage.setItem(
       'token',

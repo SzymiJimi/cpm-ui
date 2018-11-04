@@ -43,17 +43,4 @@ export class AppComponent implements OnInit{
     this.authenticated =  this.app.authenticated;
   }
 
-  // showItemSideBar(){
-  //   if(this.userService.user!==undefined){
-  //     if(this.userService.user.idRole.name===Roles.MANAGER)
-  //     {
-  //       if(this.router.url.includes('item')){
-  //         return true;
-  //       }
-  //     }
-  //   }
-  //   return false;
-  //
-  // }
-
 }

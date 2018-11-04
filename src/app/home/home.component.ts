@@ -11,12 +11,10 @@ import {UserModel} from '../shared/models/user.model';
 })
 export class HomeComponent implements OnInit{
 
-  pageLoaded = true;
 
   dateToShow;
 
-  constructor(private userService: UserService,
-              private app: AppService) {
+  constructor() {
 
   }
 
@@ -25,13 +23,6 @@ export class HomeComponent implements OnInit{
     this.dateToShow = "  "+date.getDate()+" / "+date.getMonth()+" / "+date.getFullYear();
   }
 
-  logout() {
-    this.app.changeAuthenticated(false);
-    this.userService.user = new UserModel();
-    sessionStorage.setItem('token', '');
-  }
-
-  authenticated() { return this.app.authenticated; }
 
 
 }

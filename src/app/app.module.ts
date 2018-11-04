@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  DateAdapter,
+  // DateAdapter,
   MatAutocompleteModule,
   MatBadgeModule,
   MatBottomSheetModule,
@@ -58,8 +58,13 @@ import { DateFormat } from './date-format';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { LocationComponent } from './location/location.component';
 import { ItemDetailInfoComponent } from './items/item-details/item-detail-info/item-detail-info.component';
-
-
+import {CalendarModule, DateAdapter} from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import {FlatpickrModule} from 'angularx-flatpickr';
+import {DemoUtilsModule} from './items/demo-utils/module';
+import {CommonModule} from '@angular/common';
+import { ReservationsComponent } from './reservations/reservations.component';
+import {ReservationsService} from './reservations/reservations.service';
 
 
 @NgModule({
@@ -76,12 +81,15 @@ import { ItemDetailInfoComponent } from './items/item-details/item-detail-info/i
     ItemDetailsComponent,
     ItemNewComponent,
     LocationComponent,
-    ItemDetailInfoComponent
+    ItemDetailInfoComponent,
+    ReservationsComponent
   ],
   exports: [
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ItemDetailsComponent
   ],
   imports: [
+    CommonModule,
     NgbModule,
     BrowserModule,
     FormsModule,
@@ -129,17 +137,23 @@ import { ItemDetailInfoComponent } from './items/item-details/item-detail-info/i
     MatTooltipModule,
     MatTreeModule,
     ReactiveFormsModule,
+    NgbModalModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     MDBBootstrapModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    DemoUtilsModule
   ],
 
   providers: [AppService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private dateAdapter:DateAdapter<Date>) {
-    dateAdapter.setLocale('en-in'); // DD/MM/YYYY
-  }
+  // constructor(private dateAdapter:DateAdapter<Date>) {
+  //   dateAdapter.setLocale('en-in'); // DD/MM/YYYY
+  // }
 
 }
 

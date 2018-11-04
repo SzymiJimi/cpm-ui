@@ -54,5 +54,18 @@ export class NavbarComponent implements OnInit{
 
   }
 
+  showReservationSideBar(){
+    if(this.userService.user!==undefined){
+      if(this.userService.user.idRole.name===Roles.MANAGER)
+      {
+        if(this.router.url.includes('reservation')){
+          return true;
+        }
+      }
+    }
+    return false;
+
+  }
+
 
 }

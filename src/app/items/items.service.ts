@@ -38,7 +38,6 @@ export class ItemsService {
     return new Observable<any>((observer) => {
 
       this.http.post(environment.endpointBase + 'item/new', item, this.app.options).subscribe(res => {
-          this.app.changeAuthenticated(true);
           // this.user = res['body'] as UserModel;
           // this.personData.next(this.user.idPersonaldata.name + ' ' + this.user.idPersonaldata.surname);
           observer.next('success');
@@ -46,7 +45,6 @@ export class ItemsService {
         },
         error => {
           if (error.status == 401) {
-            this.app.changeAuthenticated(false);
             observer.error('error with send data');
           }
           observer.complete();
@@ -59,10 +57,13 @@ export class ItemsService {
     return new Observable<ItemModel>((observer) => {
       this.http.get(environment.endpointBase + 'item/'+id, this.app.options).subscribe(res => {
           let item: ItemModel = res['body'] as ItemModel;
+          console.log("No mam itemek");
+          console.log(item);
           observer.next(item);
           observer.complete();
         },
         error => {
+        console.log("Brak itemka");
           if (error.status == 401) {
             observer.error('unauthorized');
           }
