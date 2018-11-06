@@ -14,13 +14,18 @@ export class HomeComponent implements OnInit{
 
   dateToShow;
 
-  constructor() {
-
+  constructor(private app: AppService) {
+    console.log(this.app.authenticated);
   }
 
   ngOnInit() {
+    this.app.authenticatedSubject.subscribe((value)=>
+    {
+      console.log('Zmieniono auth');
+      console.log(this.app.authenticated);
+    });
     let date = new Date();
-    this.dateToShow = "  "+date.getDate()+" / "+date.getMonth()+" / "+date.getFullYear();
+    this.dateToShow = "  "+date.getDate()+" / "+(date.getMonth()+1)+" / "+date.getFullYear();
   }
 
 

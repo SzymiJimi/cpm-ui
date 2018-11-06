@@ -8,18 +8,20 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {ReservationsService} from './reservations.service';
 import {ReservationModel} from '../shared/models/reservation.model';
 import {AppService} from '../shared/services/app.service';
+import {UserService} from '../shared/services/user.service';
 
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.scss'],
-  providers:[ReservationsService]
+  providers: [ReservationsService]
 })
 export class ReservationsComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'name', 'from', 'to', 'duration','contact'];
+  displayedColumns: string[] = ['select', 'name', 'from', 'to', 'duration', 'contact'];
 
   dataLoaded = false;
+  dataLoadingStarted = false;
 
   expandedElement: any;
 
@@ -43,28 +45,39 @@ export class ReservationsComponent implements OnInit {
     }
   }
 
-  constructor(private reservationService: ReservationsService, private router: Router , private app: AppService) {
-
+  constructor(private reservationService: ReservationsService, private router: Router, private app: AppService, private user: UserService) {
+    this.dataLoaded = false;
+    this.dataLoadingStarted = false;
   }
 
   ngOnInit() {
-    if(this.app.authenticated===true){
+    if(this.app.authenticated === true){
+      this.dataLoaded= true;
+      this.dataLoadingStarted = false;
       this.getReservationList();
     }else{
-      this.app.authenticatedSubject.subscribe(()=>{
-        this.getReservationList();
+      this.app.authenticatedSubject.subscribe((value) => {
+        if (!this.dataLoaded && !this.dataLoadingStarted) {
+          this.dataLoadingStarted = true;
+          this.getReservationList();
         }
-      );
+      });
     }
+
+
   }
 
-  private getReservationList(){
+  private getReservationList() {
     this.reservationService.getUserReservations().subscribe((reservations) => {
         this.dataLoaded = true;
+        console.log(this.reservationService.reservationsList);
         this.dataSource = new MatTableDataSource<ReservationModel>(reservations);
+        this.dataLoadingStarted = false;
+        console.log(reservations);
         this.initialize();
       },
       (error) => {
+        this.dataLoadingStarted = false;
 
       });
   }
@@ -79,12 +92,12 @@ export class ReservationsComponent implements OnInit {
     }
   }
 
-  calculateDuration(from: Date, to: Date){
+  calculateDuration(from: Date, to: Date) {
     let newFrom = new Date(from);
     let newTo = new Date(to);
     let fromInMs = newFrom.getTime();
     let toInMs = newTo.getTime();
-    return (toInMs - fromInMs)  / 1000 / 60 / 60 / 24;
+    return (toInMs - fromInMs) / 1000 / 60 / 60 / 24;
 
   }
 

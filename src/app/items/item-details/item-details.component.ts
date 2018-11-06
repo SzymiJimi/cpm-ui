@@ -57,7 +57,7 @@ export class ItemDetailsComponent implements OnInit {
   dataLoaded = false;
   private sub: any;
 
-  constructor(private router: ActivatedRoute, private itemService: ItemsService, private modal: NgbModal, private http: HttpClient) {
+  constructor(private router: ActivatedRoute, private itemService: ItemsService, private routerNav: Router) {
     // this.tenDays.setDate(this.tenDays.getDay()+4);
   }
 
@@ -138,6 +138,11 @@ export class ItemDetailsComponent implements OnInit {
       `https://www.themoviedb.org/movie/${event.meta.film.id}`,
       '_blank'
     );
+  }
+
+  reserveItem(element: ItemModel){
+    this.itemService.itemToReserve = this.item;
+    this.routerNav.navigateByUrl('reservation/new');
   }
 
 

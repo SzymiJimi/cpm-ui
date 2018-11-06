@@ -12,6 +12,7 @@ import {HttpClient} from '@angular/common/http';
 export class ItemsService {
 
   itemsList: ItemModel[];
+  itemToReserve: ItemModel;
 
   constructor(private app: AppService, private http: HttpClient) { }
 
@@ -33,17 +34,17 @@ export class ItemsService {
   }
 
   addItem(item: ItemModel){
-    console.log('Otrzymany item');
-    console.log(item);
+    console.log('dodawany item');
     return new Observable<any>((observer) => {
-
-      this.http.post(environment.endpointBase + 'item/new', item, this.app.options).subscribe(res => {
-          // this.user = res['body'] as UserModel;
-          // this.personData.next(this.user.idPersonaldata.name + ' ' + this.user.idPersonaldata.surname);
+      let newHeader = this.app.options;
+      newHeader.responseType= 'text';
+      this.http.post<string>(environment.endpointBase + 'item/new', item, newHeader).subscribe(res => {
+          newHeader.responseType= 'json';
           observer.next('success');
           observer.complete();
         },
         error => {
+          newHeader.responseType= 'json';
           if (error.status == 401) {
             observer.error('error with send data');
           }

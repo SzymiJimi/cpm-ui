@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {LocationModel} from '../shared/models/location.model';
 import {HttpClient} from '@angular/common/http';
 import {AppService} from '../shared/services/app.service';
+import {errorObject} from 'rxjs/internal-compatibility';
 
 @Injectable({
   providedIn: 'root'

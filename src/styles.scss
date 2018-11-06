@@ -19,3 +19,4 @@ $candy-app-primary: mat-palette($mat-indigo);
 $candy-app-accent:  mat-palette($mat-cyan, 600);
 $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 @include angular-material-theme($candy-app-theme);
+@import "~ng-pick-datetime/assets/style/picker.min.css";

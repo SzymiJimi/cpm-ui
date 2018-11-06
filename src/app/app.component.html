@@ -1,13 +1,6 @@
 <div class="bg-image">
   <app-navbar ></app-navbar>
   <div style="height: 100%;">
-    <!--<div *ngIf="showItemSideBar()" class="side-extra-bar font">-->
-      <!--<ul class="option-list">-->
-      <!--<li ><a class="element-list" routerLink="item/new">New item</a></li>-->
-      <!--<li ><a class="element-list" routerLink="items">Item list</a></li>-->
-      <!--<li ><a class="element-list" routerLink="items/settings">Settings</a></li>-->
-      <!--</ul>-->
-    <!--</div>-->
     <router-outlet *ngIf="dataChecked || !authenticated" ></router-outlet>
 
   </div>

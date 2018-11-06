@@ -13,7 +13,6 @@ import {AppService} from '../shared/services/app.service';
   selector: 'app-items',
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss'],
-  providers: [ItemsService],
   // encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('detailExpand', [
@@ -114,6 +113,10 @@ export class ItemsComponent implements OnInit {
     }
   }
 
+  reserveItem(element: ItemModel){
+    this.itemService.itemToReserve = element;
+    this.router.navigateByUrl('reservation/new');
+  }
 
 }
 

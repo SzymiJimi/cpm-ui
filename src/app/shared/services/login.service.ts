@@ -41,14 +41,14 @@ export class LoginService{
   private logUserIn(credentials: {username: string, password: string}){
     this.callback.next('success');
 
-    this.app.changeAuthenticated(true);
     sessionStorage.setItem(
       'token',
       btoa(credentials.username + ':' + credentials.password)
     );
 
     this.userService.loadUser().subscribe(()=> {
-      this.router.navigate(['']);
+      this.app.changeAuthenticated(true);
+      this.router.navigateByUrl('/');
     });
   }
 

@@ -7,7 +7,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  // DateAdapter,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+
   MatAutocompleteModule,
   MatBadgeModule,
   MatBottomSheetModule,
@@ -65,6 +66,10 @@ import {DemoUtilsModule} from './items/demo-utils/module';
 import {CommonModule} from '@angular/common';
 import { ReservationsComponent } from './reservations/reservations.component';
 import {ReservationsService} from './reservations/reservations.service';
+import { ReservationNewComponent } from './reservations/reservation-new/reservation-new.component';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {ReservationListDialogComponent} from './reservations/reservation-new/reservations-dialog/reservation-list-dialog.component';
+import {DatetimePipe} from './shared/pipes/datetime.pipe';
 
 
 @NgModule({
@@ -78,17 +83,23 @@ import {ReservationsService} from './reservations/reservations.service';
     ItemsComponent,
     ManagerDirective,
     SimpleDatePipe,
+    DatetimePipe,
     ItemDetailsComponent,
     ItemNewComponent,
     LocationComponent,
     ItemDetailInfoComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    ReservationNewComponent,
+    ReservationListDialogComponent
   ],
   exports: [
     MatProgressSpinnerModule,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    MatDialogModule
   ],
   imports: [
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     CommonModule,
     NgbModule,
     BrowserModule,
@@ -146,15 +157,14 @@ import {ReservationsService} from './reservations/reservations.service';
     AppRoutingModule,
     DemoUtilsModule
   ],
+  entryComponents: [
+    ReservationListDialogComponent
+  ],
 
-  providers: [AppService, UserService],
+  providers: [AppService, UserService, {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  // constructor(private dateAdapter:DateAdapter<Date>) {
-  //   dateAdapter.setLocale('en-in'); // DD/MM/YYYY
-  // }
-
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule);

@@ -19,6 +19,7 @@ export class AuthorizedDirective implements OnInit{
         if(this.showed === false)
         {
           this.show();
+        }else{
         }
       }else{
         this.clear();

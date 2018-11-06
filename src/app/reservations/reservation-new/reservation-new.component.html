@@ -1,0 +1,130 @@
+<div class="container-fluid font main-card">
+  <div class="card">
+    <div *appAuthorized class="card-body">
+      <div *appManager>
+        <p class="subpage-info">>Reservation > New </p>
+        <hr>
+        <div *ngIf="reservingItem!==undefined && itemChecked===true" class="button-row float-right manage-btn">
+          <button mat-raised-button class="add-button" (click)="reserveItem()">Reserve</button>
+        </div>
+        <hr *ngIf="reservingItem!==undefined && itemChecked===true" style="margin-top: 70px">
+        <div *ngIf="reservingItem!==undefined && itemChecked===true">
+
+          <div class="item-add-box">
+            <div class="item-info">
+              <div class="row">
+                <div class="input-label">
+                  <h5>General information about reservation</h5>
+                  <p>Select an item from a list</p>
+                </div>
+                <div class="card properties-fields input-card">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Brand
+                      <span class="property-value">{{reservingItem.brand}}</span>
+                    </li>
+                    <li class="list-group-item">Model
+                      <span class="property-value">{{reservingItem.model}}</span>
+                    </li>
+                    <li class="list-group-item">Available
+                      <span class="property-value">YES</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="input-label">
+                  <h5>Reservation details</h5>
+                  <p>Select date from and date to and reason for reservation.</p>
+                </div>
+                <div class="card input-card">
+                  <div class="card-body">
+                      <button mat-raised-button class="wide-styled-button float-right" (click)="openReservationListDialog()">Show reservations for this item</button>
+                    <div class="form-group">
+                      <label for="inputFromDate">From</label>
+                      <div class="input-group">
+                        <div class="input-date">
+                          <input class="form-control"
+                                 [owlDateTime]="fromDateTime"
+                                 [owlDateTimeTrigger]="fromDateTime"
+                                 placeholder="Click to select"
+                                 name="dp"
+                                 [(ngModel)]="newReservation.from"
+                                 id="inputFromDate">
+                        </div>
+                        <div class="input-group-append">
+                          <owl-date-time #fromDateTime></owl-date-time>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputToDate">To</label>
+                      <div class="input-group">
+                        <div class="input-date">
+                          <input class="form-control"
+                                 [owlDateTime]="toDateTime"
+                                 [owlDateTimeTrigger]="toDateTime"
+                                 placeholder="Click to select"
+                                 name="dp"
+                                 [(ngModel)]="newReservation.to"
+                                 id="inputToDate">
+                        </div>
+                        <div class="input-group-append">
+                          <owl-date-time #toDateTime></owl-date-time>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputReason">Reason</label>
+                      <textarea
+                        class="form-control"
+                        id="inputReason"
+                        [(ngModel)]="newReservation.reason"
+                        rows="4"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="input-label">
+                  <h5>Contact for </h5>
+                  <p>Write description of an item.</p>
+                </div>
+                <div class="card input-card">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="inputDescription">Contact</label>
+                      <textarea
+                        class="form-control"
+                        id="inputDescription"
+                        [(ngModel)]="newReservation.contact"
+                        rows="4"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="button-row float-right manage-btn">
+                <mat-spinner class="loadingSpinner" [diameter]="50" [strokeWidth]="5"
+                             *ngIf="reservingStarted"></mat-spinner>
+                <button mat-raised-button *ngIf="!reservingStarted" class="add-button" (click)="reserveItem()">Reserve
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="reservingItem===undefined" style="text-align: center; margin-top: 50px">
+          You haven't chosen any item to reserve...
+          <p style="margin-top: 350px; margin-bottom: 50px">Go back to <a routerLink="/items">item list</a></p>
+        </div>
+
+      </div>
+    </div>
+    <div *appUnauthorized class="card-body">
+      Welcome on our page sign in to see the content.
+    </div>
+
+  </div>
+
+</div>

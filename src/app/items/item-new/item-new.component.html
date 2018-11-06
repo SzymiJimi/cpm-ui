@@ -5,7 +5,8 @@
         <p class="subpage-info">>Item </p>
         <hr>
         <div class="button-row float-right manage-btn">
-          <button mat-raised-button class="add-button" (click)="addItem()">Add</button>
+          <mat-spinner class="loadingSpinner" [diameter]="50" [strokeWidth]="5" *ngIf="addingStarted"></mat-spinner>
+          <button mat-raised-button class="add-button" *ngIf="!addingStarted" (click)="addItem()">Add</button>
         </div>
         <hr style="margin-top: 70px">
         <div class="item-add-box">
@@ -150,7 +151,6 @@
               <button mat-raised-button *ngIf="!addingStarted" class="add-button" (click)="addItem()">Add</button>
             </div>
           </div>
-
         </div>
       </div>
       <div *appUnauthorized class="card-body">

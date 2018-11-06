@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import {Subject} from 'rxjs';
+import {UserService} from './user.service';
 
 @Injectable()
 export class AppService {

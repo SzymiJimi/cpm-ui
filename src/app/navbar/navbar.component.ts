@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit{
     this.app.changeAuthenticated(false);
     this.userService.user = new UserModel();
     sessionStorage.setItem('token', '');
-    this.router.navigate(['']);
+    this.router.navigateByUrl('/');
 
   }
 

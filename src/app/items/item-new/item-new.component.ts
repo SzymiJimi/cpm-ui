@@ -4,6 +4,7 @@ import {LocationService} from '../../location/location.service';
 import {ItemModel} from '../../shared/models/item.model';
 import {UserService} from '../../shared/services/user.service';
 import {ItemsService} from '../items.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-item-new',
@@ -22,7 +23,10 @@ export class ItemNewComponent implements OnInit {
 
   locationSet;
 
-  constructor( private locationService: LocationService, private user: UserService, private itemService: ItemsService) {
+  constructor( private locationService: LocationService,
+               private user: UserService,
+               private itemService: ItemsService,
+               private router: Router) {
   }
 
   ngOnInit() {
@@ -64,7 +68,7 @@ export class ItemNewComponent implements OnInit {
     this.findLocationById(this.locationSet);
     this.setCreationUser();
     this.itemService.addItem(this.newItem).subscribe(()=>{
-      console.log('Dodano pomyślnie');
+      this.router.navigateByUrl('/');
     },(error)=>{
       console.log('Coś poszło nie tak');
     })

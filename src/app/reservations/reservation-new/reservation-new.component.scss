@@ -1,0 +1,96 @@
+.add-button{
+  background-color: #258eaf;
+  color: white;
+  text-align: center;
+  width: 110px;
+  margin-left: 2%;
+  margin-right: 2%;
+
+}
+
+.wide-styled-button{
+  background-color: #258eaf;
+  color: white;
+  text-align: center;
+  width: 250px;
+  margin-bottom: 1%;
+
+}
+
+
+.item-add-box{
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.06);
+  height: 1070px;
+}
+
+.item-info{
+  width: 80%;
+  margin: auto;
+}
+
+.input-label{
+  margin-top: 20px;
+  width: 35%;
+}
+
+.input-card{
+  margin-top: 20px;
+  margin-left: 5%;
+  width: 60%;
+}
+
+.item-details{
+
+}
+
+
+
+.btnek {
+  border-width: 1px;
+  border-radius: 3px;
+  border-color: rgba(0,0,0,0.2);
+}
+
+.btnek:hover {
+  border-width: 1px;
+  border-radius: 3px;
+  border-color: rgba(0,0,0,0.2);
+  background-color: rgba(0,0,0,0.2);
+}
+
+
+.select-today{
+  border-color: #ced4da;
+  margin: 0 !important;
+  text-align-all: center;
+  height: 38px;
+  width: 25%;
+}
+
+.select-today:hover.select-period:hover{
+  background-color: rgba(0,0,0,0.5) !important;
+  color: white;
+
+}
+.select-period{
+  border-color: #ced4da;
+  text-align-all: center;
+  height: 38px;
+  width: 31%;
+  margin: 1% 1% 1% 0;
+}
+
+.warranty-select{
+
+}
+
+.input-date{
+  width: 100%;
+}
+
+
+.property-value{
+  float: right;
+  color: rgba(0,0,0,0.6);
+}
