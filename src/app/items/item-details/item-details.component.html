@@ -21,7 +21,8 @@
             <div class="item-info">
               <p class="brand-info">{{item.brand}}</p>
               <p>{{item.model}}</p>
-              <p>Dostępność</p>
+              <p *ngIf="available"><span class="dot-green"></span>Available</p>
+              <p *ngIf="!available"><span class="dot-red"></span>Not available</p>
             </div>
           </div>
           <hr>
@@ -31,12 +32,44 @@
                 <!--Informacja czy produkt jest aktualnie dostępny, Timeline oraz kalendarz-->
                 <!--z-->
                 <!--dniami kiedy wolny a kiedy zajęty item-->
-                <mwl-demo-utils-calendar-header
-                  [(view)]="view"
-                  [(viewDate)]="viewDate"
-                  (viewDateChange)="fetchEvents()"
-                  (viewChange)="fetchEvents()">
-                </mwl-demo-utils-calendar-header>
+                <!--<mwl-demo-utils-calendar-header-->
+                  <!--[(view)]="view"-->
+                  <!--[(viewDate)]="viewDate"-->
+                  <!--(viewDateChange)="fetchEvents()"-->
+                  <!--(viewChange)="fetchEvents()">-->
+                <!--</mwl-demo-utils-calendar-header>-->
+                <div class="center-block">
+                  <div class="col-md-4">
+                    <div class="btn-group">
+                      <div
+                        class="btn btn-primary"
+                        mwlCalendarPreviousView
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="activeDayIsOpen = false">
+                        Previous
+                      </div>
+                      <div
+                        class="btn btn-outline-secondary"
+                        mwlCalendarToday
+                        [(viewDate)]="viewDate">
+                        Today
+                      </div>
+                      <div
+                        class="btn btn-primary"
+                        mwlCalendarNextView
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="activeDayIsOpen = false">
+                        Next
+                      </div>
+                    </div>
+                  </div>
+                  <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+                </div>
+
+
+
 
                 <ng-template #loading>
                   <div class="text-center">
@@ -50,6 +83,7 @@
                   <div [ngSwitch]="view">
                     <mwl-calendar-month-view
                       [viewDate]="viewDate"
+                      [refresh]="refresh"
                       [events]="events"
                       [activeDayIsOpen]="activeDayIsOpen"
                       (dayClicked)="dayClicked($event.day)"

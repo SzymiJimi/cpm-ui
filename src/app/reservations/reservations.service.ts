@@ -16,19 +16,17 @@ export class ReservationsService {
   }
 
   reservationsList: ReservationModel[];
+  allReservationListForItem: ReservationModel[];
 
   getUserReservations(): Observable<ReservationModel[]> {
-    console.log('no tu');
+    console.log(this.app.options);
     return new Observable<ReservationModel[]>((observer) => {
-      console.log('tu tes');
       this.http.get(environment.endpointBase + 'reservations/user/' + this.user.user.idUser, this.app.options).subscribe(res => {
           this.reservationsList = res['body'] as ReservationModel[];
-          console.log('no jeste');
           observer.next(this.reservationsList);
           observer.complete();
         },
         error => {
-        console.log(error);
           observer.error('error with send data');
           observer.complete();
         }
@@ -50,11 +48,31 @@ export class ReservationsService {
   }
 
   getReservationsForItem(itemId): Observable<ReservationModel[]> {
+    this.app.options.responseType = 'json';
     let reservationsForItem: ReservationModel[];
     return new Observable<ReservationModel[]>((observer) => {
       this.http.get(environment.endpointBase + 'reservations/item/' + itemId, this.app.options).subscribe(res => {
+        console.log(res['body'] as ReservationModel[]);
           reservationsForItem = res['body'] as ReservationModel[];
           observer.next(reservationsForItem);
+          observer.complete();
+        },
+        error => {
+          observer.error('error with send data');
+          observer.complete();
+        }
+      );
+
+    });
+  }
+
+  getAllReservationsForItem(itemId): Observable<ReservationModel[]> {
+    this.app.options.responseType = 'json';
+    let allReservationsForItem: ReservationModel[];
+    return new Observable<ReservationModel[]>((observer) => {
+      this.http.get(environment.endpointBase + 'reservations/all/item/' + itemId, this.app.options).subscribe(res => {
+          allReservationsForItem = res['body'] as ReservationModel[];
+          observer.next(allReservationsForItem);
           observer.complete();
         },
         error => {

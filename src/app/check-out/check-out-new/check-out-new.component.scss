@@ -20,7 +20,7 @@
 .item-add-box{
   border-radius: 5px;
   background-color: rgba(0,0,0,0.06);
-  height: 1070px;
+  height: 870px;
 }
 
 .item-info{
@@ -39,45 +39,9 @@
   width: 60%;
 }
 
-.btnek {
-  border-width: 1px;
-  border-radius: 3px;
-  border-color: rgba(0,0,0,0.2);
-}
-
-.btnek:hover {
-  border-width: 1px;
-  border-radius: 3px;
-  border-color: rgba(0,0,0,0.2);
-  background-color: rgba(0,0,0,0.2);
-}
-
-
-.select-today{
-  border-color: #ced4da;
-  margin: 0 !important;
-  text-align-all: center;
-  height: 38px;
-  width: 25%;
-}
-
-.select-today:hover.select-period:hover{
-  background-color: rgba(0,0,0,0.5) !important;
-  color: white;
-
-}
-.select-period{
-  border-color: #ced4da;
-  text-align-all: center;
-  height: 38px;
-  width: 31%;
-  margin: 1% 1% 1% 0;
-}
-
 .input-date{
   width: 100%;
 }
-
 
 .property-value{
   float: right;

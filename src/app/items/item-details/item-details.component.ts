@@ -1,29 +1,20 @@
-import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ItemsService} from '../items.service';
 import {ItemModel} from '../../shared/models/item.model';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView
 } from 'angular-calendar';
 import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
   isSameDay,
   isSameMonth,
-  addHours, startOfMonth, startOfWeek, endOfWeek, format
 } from 'date-fns';
-import { colors } from '../demo-utils/colors';
-
+import {colors} from '../demo-utils/colors';
 import {Observable, Subject} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {ReservationModel} from '../../shared/models/reservation.model';
+import {ReservationsService} from '../../reservations/reservations.service';
+import {DatetimePipe} from '../../shared/pipes/datetime.pipe';
+import {UserService} from '../../shared/services/user.service';
 
 declare var require: any;
 
@@ -50,14 +41,21 @@ function getTimezoneOffsetString(date: Date): string {
 })
 export class ItemDetailsComponent implements OnInit {
 
+  available = false;
   name = 'HP';
   src = require('../../shared/images/item.jpg');
   id: number;
   item: ItemModel;
   dataLoaded = false;
   private sub: any;
+  reservationsForItem: ReservationModel[];
+  refresh: Subject<any> = new Subject();
 
-  constructor(private router: ActivatedRoute, private itemService: ItemsService, private routerNav: Router) {
+  constructor(private router: ActivatedRoute,
+              private itemService: ItemsService,
+              private routerNav: Router,
+              private userService: UserService,
+              private reservationService: ReservationsService) {
     // this.tenDays.setDate(this.tenDays.getDay()+4);
   }
 
@@ -66,16 +64,16 @@ export class ItemDetailsComponent implements OnInit {
     this.sub = this.router.params.subscribe(params => {
       this.id = +params['id'];
       this.getItemFromDb();
+
     });
   }
 
   private getItemFromDb() {
     this.itemService.getSingleItem(this.id).subscribe((item) => {
       this.item = item;
-      console.log('Otrzymany itemek');
-      console.log(this.item);
+      this.checkAvailability();
+      this.getReservationsForItem();
       this.dataLoaded = true;
-      console.log(this.dataLoaded);
     });
   }
 
@@ -94,24 +92,7 @@ export class ItemDetailsComponent implements OnInit {
   activeDayIsOpen: boolean = false;
 
 
-  events: Array<CalendarEvent<{ incrementsBadgeTotal: boolean }>> = [
-    {
-      title: 'Increments badge total on the day cell',
-      color: colors.yellow,
-      start: new Date(),
-      meta: {
-        incrementsBadgeTotal: true
-      }
-    },
-    {
-      title: 'Does not increment the badge total on the day cell',
-      color: colors.blue,
-      start: new Date(),
-      meta: {
-        incrementsBadgeTotal: false
-      }
-    }
-  ];
+  events: Array<CalendarEvent<{ incrementsBadgeTotal: boolean }>> =[];
 
   dayClicked({
                date,
@@ -140,9 +121,67 @@ export class ItemDetailsComponent implements OnInit {
     );
   }
 
-  reserveItem(element: ItemModel){
+  reserveItem(element: ItemModel) {
     this.itemService.itemToReserve = this.item;
     this.routerNav.navigateByUrl('reservation/new');
+  }
+
+  checkAvailability() {
+    this.itemService.checkAvailabilityOfItem(this.item.idItem).subscribe((value) => {
+        this.available = value;
+      },
+      (error) => {
+        this.available = error;
+      });
+  }
+
+  getReservationsForItem() {
+    this.reservationService.getAllReservationsForItem(this.item.idItem).subscribe((value) => {
+      this.reservationsForItem = value;
+      this.insertReservationsToCalendar();
+    });
+  }
+
+  private insertReservationsToCalendar() {
+    let dateFrom: Date;
+    let dateTo: Date;
+    let amountOfDays: number;
+    let color;
+    this.reservationsForItem.forEach((reservation) => {
+      dateFrom = new Date(reservation.from);
+      dateTo = new Date(reservation.to);
+      if(reservation.type === 'RESERVATION')
+      {
+        color = colors.yellow;
+      }else{
+        color = colors.red;
+      }
+      amountOfDays = this.calculateDaysBetween(dateFrom, dateTo);
+      for (let i = 0; i < amountOfDays; i++) {
+        let dateToInsert: Date = new Date(dateFrom);
+        dateToInsert.setDate(dateToInsert.getDate() + i);
+        this.events.push({
+          title: reservation.reason +
+                '<br/> &emsp;&emsp; From: ' +
+                new DatetimePipe().transform(reservation.from.toString()) +
+                '<br/> &emsp;&emsp; To: ' +
+                new DatetimePipe().transform(reservation.to.toString()),
+          color: color,
+          start: dateToInsert,
+          meta: {
+            incrementsBadgeTotal: true
+          }
+        });
+        this.refresh.next();
+      }
+    });
+  }
+
+  private calculateDaysBetween(from: Date, to: Date): number {
+    let one_day = 1000 * 60 * 60 * 24;
+    let fromLong = from.getTime();
+    let toLong = to.getTime();
+    return (toLong - fromLong) / one_day;
   }
 
 

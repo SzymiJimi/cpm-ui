@@ -67,5 +67,16 @@ export class NavbarComponent implements OnInit{
 
   }
 
+  showCheckOutSideBar(){
+    if(this.userService.user!==undefined){
+      if(this.userService.user.idRole.name===Roles.MANAGER)
+      {
+        if(this.router.url.includes('checkout')){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
 }

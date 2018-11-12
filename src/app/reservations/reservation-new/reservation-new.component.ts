@@ -18,7 +18,7 @@ export class ReservationNewComponent implements OnInit {
 
   itemChecked=false;
   reservingStarted= false;
-  reservationsForSelectedItem: ReservationModel[];
+  allReservationsForItem: ReservationModel[];
   myControl = new FormControl();
   reservingItem: ItemModel;
 
@@ -36,8 +36,8 @@ export class ReservationNewComponent implements OnInit {
   this.reservingItem = this.itemService.itemToReserve;
   this.itemChecked = true;
   if(this.reservingItem!==undefined){
-    this.reservationService.getReservationsForItem(this.reservingItem.idItem).subscribe((value)=>{
-        this.reservationsForSelectedItem = value;
+    this.reservationService.getAllReservationsForItem(this.reservingItem.idItem).subscribe((value)=>{
+        this.allReservationsForItem = value;
       },
       (error)=>{
 
@@ -52,6 +52,7 @@ export class ReservationNewComponent implements OnInit {
       this.newReservation.itemId = this.reservingItem;
       this.newReservation.reserverUser = this.user.user;
       this.reservationService.reserveItem(this.newReservation);
+      this.itemService.itemToReserve = new ItemModel();
     }else{
       alert('Selected dates are not correct, check reservations for this item, and input them correctly!');
     }
@@ -60,7 +61,7 @@ export class ReservationNewComponent implements OnInit {
 
   checkDates():boolean{
     let includes= false;
-    this.reservationsForSelectedItem.forEach((reservation)=>{
+    this.allReservationsForItem.forEach((reservation)=>{
       if(this.compareDates(reservation)){ includes = true; }
       console.log('sprawdzanie trwa');
     });
@@ -88,7 +89,7 @@ export class ReservationNewComponent implements OnInit {
   openReservationListDialog(){
     this.dialog.open(ReservationListDialogComponent, {
       data: {
-        reservations: this.reservationsForSelectedItem
+        reservations: this.allReservationsForItem
       }
     });
   }

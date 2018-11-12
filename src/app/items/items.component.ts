@@ -118,5 +118,10 @@ export class ItemsComponent implements OnInit {
     this.router.navigateByUrl('reservation/new');
   }
 
+  checkoutItem(element: ItemModel){
+    this.itemService.itemToCheckout = element;
+    this.router.navigateByUrl('checkout/new');
+  }
+
 }
 

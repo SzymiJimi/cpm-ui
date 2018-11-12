@@ -13,6 +13,12 @@
       <li class="items"><a routerLink="my/reservations">>My</a></li>
       <li class="items"><a routerLink="reservations/all">>All</a></li>
     </div>
+    <li><a routerLink="my/checkout">Check-out</a></li>
+    <div *ngIf="showCheckOutSideBar()" >
+      <li class="items"><a routerLink="checkout/new">>New</a></li>
+      <li class="items"><a routerLink="my/checkout">>My</a></li>
+      <li class="items"><a routerLink="checkout/all">>All</a></li>
+    </div>
     <li><a href="#contact">My Items</a></li>
     <li><a href="#contact">Reports</a></li>
 

@@ -5,6 +5,7 @@
     <tr>
       <th scope="col">From</th>
       <th scope="col">To</th>
+      <th scope="col">Type</th>
       <th scope="col">Contact</th>
     </tr>
     </thead>
@@ -12,6 +13,7 @@
     <tr *ngFor="let reservation of data.reservations">
       <td>{{reservation.from | datetime}}</td>
       <td>{{reservation.to | datetime}}</td>
+      <td>{{reservation.type }}</td>
       <td>{{reservation.contact}}</td>
     </tr>
     </tbody>

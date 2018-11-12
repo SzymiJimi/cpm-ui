@@ -13,6 +13,7 @@ export class ItemsService {
 
   itemsList: ItemModel[];
   itemToReserve: ItemModel;
+  itemToCheckout: ItemModel;
 
   constructor(private app: AppService, private http: HttpClient) { }
 
@@ -34,7 +35,6 @@ export class ItemsService {
   }
 
   addItem(item: ItemModel){
-    console.log('dodawany item');
     return new Observable<any>((observer) => {
       let newHeader = this.app.options;
       newHeader.responseType= 'text';
@@ -58,16 +58,31 @@ export class ItemsService {
     return new Observable<ItemModel>((observer) => {
       this.http.get(environment.endpointBase + 'item/'+id, this.app.options).subscribe(res => {
           let item: ItemModel = res['body'] as ItemModel;
-          console.log("No mam itemek");
-          console.log(item);
           observer.next(item);
           observer.complete();
         },
         error => {
-        console.log("Brak itemka");
           if (error.status == 401) {
             observer.error('unauthorized');
           }
+          observer.complete();
+        }
+      );
+    });
+  }
+
+  checkAvailabilityOfItem(id: number){
+    let newHeader = this.app.options;
+    newHeader.responseType= 'text';
+    return new Observable<boolean>((observer) => {
+      this.http.get(environment.endpointBase + 'item/availability/'+id, newHeader).subscribe(res => {
+          newHeader.responseType= 'json';
+          observer.next(res['body']);
+          observer.complete();
+        },
+        error => {
+          newHeader.responseType= 'json';
+          observer.next(error['body']);
           observer.complete();
         }
       );

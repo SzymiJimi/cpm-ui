@@ -1,19 +1,19 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Router} from '@angular/router';
-import {SelectionModel} from '@angular/cdk/collections';
-import {ReservationsService} from './reservations.service';
-import {ReservationModel} from '../shared/models/reservation.model';
-import {AppService} from '../shared/services/app.service';
 import {UserService} from '../shared/services/user.service';
+import {ReservationsService} from '../reservations/reservations.service';
+import {ReservationModel} from '../shared/models/reservation.model';
+import {SelectionModel} from '@angular/cdk/collections';
+import {Router} from '@angular/router';
+import {AppService} from '../shared/services/app.service';
+import {CheckOutService} from './check-out.service';
 
 @Component({
-  selector: 'app-reservations',
-  templateUrl: './reservations.component.html',
-  styleUrls: ['./reservations.component.scss']
+  selector: 'app-check-out',
+  templateUrl: './check-out.component.html',
+  styleUrls: ['./check-out.component.scss']
 })
-export class ReservationsComponent implements OnInit {
-
+export class CheckOutComponent implements OnInit {
   displayedColumns: string[] = ['select', 'name', 'from', 'to', 'duration', 'contact'];
 
   dataLoaded = false;
@@ -41,7 +41,7 @@ export class ReservationsComponent implements OnInit {
     }
   }
 
-  constructor(private reservationService: ReservationsService, private router: Router, private app: AppService) {
+  constructor(private checkoutService: CheckOutService, private router: Router, private app: AppService, private user: UserService) {
     this.dataLoaded = false;
     this.dataLoadingStarted = false;
   }
@@ -50,12 +50,12 @@ export class ReservationsComponent implements OnInit {
     if(this.app.authenticated === true){
       this.dataLoaded= true;
       this.dataLoadingStarted = false;
-      this.getCheckoutList();
+      this.getCheckOutList();
     }else{
       this.app.authenticatedSubject.subscribe((value) => {
         if (!this.dataLoaded && !this.dataLoadingStarted) {
           this.dataLoadingStarted = true;
-          this.getCheckoutList();
+          this.getCheckOutList();
         }
       });
     }
@@ -63,10 +63,10 @@ export class ReservationsComponent implements OnInit {
 
   }
 
-  private getCheckoutList() {
-    this.reservationService.getUserReservations().subscribe((reservations) => {
+  private getCheckOutList() {
+    this.checkoutService.getUserCheckouts().subscribe((reservations) => {
         this.dataLoaded = true;
-        console.log(this.reservationService.reservationsList);
+        console.log(this.checkoutService.checkOutsList);
         this.dataSource = new MatTableDataSource<ReservationModel>(reservations);
         this.dataLoadingStarted = false;
         console.log(reservations);
@@ -127,5 +127,4 @@ export class ReservationsComponent implements OnInit {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
-
 }

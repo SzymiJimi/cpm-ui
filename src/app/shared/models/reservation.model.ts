@@ -8,6 +8,7 @@ export class ReservationModel {
   to: Date;
   reason: string;
   contact: string;
+  type: string;
   reserverUser: UserModel;
   itemId: ItemModel;
 

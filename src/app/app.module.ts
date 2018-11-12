@@ -55,21 +55,19 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import { SimpleDatePipe } from './shared/pipes/simple-date.pipe';
 import { ItemDetailsComponent } from './items/item-details/item-details.component';
 import { ItemNewComponent } from './items/item-new/item-new.component';
-import { DateFormat } from './date-format';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { LocationComponent } from './location/location.component';
 import { ItemDetailInfoComponent } from './items/item-details/item-detail-info/item-detail-info.component';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
-import {FlatpickrModule} from 'angularx-flatpickr';
-import {DemoUtilsModule} from './items/demo-utils/module';
 import {CommonModule} from '@angular/common';
 import { ReservationsComponent } from './reservations/reservations.component';
-import {ReservationsService} from './reservations/reservations.service';
 import { ReservationNewComponent } from './reservations/reservation-new/reservation-new.component';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {ReservationListDialogComponent} from './reservations/reservation-new/reservations-dialog/reservation-list-dialog.component';
 import {DatetimePipe} from './shared/pipes/datetime.pipe';
+import { CheckOutComponent } from './check-out/check-out.component';
+import { CheckOutNewComponent } from './check-out/check-out-new/check-out-new.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -90,7 +88,10 @@ import {DatetimePipe} from './shared/pipes/datetime.pipe';
     ItemDetailInfoComponent,
     ReservationsComponent,
     ReservationNewComponent,
-    ReservationListDialogComponent
+    ReservationListDialogComponent,
+    CheckOutComponent,
+    CheckOutNewComponent,
+    UserProfileComponent
   ],
   exports: [
     MatProgressSpinnerModule,
@@ -154,8 +155,7 @@ import {DatetimePipe} from './shared/pipes/datetime.pipe';
       useFactory: adapterFactory
     }),
     MDBBootstrapModule.forRoot(),
-    AppRoutingModule,
-    DemoUtilsModule
+    AppRoutingModule
   ],
   entryComponents: [
     ReservationListDialogComponent
@@ -167,4 +167,3 @@ import {DatetimePipe} from './shared/pipes/datetime.pipe';
 export class AppModule {
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

@@ -1,0 +1,87 @@
+<div class="container-fluid font main-card">
+  <div class="card">
+    <div *appAuthorized class="card-body">
+      <div *appManager>
+        <p class="subpage-info">>Profile </p>
+        <hr>
+        <div class="button-row float-right manage-btn">
+          <button mat-button [matMenuTriggerFor]="menu" class="action-btn">Menu</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item class="action-window">Change my personal data</button>
+            <button mat-menu-item class="action-window">Change password</button>
+          </mat-menu>
+          <button mat-raised-button class="more-button" >Change role</button>
+          <button mat-raised-button class="more-button">Delete user</button>
+        </div>
+        <hr style="margin-top: 70px">
+        <mat-spinner [diameter]="200" class="loading-data-spinner" *ngIf="!dataLoaded"></mat-spinner>
+        <div *ngIf="dataLoaded">
+          <div class="item-info-box">
+            <img [src]="src" alt="{{name}}" class="img-responsive item-image">
+            <div class="item-info">
+              <p class="brand-info">{{user.idPersonaldata.surname}}</p>
+              <p>{{user.idPersonaldata.name}}</p>
+            </div>
+          </div>
+          <hr>
+              <div class="tab-subpage-content">
+                <div class="row info-tab">
+                  <div class="info-column-left">
+                    <p style="color: rgba(0,0,0,0.4); margin-left: 20px; padding-top: 15px;">INFORMATION</p>
+                    <div class="card properties-fields">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Username
+                          <span class="property-value">{{user.username}}</span>
+                        </li>
+                        <li class="list-group-item">Email
+                          <span class="property-value">{{user.email}}</span>
+                        </li>
+                        <li class="list-group-item">Role
+                          <span class="property-value">{{user.idRole.name}}</span>
+                          <mat-form-field>
+                            <mat-select [(value)]="newUserRole">
+                              <mat-option value="option1">Option 1</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </li>
+                        <li class="list-group-item">Name
+                          <span class="property-value">{{user.idPersonaldata.name}}</span>
+                        </li>
+                        <li class="list-group-item">Surname
+                          <span class="property-value">{{user.idPersonaldata.surname}}</span>
+                        </li>
+                        <li class="list-group-item">Date of birth
+                          <span class="property-value">{{user.idPersonaldata.dateOfBirth | simpleDate}}</span>
+                        </li>
+                        <li class="list-group-item">Gender
+                          <span class="property-value">{{user.idPersonaldata.gender}}</span>
+                        </li>
+
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="info-column-right">
+                    <p style="color: rgba(0,0,0,0.4); margin-left: 20px; padding-top: 15px;">EXTRA</p>
+                    <div class="card properties-fields">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Creator
+                          <span class="property-value"></span>
+                        </li>
+                        <li class="list-group-item">Modify data
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+    <div *appUnauthorized class="card-body">
+      Welcome on our page sign in to see the content.
+    </div>
+
+  </div>
+
+</div>
