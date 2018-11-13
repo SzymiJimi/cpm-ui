@@ -23,23 +23,8 @@ export class CheckOutComponent implements OnInit {
 
   dataSource: MatTableDataSource<ReservationModel>;
 
-  private paginator: MatPaginator;
-  private sort: MatSort;
-
-
-  @ViewChild(MatSort) set matSort(ms: MatSort) {
-    this.sort = ms;
-    if (this.dataSource != undefined) {
-      this.setDataSourceAttributes();
-    }
-  }
-
-  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
-    this.paginator = mp;
-    if (this.dataSource != undefined) {
-      this.setDataSourceAttributes();
-    }
-  }
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator : MatPaginator;
 
   constructor(private checkoutService: CheckOutService, private router: Router, private app: AppService, private user: UserService) {
     this.dataLoaded = false;
@@ -79,14 +64,6 @@ export class CheckOutComponent implements OnInit {
   }
 
 
-  setDataSourceAttributes() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
-    if (this.paginator && this.sort) {
-      this.applyFilter('');
-    }
-  }
 
   calculateDuration(from: Date, to: Date) {
     let newFrom = new Date(from);
@@ -114,14 +91,14 @@ export class CheckOutComponent implements OnInit {
 
   selection = new SelectionModel<ReservationModel>(true, []);
 
-  /** Whether the number of selected elements matches the total number of rows. */
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :

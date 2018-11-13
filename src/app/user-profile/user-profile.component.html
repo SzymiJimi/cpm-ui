@@ -7,10 +7,10 @@
         <div class="button-row float-right manage-btn">
           <button mat-button [matMenuTriggerFor]="menu" class="action-btn">Menu</button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item class="action-window">Change my personal data</button>
+            <button mat-menu-item class="action-window" (click)="changePersonalData()">Change my personal data</button>
             <button mat-menu-item class="action-window">Change password</button>
           </mat-menu>
-          <button mat-raised-button class="more-button" >Change role</button>
+          <button mat-raised-button class="more-button" (click)="changeUserRole()" >Change role</button>
           <button mat-raised-button class="more-button">Delete user</button>
         </div>
         <hr style="margin-top: 70px">
@@ -24,37 +24,46 @@
             </div>
           </div>
           <hr>
-              <div class="tab-subpage-content">
+              <div ngClass="{{changingPersonalData ? 'tab-subpage-content-large' : 'tab-subpage-content-small'}}">
                 <div class="row info-tab">
                   <div class="info-column-left">
                     <p style="color: rgba(0,0,0,0.4); margin-left: 20px; padding-top: 15px;">INFORMATION</p>
                     <div class="card properties-fields">
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Username
+                        <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Username
                           <span class="property-value">{{user.username}}</span>
                         </li>
-                        <li class="list-group-item">Email
+                        <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Email
                           <span class="property-value">{{user.email}}</span>
                         </li>
-                        <li class="list-group-item">Role
-                          <span class="property-value">{{user.idRole.name}}</span>
-                          <mat-form-field>
-                            <mat-select [(value)]="newUserRole">
-                              <mat-option value="option1">Option 1</mat-option>
+                        <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Role
+                          <span *ngIf="!changingRole" class="property-value">{{user.idRole.name}}</span>
+                          <mat-form-field class="property-value" *ngIf="changingRole">
+                            <mat-select   [(value)]="newUserRole">
+                              <mat-option *ngFor="let role of availableRoles" value="{{role}}">{{role}}</mat-option>
                             </mat-select>
                           </mat-form-field>
                         </li>
                         <li class="list-group-item">Name
-                          <span class="property-value">{{user.idPersonaldata.name}}</span>
+                          <span *ngIf="!changingPersonalData" class="property-value">{{user.idPersonaldata.name}}</span>
+                          <mat-form-field class="property-value" *ngIf="changingPersonalData">
+                            <input [(ngModel)]="newPersonalData.name" matInput placeholder="Name" value="Sushi">
+                          </mat-form-field>
                         </li>
                         <li class="list-group-item">Surname
-                          <span class="property-value">{{user.idPersonaldata.surname}}</span>
+                          <span *ngIf="!changingPersonalData" class="property-value">{{user.idPersonaldata.surname}}</span>
+                          <mat-form-field class="property-value" *ngIf="changingPersonalData">
+                            <input [(ngModel)]="newPersonalData.surname" matInput placeholder="Surname" value="Sushi">
+                          </mat-form-field>
                         </li>
-                        <li class="list-group-item">Date of birth
+                        <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Date of birth
                           <span class="property-value">{{user.idPersonaldata.dateOfBirth | simpleDate}}</span>
                         </li>
                         <li class="list-group-item">Gender
-                          <span class="property-value">{{user.idPersonaldata.gender}}</span>
+                          <span *ngIf="!changingPersonalData" class="property-value">{{user.idPersonaldata.gender}}</span>
+                          <mat-form-field class="property-value" *ngIf="changingPersonalData" >
+                            <input [(ngModel)]="newPersonalData.gender" matInput placeholder="Gender" value="Sushi">
+                          </mat-form-field>
                         </li>
 
                       </ul>
@@ -72,6 +81,9 @@
                         </li>
                       </ul>
                     </div>
+                    <button *ngIf="changingPersonalData" mat-raised-button class="more-button float-right top-space-sm" (click)="saveNewPersonalData()">Save new profile</button>
+                    <button *ngIf="changingRole" mat-raised-button class="more-button float-right top-space-sm" (click)="saveNewRole()" >Save new role</button>
+                    <!--<button mat-raised-button class="more-button float-right top-space-sm" (click)="changeUserRole()" >Save changes</button>-->
                   </div>
                 </div>
               </div>

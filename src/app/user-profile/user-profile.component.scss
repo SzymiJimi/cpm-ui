@@ -40,13 +40,20 @@
   min-width: 300px;
 }
 
-.tab-subpage-content{
+.tab-subpage-content-small{
   margin-top: 1%;
   border-radius: 8px;
   background-color: rgba(0,0,0,0.06);
   height: 500px;
 }
 
+
+.tab-subpage-content-large{
+  margin-top: 1%;
+  border-radius: 8px;
+  background-color: rgba(0,0,0,0.06);
+  height: 750px;
+}
 
 
 .loading-data-spinner{
@@ -108,4 +115,12 @@ pre {
   border-radius: 50%;
   display: inline-block;
   margin-right: 2%;
+}
+
+.top-space-sm{
+  margin-top: 3%;
+}
+
+.high-row{
+  height: 90px;
 }

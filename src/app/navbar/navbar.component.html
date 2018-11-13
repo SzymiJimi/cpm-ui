@@ -3,8 +3,8 @@
   <div *appAuthorized>
     <li><a routerLink="items">Items</a></li>
     <div *ngIf="showItemSideBar()" >
-      <li class="items"><a routerLink="item/new">>New item</a></li>
-      <li class="items"><a routerLink="items">>Item list</a></li>
+      <li class="items"><a routerLink="item/new">>New</a></li>
+      <li class="items"><a routerLink="items">>All</a></li>
       <li class="items"><a routerLink="items/settings">>Settings</a></li>
     </div>
     <li><a routerLink="my/reservations">Reservations</a></li>
@@ -21,12 +21,14 @@
     </div>
     <li><a href="#contact">My Items</a></li>
     <li><a href="#contact">Reports</a></li>
+    <li><a routerLink="users">Users</a></li>
+    <li><a href="#contact">Locations</a></li>
 
 
   </div>
   <div *appAuthorized>
     <li style="float:right"><a class="active" (click)="logout()">Logout</a></li>
-    <li style="float:right"><a class="active" href="#about">{{personData}}</a></li>
+    <li style="float:right"><a class="active" routerLink="profile/my">{{personData}}</a></li>
   </div>
   <div *appUnauthorized>
     <li style="float:right"><a class="active" routerLink="login">Sign in</a></li>

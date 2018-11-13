@@ -68,6 +68,7 @@ import {DatetimePipe} from './shared/pipes/datetime.pipe';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { CheckOutNewComponent } from './check-out/check-out-new/check-out-new.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfilesListComponent } from './user-profile/user-profiles-list/user-profiles-list.component';
 
 
 @NgModule({
@@ -91,7 +92,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ReservationListDialogComponent,
     CheckOutComponent,
     CheckOutNewComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserProfilesListComponent
   ],
   exports: [
     MatProgressSpinnerModule,

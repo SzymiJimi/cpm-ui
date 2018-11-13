@@ -23,23 +23,8 @@ export class ReservationsComponent implements OnInit {
 
   dataSource: MatTableDataSource<ReservationModel>;
 
-  private paginator: MatPaginator;
-  private sort: MatSort;
-
-
-  @ViewChild(MatSort) set matSort(ms: MatSort) {
-    this.sort = ms;
-    if (this.dataSource != undefined) {
-      this.setDataSourceAttributes();
-    }
-  }
-
-  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
-    this.paginator = mp;
-    if (this.dataSource != undefined) {
-      this.setDataSourceAttributes();
-    }
-  }
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator : MatPaginator;
 
   constructor(private reservationService: ReservationsService, private router: Router, private app: AppService) {
     this.dataLoaded = false;
@@ -78,15 +63,6 @@ export class ReservationsComponent implements OnInit {
       });
   }
 
-
-  setDataSourceAttributes() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
-    if (this.paginator && this.sort) {
-      this.applyFilter('');
-    }
-  }
 
   calculateDuration(from: Date, to: Date) {
     let newFrom = new Date(from);

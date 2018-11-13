@@ -35,24 +35,8 @@ export class ItemsComponent implements OnInit {
 
   dataSource: MatTableDataSource<ItemModel>;
 
-  private paginator: MatPaginator;
-  private sort: MatSort;
-
-
-  @ViewChild(MatSort) set matSort(ms: MatSort) {
-    this.sort = ms;
-    if (this.dataSource != undefined) {
-      this.setDataSourceAttributes();
-    }
-  }
-
-  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
-    this.paginator = mp;
-    if (this.dataSource != undefined) {
-      this.setDataSourceAttributes();
-    }
-  }
-
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator : MatPaginator;
   constructor(private itemService: ItemsService, private router: Router, private app: AppService) {
 
     if(this.app.authenticated===true){
@@ -80,14 +64,6 @@ export class ItemsComponent implements OnInit {
       });
   }
 
-  setDataSourceAttributes() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
-    if (this.paginator && this.sort) {
-      this.applyFilter('');
-    }
-  }
 
   displayColumnName(columnCode: string) {
 

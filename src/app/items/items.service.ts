@@ -34,7 +34,7 @@ export class ItemsService {
     });
   }
 
-  addItem(item: ItemModel){
+  addItem(item: ItemModel):Observable<any>{
     return new Observable<any>((observer) => {
       let newHeader = this.app.options;
       newHeader.responseType= 'text';

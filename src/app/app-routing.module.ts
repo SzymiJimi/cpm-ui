@@ -11,6 +11,7 @@ import {ReservationNewComponent} from './reservations/reservation-new/reservatio
 import {CheckOutComponent} from './check-out/check-out.component';
 import {CheckOutNewComponent} from './check-out/check-out-new/check-out-new.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
+import {UserProfilesListComponent} from './user-profile/user-profiles-list/user-profiles-list.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,11 +19,12 @@ const appRoutes: Routes = [
   { path: 'items', component: ItemsComponent },
   { path: 'item/new', component: ItemNewComponent },
   { path: 'item/:id', component: ItemDetailsComponent },
+  { path: 'users', component: UserProfilesListComponent },
   { path: 'reservation/new', component: ReservationNewComponent },
   { path: 'my/reservations', component: ReservationsComponent },
   { path: 'checkout/new', component: CheckOutNewComponent },
   { path: 'my/checkout', component: CheckOutComponent },
-  { path: 'profile/my', component: UserProfileComponent },
+  { path: 'profile/:id', component: UserProfileComponent },
   { path: '**', redirectTo: '' }
 ];
 
