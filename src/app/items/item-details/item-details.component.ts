@@ -11,7 +11,7 @@ import {
 } from 'date-fns';
 import {colors} from '../demo-utils/colors';
 import {Observable, Subject} from 'rxjs';
-import {ReservationModel} from '../../shared/models/reservation.model';
+import {ActionModel} from '../../shared/models/reservation.model';
 import {ReservationsService} from '../../reservations/reservations.service';
 import {DatetimePipe} from '../../shared/pipes/datetime.pipe';
 import {UserService} from '../../shared/services/user.service';
@@ -48,7 +48,7 @@ export class ItemDetailsComponent implements OnInit {
   item: ItemModel;
   dataLoaded = false;
   private sub: any;
-  reservationsForItem: ReservationModel[];
+  reservationsForItem: ActionModel[];
   refresh: Subject<any> = new Subject();
 
   constructor(private router: ActivatedRoute,
@@ -175,6 +175,11 @@ export class ItemDetailsComponent implements OnInit {
         this.refresh.next();
       }
     });
+  }
+
+  reportItem(){
+    this.itemService.itemToReport= this.item;
+    this.routerNav.navigateByUrl('report/new');
   }
 
   private calculateDaysBetween(from: Date, to: Date): number {

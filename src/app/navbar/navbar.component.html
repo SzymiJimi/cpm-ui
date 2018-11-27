@@ -19,10 +19,13 @@
       <li class="items"><a routerLink="my/checkout">>My</a></li>
       <li class="items"><a routerLink="checkout/all">>All</a></li>
     </div>
-    <li><a href="#contact">My Items</a></li>
-    <li><a href="#contact">Reports</a></li>
+    <li><a routerLink="report/new">Reports</a></li>
+    <div *ngIf="showReportsSideBar()" >
+      <li class="items"><a routerLink="report/new">>New</a></li>
+      <li class="items"><a routerLink="reports/my">>My</a></li>
+    </div>
     <li><a routerLink="users">Users</a></li>
-    <li><a href="#contact">Locations</a></li>
+    <li><a routerLink="locations">Locations</a></li>
 
 
   </div>

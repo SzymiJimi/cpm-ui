@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {UserService} from '../shared/services/user.service';
 import {ReservationsService} from '../reservations/reservations.service';
-import {ReservationModel} from '../shared/models/reservation.model';
+import {ActionModel} from '../shared/models/reservation.model';
 import {SelectionModel} from '@angular/cdk/collections';
 import {Router} from '@angular/router';
 import {AppService} from '../shared/services/app.service';
@@ -21,7 +21,7 @@ export class CheckOutComponent implements OnInit {
 
   expandedElement: any;
 
-  dataSource: MatTableDataSource<ReservationModel>;
+  dataSource: MatTableDataSource<ActionModel>;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator : MatPaginator;
@@ -52,7 +52,7 @@ export class CheckOutComponent implements OnInit {
     this.checkoutService.getUserCheckouts().subscribe((reservations) => {
         this.dataLoaded = true;
         console.log(this.checkoutService.checkOutsList);
-        this.dataSource = new MatTableDataSource<ReservationModel>(reservations);
+        this.dataSource = new MatTableDataSource<ActionModel>(reservations);
         this.dataLoadingStarted = false;
         console.log(reservations);
         this.initialize();
@@ -89,7 +89,7 @@ export class CheckOutComponent implements OnInit {
   }
 
 
-  selection = new SelectionModel<ReservationModel>(true, []);
+  selection = new SelectionModel<ActionModel>(true, []);
 
 
   isAllSelected() {

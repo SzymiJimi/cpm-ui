@@ -7,8 +7,7 @@
         <div class="button-row float-right manage-btn">
           <button mat-button [matMenuTriggerFor]="menu" class="action-btn">Menu</button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item class="action-window">Item 1</button>
-            <button mat-menu-item class="action-window">Item 2</button>
+            <button mat-menu-item class="action-window" (click)="reportItem()">Report</button>
           </mat-menu>
           <button mat-raised-button class="more-button" (click)="reserveItem()">Reserve</button>
           <button mat-raised-button class="more-button">Check-out</button>

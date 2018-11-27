@@ -1,7 +1,7 @@
 import {UserModel} from './user.model';
 import {ItemModel} from './item.model';
 
-export class ReservationModel {
+export class ActionModel {
 
   idReservation: number;
   from: Date;

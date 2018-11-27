@@ -33,4 +33,82 @@ export class LocationService {
     });
   }
 
+  loadSingleLocation(id: number):Observable<LocationModel>{
+    return new Observable<LocationModel>((observer) => {
+      this.http.get(environment.endpointBase + 'location/'+ id, this.app.options).subscribe(res => {
+          let location = res['body'] as LocationModel;
+          observer.next(location);
+          observer.complete();
+        },
+        error => {
+          if (error.status == 401) {
+            observer.error('unauthorized');
+          }
+          observer.complete();
+        }
+      );
+    });
+  }
+
+  updateLocation(updatedLocation: LocationModel){
+    return new Observable<any>((observer) => {
+      let newHeader = this.app.options;
+      newHeader.responseType= 'text';
+      this.http.post<string>(environment.endpointBase + 'location/update', updatedLocation, newHeader).subscribe(res => {
+          newHeader.responseType= 'json';
+          observer.next('success');
+          observer.complete();
+        },
+        error => {
+          newHeader.responseType= 'json';
+          if (error.status == 401) {
+            observer.error('error with send data');
+          }
+          observer.complete();
+        }
+      );
+    });
+  }
+
+  addLocation(newLocation: LocationModel){
+    return new Observable<any>((observer) => {
+      let newHeader = this.app.options;
+      newHeader.responseType= 'text';
+      this.http.post<string>(environment.endpointBase + 'location/update', newLocation, newHeader).subscribe(res => {
+          newHeader.responseType= 'json';
+          observer.next('success');
+          observer.complete();
+        },
+        error => {
+          newHeader.responseType= 'json';
+          if (error.status == 401) {
+            observer.error('error with send data');
+          }
+          observer.complete();
+        }
+      );
+    });
+  }
+
+  deleteLocation(locationToDelete: LocationModel){
+    return new Observable<any>((observer) => {
+      let newHeader = this.app.options;
+      newHeader.responseType= 'text';
+      this.http.post<string>(environment.endpointBase + 'location/delete', locationToDelete, newHeader).subscribe(res => {
+          newHeader.responseType= 'json';
+          observer.next('success');
+          observer.complete();
+        },
+        error => {
+          newHeader.responseType= 'json';
+          if (error.status == 401) {
+            observer.error('error with send data');
+          }
+          observer.complete();
+        }
+      );
+    });
+  }
+
+
 }

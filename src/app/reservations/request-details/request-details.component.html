@@ -1,0 +1,52 @@
+<div class="container-fluid font main-card">
+  <div class="card">
+    <div *appAuthorized class="card-body">
+      <div *appManager>
+        <p class="subpage-info">>Reservation </p>
+        <hr>
+        <div class="button-row float-right manage-btn">
+          <button mat-raised-button class="finish-button">Finish reservation</button>
+          <button mat-raised-button class="report-button" (click)="showItemDetails()">Show item details</button>
+        </div>
+        <hr style="margin-top: 70px">
+        <mat-spinner [diameter]="200" class="loading-data-spinner" *ngIf="!dataLoaded"></mat-spinner>
+        <div *ngIf="dataLoaded">
+          <div class="item-info-box">
+            <img [src]="src" alt="{{item.brand}}" class="img-responsive item-image">
+            <div class="item-info">
+              <p class="brand-info">{{item.brand}}</p>
+              <p>{{item.model}}</p>
+              <p *ngIf="available"><span class="dot-green"></span>Available</p>
+            </div>
+          </div>
+          <hr>
+          <div class="tab-subpage-content">
+            <div class="row info-tab">
+              <div class="info-column-left">
+                <p style="color: rgba(0,0,0,0.4); margin-left: 20px; padding-top: 15px;">INFORMATION</p>
+                <div class="card properties-fields">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Reason of reservation
+                      <span class="property-value">{{reservation.reason}}</span>
+                    </li>
+                    <li class="list-group-item">From
+                      <span class="property-value">{{reservation.from | datetime}}</span>
+                    </li>
+                    <li class="list-group-item">To
+                      <span class="property-value">{{reservation.to | datetime}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *appUnauthorized class="card-body">
+      Welcome on our page sign in to see the content.
+    </div>
+
+  </div>
+
+</div>

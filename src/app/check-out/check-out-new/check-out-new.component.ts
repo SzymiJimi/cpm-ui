@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ReservationModel} from '../../shared/models/reservation.model';
+import {ActionModel} from '../../shared/models/reservation.model';
 import {MatDialog} from '@angular/material';
 import {ItemModel} from '../../shared/models/item.model';
 import {LocationService} from '../../location/location.service';
@@ -19,11 +19,11 @@ export class CheckOutNewComponent implements OnInit {
 
   itemChecked=false;
   checkOutStarted= false;
-  allReservationsForItem: ReservationModel[];
+  allReservationsForItem: ActionModel[];
   myControl = new FormControl();
   checkOutingItem: ItemModel;
 
-  newCheckOut: ReservationModel = new ReservationModel();
+  newCheckOut: ActionModel = new ActionModel();
 
 
   constructor( private locationService: LocationService,
@@ -70,7 +70,7 @@ export class CheckOutNewComponent implements OnInit {
     return includes;
   }
 
-  private compareDates(reservation: ReservationModel): boolean{
+  private compareDates(reservation: ActionModel): boolean{
     let value: boolean = false;
     if(this.checkInclude(new Date(this.newCheckOut.from), new Date(reservation.from), new Date(reservation.to))){ value = true; }
     if(this.checkInclude(new Date(this.newCheckOut.from), new Date(reservation.from), new Date(reservation.to))){ value = true; }

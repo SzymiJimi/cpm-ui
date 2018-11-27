@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {ReservationModel} from '../shared/models/reservation.model';
 import {HttpClient} from '@angular/common/http';
 import {AppService} from '../shared/services/app.service';
 import {UserModel} from '../shared/models/user.model';

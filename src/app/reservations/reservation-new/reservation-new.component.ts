@@ -3,7 +3,7 @@ import {ItemsService} from '../../items/items.service';
 import {UserService} from '../../shared/services/user.service';
 import {ItemModel} from '../../shared/models/item.model';
 import {LocationService} from '../../location/location.service';
-import {ReservationModel} from '../../shared/models/reservation.model';
+import {ActionModel} from '../../shared/models/reservation.model';
 import {FormControl} from '@angular/forms';
 import {ReservationsService} from '../reservations.service';
 import {MatDialog} from '@angular/material';
@@ -18,11 +18,11 @@ export class ReservationNewComponent implements OnInit {
 
   itemChecked=false;
   reservingStarted= false;
-  allReservationsForItem: ReservationModel[];
+  allReservationsForItem: ActionModel[];
   myControl = new FormControl();
   reservingItem: ItemModel;
 
-  newReservation: ReservationModel = new ReservationModel();
+  newReservation: ActionModel = new ActionModel();
 
 
   constructor( private locationService: LocationService,
@@ -68,7 +68,7 @@ export class ReservationNewComponent implements OnInit {
     return includes;
   }
 
-  private compareDates(reservation: ReservationModel): boolean{
+  private compareDates(reservation: ActionModel): boolean{
     let value: boolean = false;
     if(this.checkInclude(new Date(this.newReservation.from), new Date(reservation.from), new Date(reservation.to))){ value = true; }
     if(this.checkInclude(new Date(this.newReservation.from), new Date(reservation.from), new Date(reservation.to))){ value = true; }

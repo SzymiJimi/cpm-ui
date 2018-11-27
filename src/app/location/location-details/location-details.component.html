@@ -1,0 +1,45 @@
+<div class="container-fluid font main-card">
+  <div class="card">
+    <div *appAuthorized class="card-body">
+      <div *appManager>
+        <p class="subpage-info">>Location details </p>
+        <hr>
+        <div class="button-row float-right manage-btn">
+          <button mat-raised-button class="delete-button" (click)="deleteLocation()">Delete location</button>
+        </div>
+        <hr style="margin-top: 70px">
+        <mat-spinner [diameter]="200" class="loading-data-spinner" *ngIf="!dataLoaded"></mat-spinner>
+        <div *ngIf="dataLoaded">
+          <div class="info-column-left">
+            <div class="card properties-fields">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item name-location-header">Name:
+                  <div class="card name-location-value-box">
+                    <span *ngIf="!locationEditStarted" class="name-location-value">{{location.name}}</span>
+                    <input *ngIf="locationEditStarted" class="edit-input" [(ngModel)]="newLocation.name" matInput placeholder="Name">
+                  </div>
+                </li>
+                <li class="list-group-item name-location-header">Address:
+                  <div class="card name-location-value-box">
+                    <span *ngIf="!locationEditStarted" class="name-location-value">{{location.address}}</span>
+                    <input *ngIf="locationEditStarted" class="edit-input" [(ngModel)]="newLocation.address" matInput placeholder="Address" >
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <button *ngIf="!locationEditStarted" mat-raised-button class="edit-button" (click)="editLocation()">Edit</button>
+                  <button *ngIf="locationEditStarted" mat-raised-button class="edit-button" (click)="saveLocation()">Save</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div *appUnauthorized class="card-body">
+      Welcome on our page sign in to see the content.
+    </div>
+
+  </div>
+
+</div>

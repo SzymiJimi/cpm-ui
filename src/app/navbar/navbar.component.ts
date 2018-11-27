@@ -79,4 +79,16 @@ export class NavbarComponent implements OnInit{
     return false;
   }
 
+  showReportsSideBar(){
+    if(this.userService.user!==undefined){
+      if(this.userService.user.idRole.name===Roles.MANAGER)
+      {
+        if(this.router.url.includes('report')){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 }

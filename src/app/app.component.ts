@@ -11,13 +11,14 @@ import {ItemsService} from './items/items.service';
 import {ReservationsService} from './reservations/reservations.service';
 import {CheckOutComponent} from './check-out/check-out.component';
 import {CheckOutService} from './check-out/check-out.service';
+import {ReportService} from './report/report.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.None,
-  providers: [LoginService, LocationService, ItemsService, ReservationsService, CheckOutService]
+  providers: [LoginService, LocationService, ItemsService, ReservationsService, CheckOutService, ReportService]
 })
 export class AppComponent implements OnInit{
 

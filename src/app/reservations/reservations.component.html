@@ -55,9 +55,9 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let element; columns: displayedColumns;"
-                class="example-element-row">
+                class="example-element-row"
+                (click)="showDetails(element)">
             </tr>
-            <!--<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>-->
           </table>
 
 

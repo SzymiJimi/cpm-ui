@@ -1,7 +1,5 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {DialogData} from '../../../shared/interfaces/dialog-data.interface';
-import {ReservationModel} from '../../../shared/models/reservation.model';
 
 
 

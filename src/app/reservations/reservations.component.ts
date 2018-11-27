@@ -3,9 +3,11 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {SelectionModel} from '@angular/cdk/collections';
 import {ReservationsService} from './reservations.service';
-import {ReservationModel} from '../shared/models/reservation.model';
+import {ActionModel} from '../shared/models/reservation.model';
 import {AppService} from '../shared/services/app.service';
 import {UserService} from '../shared/services/user.service';
+import {ItemModel} from '../shared/models/item.model';
+import {ItemsService} from '../items/items.service';
 
 @Component({
   selector: 'app-reservations',
@@ -21,12 +23,15 @@ export class ReservationsComponent implements OnInit {
 
   expandedElement: any;
 
-  dataSource: MatTableDataSource<ReservationModel>;
+  dataSource: MatTableDataSource<ActionModel>;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator : MatPaginator;
 
-  constructor(private reservationService: ReservationsService, private router: Router, private app: AppService) {
+  constructor(private reservationService: ReservationsService,
+              private router: Router,
+              private app: AppService,
+              private itemService: ItemsService) {
     this.dataLoaded = false;
     this.dataLoadingStarted = false;
   }
@@ -52,7 +57,7 @@ export class ReservationsComponent implements OnInit {
     this.reservationService.getUserReservations().subscribe((reservations) => {
         this.dataLoaded = true;
         console.log(this.reservationService.reservationsList);
-        this.dataSource = new MatTableDataSource<ReservationModel>(reservations);
+        this.dataSource = new MatTableDataSource<ActionModel>(reservations);
         this.dataLoadingStarted = false;
         console.log(reservations);
         this.initialize();
@@ -88,7 +93,7 @@ export class ReservationsComponent implements OnInit {
   }
 
 
-  selection = new SelectionModel<ReservationModel>(true, []);
+  selection = new SelectionModel<ActionModel>(true, []);
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -102,6 +107,12 @@ export class ReservationsComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  showDetails(element: ActionModel){
+    this.router.navigateByUrl("reservation/"+element.idReservation);
+    // this.itemService.itemToReport = element;
+    // this.router.navigateByUrl('report/new');
   }
 
 }

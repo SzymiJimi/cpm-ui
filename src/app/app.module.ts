@@ -69,6 +69,12 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { CheckOutNewComponent } from './check-out/check-out-new/check-out-new.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProfilesListComponent } from './user-profile/user-profiles-list/user-profiles-list.component';
+import { RequestDetailsComponent } from './reservations/request-details/request-details.component';
+import { LocationDetailsComponent } from './location/location-details/location-details.component';
+import { NewLocationComponent } from './location/new-location/new-location.component';
+import { ReportComponent } from './report/report.component';
+import { NewReportComponent } from './report/new-report/new-report.component';
+import { UserReportsComponent } from './report/user-reports/user-reports.component';
 
 
 @NgModule({
@@ -93,7 +99,13 @@ import { UserProfilesListComponent } from './user-profile/user-profiles-list/use
     CheckOutComponent,
     CheckOutNewComponent,
     UserProfileComponent,
-    UserProfilesListComponent
+    UserProfilesListComponent,
+    RequestDetailsComponent,
+    LocationDetailsComponent,
+    NewLocationComponent,
+    ReportComponent,
+    NewReportComponent,
+    UserReportsComponent
   ],
   exports: [
     MatProgressSpinnerModule,

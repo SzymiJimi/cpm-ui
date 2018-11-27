@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {ReservationModel} from '../../shared/models/reservation.model';
+import {ActionModel} from '../../shared/models/reservation.model';
 import {UserModel} from '../../shared/models/user.model';
 import {Router} from '@angular/router';
 import {UserService} from '../../shared/services/user.service';

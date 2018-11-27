@@ -15,6 +15,7 @@ table {
 
 tr.example-detail-row {
   height: 0 !important;
+  //display: none;
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
@@ -60,12 +61,12 @@ tr.example-element-row:not(.example-expanded-row):active {
   color: white;
   float: right;
   margin-bottom: 2%;
+  width: 160px;
+  margin-left: 1%;
   //color: #9c46ff;
   //margin-left: 1%;
 }
 
-mat-checkbox {
-  &.mat-checkbox-disabled.mat-checkbox-checked .mat-checkbox-background {
-    background: #258eaf;
-  }
-}
+//.detailButtons{
+//  width: 150px;
+//}

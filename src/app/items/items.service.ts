@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {UserModel} from '../shared/models/user.model';
 import {AppService} from '../shared/services/app.service';
 import {HttpClient} from '@angular/common/http';
+import {UserService} from '../shared/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,9 @@ export class ItemsService {
   itemsList: ItemModel[];
   itemToReserve: ItemModel;
   itemToCheckout: ItemModel;
+  itemToReport: ItemModel;
 
-  constructor(private app: AppService, private http: HttpClient) { }
+  constructor(private app: AppService, private http: HttpClient, private userService: UserService) { }
 
   getItems():Observable<ItemModel[]>{
     return new Observable<ItemModel[]>((observer) => {
@@ -88,5 +90,6 @@ export class ItemsService {
       );
     });
   }
+
 
 }

@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ReservationsService} from '../reservations/reservations.service';
-import {Observable, Subject} from 'rxjs';
-import {isSameDay, isSameMonth} from 'date-fns';
 import {ItemModel} from '../shared/models/item.model';
-import {CalendarEvent} from 'angular-calendar';
-import {DatetimePipe} from '../shared/pipes/datetime.pipe';
-import {ItemsService} from '../items/items.service';
-import {ReservationModel} from '../shared/models/reservation.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {colors} from '../items/demo-utils/colors';
 import {UserModel} from '../shared/models/user.model';
 import {UserService} from '../shared/services/user.service';
 import {PersonaldataModel} from '../shared/models/personaldata.model';
