@@ -2,10 +2,10 @@
   <div class="card">
     <div *appAuthorized class="card-body">
       <div *appManager>
-        <p class="subpage-info">>Reservation </p>
+        <p class="subpage-info">>{{title}} </p>
         <hr>
         <div class="button-row float-right manage-btn">
-          <button mat-raised-button class="finish-button">Finish reservation</button>
+          <button *ngIf="!finished" mat-raised-button class="finish-button" (click)="finishReservation()">Finish {{type}}</button>
           <button mat-raised-button class="report-button" (click)="showItemDetails()">Show item details</button>
         </div>
         <hr style="margin-top: 70px">
@@ -26,7 +26,7 @@
                 <p style="color: rgba(0,0,0,0.4); margin-left: 20px; padding-top: 15px;">INFORMATION</p>
                 <div class="card properties-fields">
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Reason of reservation
+                    <li class="list-group-item">Reason of {{type}}
                       <span class="property-value">{{reservation.reason}}</span>
                     </li>
                     <li class="list-group-item">From

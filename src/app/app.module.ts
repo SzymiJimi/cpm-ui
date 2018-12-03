@@ -60,21 +60,24 @@ import { ItemDetailInfoComponent } from './items/item-details/item-detail-info/i
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {CommonModule} from '@angular/common';
-import { ReservationsComponent } from './reservations/reservations.component';
-import { ReservationNewComponent } from './reservations/reservation-new/reservation-new.component';
+import { ReservationsComponent } from './actions/reservations/reservations.component';
+import { ReservationNewComponent } from './actions/reservations/reservation-new/reservation-new.component';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
-import {ReservationListDialogComponent} from './reservations/reservation-new/reservations-dialog/reservation-list-dialog.component';
+import {ReservationListDialogComponent} from './actions/reservations/reservation-new/reservations-dialog/reservation-list-dialog.component';
 import {DatetimePipe} from './shared/pipes/datetime.pipe';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { CheckOutNewComponent } from './check-out/check-out-new/check-out-new.component';
+import { CheckOutComponent } from './actions/check-out/check-out.component';
+import { CheckOutNewComponent } from './actions/check-out/check-out-new/check-out-new.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProfilesListComponent } from './user-profile/user-profiles-list/user-profiles-list.component';
-import { RequestDetailsComponent } from './reservations/request-details/request-details.component';
+import { ActionDetailsComponent } from './actions/action-details/action-details.component';
 import { LocationDetailsComponent } from './location/location-details/location-details.component';
 import { NewLocationComponent } from './location/new-location/new-location.component';
 import { ReportComponent } from './report/report.component';
 import { NewReportComponent } from './report/new-report/new-report.component';
 import { UserReportsComponent } from './report/user-reports/user-reports.component';
+import { ReportDetailsComponent } from './report/report-details/report-details.component';
+import {ConfirmDialog} from './shared/dialogs/confirm-dialog';
+import {FinishReportDialog} from './report/report-details/dialog/finish-report-dialog';
 
 
 @NgModule({
@@ -100,12 +103,16 @@ import { UserReportsComponent } from './report/user-reports/user-reports.compone
     CheckOutNewComponent,
     UserProfileComponent,
     UserProfilesListComponent,
-    RequestDetailsComponent,
+    ActionDetailsComponent,
     LocationDetailsComponent,
     NewLocationComponent,
     ReportComponent,
     NewReportComponent,
-    UserReportsComponent
+    UserReportsComponent,
+    ReportDetailsComponent,
+    ConfirmDialog,
+    FinishReportDialog
+
   ],
   exports: [
     MatProgressSpinnerModule,
@@ -172,7 +179,9 @@ import { UserReportsComponent } from './report/user-reports/user-reports.compone
     AppRoutingModule
   ],
   entryComponents: [
-    ReservationListDialogComponent
+    ReservationListDialogComponent,
+    ConfirmDialog,
+    FinishReportDialog
   ],
 
   providers: [AppService, UserService, {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],

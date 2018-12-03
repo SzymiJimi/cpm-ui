@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {ItemsService} from '../../items/items.service';
-import {UserService} from '../../shared/services/user.service';
-import {ItemModel} from '../../shared/models/item.model';
-import {LocationService} from '../../location/location.service';
-import {ActionModel} from '../../shared/models/reservation.model';
+import {ItemsService} from '../../../items/items.service';
+import {UserService} from '../../../shared/services/user.service';
+import {ItemModel} from '../../../shared/models/item.model';
+import {LocationService} from '../../../location/location.service';
+import {ActionModel} from '../../../shared/models/reservation.model';
 import {FormControl} from '@angular/forms';
-import {ReservationsService} from '../reservations.service';
-import {MatDialog} from '@angular/material';
+import {ActionsService} from '../../actions.service';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {ReservationListDialogComponent} from './reservations-dialog/reservation-list-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-reservation-new',
@@ -19,17 +20,18 @@ export class ReservationNewComponent implements OnInit {
   itemChecked=false;
   reservingStarted= false;
   allReservationsForItem: ActionModel[];
-  myControl = new FormControl();
   reservingItem: ItemModel;
 
   newReservation: ActionModel = new ActionModel();
 
 
   constructor( private locationService: LocationService,
+               private router: Router,
                private user: UserService,
                private itemService: ItemsService,
-               private reservationService: ReservationsService,
-               public dialog: MatDialog) {
+               private reservationService: ActionsService,
+               public dialog: MatDialog,
+               public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -51,19 +53,41 @@ export class ReservationNewComponent implements OnInit {
     if(!this.checkDates()){
       this.newReservation.itemId = this.reservingItem;
       this.newReservation.reserverUser = this.user.user;
-      this.reservationService.reserveItem(this.newReservation);
-      this.itemService.itemToReserve = new ItemModel();
+      this.reservationService.reserveItem(this.newReservation).subscribe(()=>
+      {
+        this.openSuccessSnackBar();
+        this.itemService.itemToReserve = new ItemModel();
+        this.router.navigateByUrl('/');
+      },(error)=>{
+        this.openErrorSnackBar();
+      });
+
     }else{
       alert('Selected dates are not correct, check reservations for this item, and input them correctly!');
     }
 
   }
 
+  openSuccessSnackBar() {
+    this.snackBar.open('The reservation creation was completed successfully!' , 'Ok', {
+      duration: 5000,
+      panelClass: ['green-snackbar'],
+      horizontalPosition: 'end'
+    });
+  }
+
+  openErrorSnackBar() {
+    this.snackBar.open('Error with creating reservation!' , 'Ok', {
+      duration: 15000,
+      panelClass: ['red-snackbar'],
+      horizontalPosition: 'end'
+    });
+  }
+
   checkDates():boolean{
     let includes= false;
     this.allReservationsForItem.forEach((reservation)=>{
       if(this.compareDates(reservation)){ includes = true; }
-      console.log('sprawdzanie trwa');
     });
     return includes;
   }

@@ -5,6 +5,8 @@ import {UserModel} from '../shared/models/user.model';
 import {UserService} from '../shared/services/user.service';
 import {PersonaldataModel} from '../shared/models/personaldata.model';
 import {UserProfileService} from './user-profile.service';
+import {ActionsService} from '../actions/actions.service';
+import {ActionModel} from '../shared/models/reservation.model';
 
 declare var require: any;
 
@@ -33,11 +35,16 @@ export class UserProfileComponent implements OnInit {
 
   changingPersonalData = false;
   newPersonalData: PersonaldataModel;
+  userActionsHistory: ActionModel[];
+  userActionsActual: ActionModel[];
+  actionsLoaded = false;
 
 
   constructor(private router: ActivatedRoute,
+              private navRouter: Router,
               private userService: UserService,
-              private userProfileService: UserProfileService) {
+              private userProfileService: UserProfileService,
+              private reservationService: ActionsService) {
 
   }
 
@@ -99,6 +106,7 @@ export class UserProfileComponent implements OnInit {
       this.userService.getUserById(id).subscribe((value)=>{
           this.user = value;
           this.dataLoaded = true;
+          this.getUserActions(value.idUser);
         },
         (error)=>{
 
@@ -116,6 +124,22 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+
+  private getUserActions(id: number){
+    this.reservationService.getAllUserActions('before',id).subscribe((actions)=>{
+      this.userActionsHistory = actions;
+      this.reservationService.getAllUserActions('after', id).subscribe((actionsAfter)=>{
+        this.userActionsActual = actionsAfter;
+        this.actionsLoaded = true;
+      });
+    },(error)=>{
+
+    })
+  }
+
+  openDetails(action: ActionModel){
+    this.navRouter.navigateByUrl('reservation/'+ action.idReservation);
+  }
 
 
 }

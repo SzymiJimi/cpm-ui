@@ -1,22 +1,20 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Router} from '@angular/router';
+import {UserService} from '../../shared/services/user.service';
+import {ActionsService} from '../actions.service';
+import {ActionModel} from '../../shared/models/reservation.model';
 import {SelectionModel} from '@angular/cdk/collections';
-import {ReservationsService} from './reservations.service';
-import {ActionModel} from '../shared/models/reservation.model';
-import {AppService} from '../shared/services/app.service';
-import {UserService} from '../shared/services/user.service';
-import {ItemModel} from '../shared/models/item.model';
-import {ItemsService} from '../items/items.service';
+import {Router} from '@angular/router';
+import {AppService} from '../../shared/services/app.service';
+import {CheckOutService} from './check-out.service';
 
 @Component({
-  selector: 'app-reservations',
-  templateUrl: './reservations.component.html',
-  styleUrls: ['./reservations.component.scss']
+  selector: 'app-check-out',
+  templateUrl: './check-out.component.html',
+  styleUrls: ['./check-out.component.scss']
 })
-export class ReservationsComponent implements OnInit {
-
-  displayedColumns: string[] = ['select', 'name', 'from', 'to', 'duration', 'contact'];
+export class CheckOutComponent implements OnInit {
+  displayedColumns: string[] = [ 'name', 'from', 'to', 'duration', 'contact'];
 
   dataLoaded = false;
   dataLoadingStarted = false;
@@ -28,10 +26,7 @@ export class ReservationsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator : MatPaginator;
 
-  constructor(private reservationService: ReservationsService,
-              private router: Router,
-              private app: AppService,
-              private itemService: ItemsService) {
+  constructor(private checkoutService: CheckOutService, private router: Router, private app: AppService, private user: UserService) {
     this.dataLoaded = false;
     this.dataLoadingStarted = false;
   }
@@ -40,12 +35,12 @@ export class ReservationsComponent implements OnInit {
     if(this.app.authenticated === true){
       this.dataLoaded= true;
       this.dataLoadingStarted = false;
-      this.getCheckoutList();
+      this.getCheckOutList();
     }else{
       this.app.authenticatedSubject.subscribe((value) => {
         if (!this.dataLoaded && !this.dataLoadingStarted) {
           this.dataLoadingStarted = true;
-          this.getCheckoutList();
+          this.getCheckOutList();
         }
       });
     }
@@ -53,10 +48,10 @@ export class ReservationsComponent implements OnInit {
 
   }
 
-  private getCheckoutList() {
-    this.reservationService.getUserReservations().subscribe((reservations) => {
+  private getCheckOutList() {
+    this.checkoutService.getUserCheckouts().subscribe((reservations) => {
         this.dataLoaded = true;
-        console.log(this.reservationService.reservationsList);
+        console.log(this.checkoutService.checkOutsList);
         this.dataSource = new MatTableDataSource<ActionModel>(reservations);
         this.dataLoadingStarted = false;
         console.log(reservations);
@@ -67,6 +62,7 @@ export class ReservationsComponent implements OnInit {
 
       });
   }
+
 
 
   calculateDuration(from: Date, to: Date) {
@@ -95,24 +91,15 @@ export class ReservationsComponent implements OnInit {
 
   selection = new SelectionModel<ActionModel>(true, []);
 
-  /** Whether the number of selected elements matches the total number of rows. */
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
 
-  showDetails(element: ActionModel){
-    this.router.navigateByUrl("reservation/"+element.idReservation);
-    // this.itemService.itemToReport = element;
-    // this.router.navigateByUrl('report/new');
+  loadCheckOutDetails(action: ActionModel){
+    this.router.navigateByUrl('/reservation/'+action.idReservation);
   }
-
 }

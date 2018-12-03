@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {ReservationsService} from '../../reservations/reservations.service';
+import {ActionsService} from '../../actions/actions.service';
 import {ItemModel} from '../../shared/models/item.model';
-import {ReservationListDialogComponent} from '../../reservations/reservation-new/reservations-dialog/reservation-list-dialog.component';
+import {ReservationListDialogComponent} from '../../actions/reservations/reservation-new/reservations-dialog/reservation-list-dialog.component';
 import {ActionModel} from '../../shared/models/reservation.model';
 import {UserService} from '../../shared/services/user.service';
 import {ItemsService} from '../../items/items.service';

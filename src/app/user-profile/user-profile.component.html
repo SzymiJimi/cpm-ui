@@ -24,6 +24,8 @@
             </div>
           </div>
           <hr>
+          <mat-tab-group>
+            <mat-tab label="Information">
               <div ngClass="{{changingPersonalData ? 'tab-subpage-content-large' : 'tab-subpage-content-small'}}">
                 <div class="row info-tab">
                   <div class="info-column-left">
@@ -31,37 +33,37 @@
                     <div class="card properties-fields">
                       <ul class="list-group list-group-flush">
                         <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Username
-                          <span class="property-value">{{user.username}}</span>
+                          <span class="property-value-right">{{user.username}}</span>
                         </li>
                         <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Email
-                          <span class="property-value">{{user.email}}</span>
+                          <span class="property-value-right">{{user.email}}</span>
                         </li>
                         <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Role
-                          <span *ngIf="!changingRole" class="property-value">{{user.idRole.name}}</span>
-                          <mat-form-field class="property-value" *ngIf="changingRole">
+                          <span *ngIf="!changingRole" class="property-value-right">{{user.idRole.name}}</span>
+                          <mat-form-field class="property-value-right" *ngIf="changingRole">
                             <mat-select   [(value)]="newUserRole">
                               <mat-option *ngFor="let role of availableRoles" value="{{role}}">{{role}}</mat-option>
                             </mat-select>
                           </mat-form-field>
                         </li>
                         <li class="list-group-item">Name
-                          <span *ngIf="!changingPersonalData" class="property-value">{{user.idPersonaldata.name}}</span>
-                          <mat-form-field class="property-value" *ngIf="changingPersonalData">
+                          <span *ngIf="!changingPersonalData" class="property-value-right">{{user.idPersonaldata.name}}</span>
+                          <mat-form-field class="property-value-right" *ngIf="changingPersonalData">
                             <input [(ngModel)]="newPersonalData.name" matInput placeholder="Name" value="Sushi">
                           </mat-form-field>
                         </li>
                         <li class="list-group-item">Surname
-                          <span *ngIf="!changingPersonalData" class="property-value">{{user.idPersonaldata.surname}}</span>
-                          <mat-form-field class="property-value" *ngIf="changingPersonalData">
+                          <span *ngIf="!changingPersonalData" class="property-value-right">{{user.idPersonaldata.surname}}</span>
+                          <mat-form-field class="property-value-right" *ngIf="changingPersonalData">
                             <input [(ngModel)]="newPersonalData.surname" matInput placeholder="Surname" value="Sushi">
                           </mat-form-field>
                         </li>
                         <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Date of birth
-                          <span class="property-value">{{user.idPersonaldata.dateOfBirth | simpleDate}}</span>
+                          <span class="property-value-right">{{user.idPersonaldata.dateOfBirth | simpleDate}}</span>
                         </li>
                         <li class="list-group-item">Gender
-                          <span *ngIf="!changingPersonalData" class="property-value">{{user.idPersonaldata.gender}}</span>
-                          <mat-form-field class="property-value" *ngIf="changingPersonalData" >
+                          <span *ngIf="!changingPersonalData" class="property-value-right">{{user.idPersonaldata.gender}}</span>
+                          <mat-form-field class="property-value-right" *ngIf="changingPersonalData" >
                             <input [(ngModel)]="newPersonalData.gender" matInput placeholder="Gender" value="Sushi">
                           </mat-form-field>
                         </li>
@@ -75,7 +77,7 @@
                     <div class="card properties-fields">
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item">Creator
-                          <span class="property-value"></span>
+                          <span class="property-value-right"></span>
                         </li>
                         <li class="list-group-item">Modify data
                         </li>
@@ -83,10 +85,61 @@
                     </div>
                     <button *ngIf="changingPersonalData" mat-raised-button class="more-button float-right top-space-sm" (click)="saveNewPersonalData()">Save new profile</button>
                     <button *ngIf="changingRole" mat-raised-button class="more-button float-right top-space-sm" (click)="saveNewRole()" >Save new role</button>
-                    <!--<button mat-raised-button class="more-button float-right top-space-sm" (click)="changeUserRole()" >Save changes</button>-->
                   </div>
                 </div>
               </div>
+            </mat-tab>
+            <mat-tab label="Items">
+
+              <div class="row info-tab tab-subpage-content-small">
+                <div class="list-item-column">
+                  <p style="color: rgba(0,0,0,0.4); margin-left: 20px; padding-top: 15px;">ITEMS</p>
+                  <div *ngIf="actionsLoaded && userActionsActual.length>0" class="card properties-fields">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item list-item-row"
+                          *ngFor="let action of userActionsActual"
+                          (click)="openDetails(action)">
+                        Type: <span style="color: rgba(0,0,0,0.6); margin-right: 10%">{{action.type}}</span>
+                        Item: <span style="color: rgba(0,0,0,0.6);">{{ action.itemId.brand + ' '+action.itemId.model}}</span>
+                        <span style="float: right">
+                          To: <span style="color: rgba(0,0,0,0.6); "> {{action.to | datetime}}</span>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                  <p *ngIf="actionsLoaded && userActionsActual.length===0">
+                    User do not have any item history...
+                  </p>
+                </div>
+              </div>
+
+            </mat-tab>
+            <mat-tab label="Item history">
+              <div class="row info-tab tab-subpage-content-small">
+                <div class="list-item-column">
+                  <p style="color: rgba(0,0,0,0.4); margin-left: 20px; padding-top: 15px;">ITEMS HISTORY</p>
+                  <div *ngIf="actionsLoaded && userActionsHistory.length>0" class="card properties-fields">
+                    <ul class="list-group list-group-flush">
+                      <li
+                        class="list-group-item list-item-row"
+                        *ngFor="let historyAction of userActionsHistory"
+                        (click)="openDetails(historyAction)">
+                        Type: <span style="color: rgba(0,0,0,0.6); margin-right: 10%">{{historyAction.type}}</span>
+                        Item: <span style="color: rgba(0,0,0,0.6);">{{ historyAction.itemId.brand + ' '+historyAction.itemId.model}}</span>
+                        <span style="float: right">
+                          From: <span style="color: rgba(0,0,0,0.6);"> {{historyAction.from | datetime}}</span>
+                          To: <span style="color: rgba(0,0,0,0.6); "> {{historyAction.to | datetime}}</span>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div *ngIf="actionsLoaded && userActionsHistory.length===0">
+                    User do not have any item history...
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
       </div>
     </div>

@@ -20,3 +20,16 @@ $candy-app-accent:  mat-palette($mat-cyan, 600);
 $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 @include angular-material-theme($candy-app-theme);
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+
+.blue-snackbar {
+  background: #2196F3;
+}
+
+.red-snackbar {
+  background: #750012;
+}
+
+.green-snackbar {
+  margin-top: 150px;
+  background: #007016;
+}

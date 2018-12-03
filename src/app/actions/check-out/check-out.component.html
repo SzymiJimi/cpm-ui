@@ -2,7 +2,7 @@
   <div class="card">
     <div *appAuthorized class="card-body">
       <div *appManager>
-        <p class="subpage-info">>My reservations </p>
+        <p class="subpage-info">>My check-outs </p>
         <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
@@ -11,22 +11,6 @@
 
           <table mat-table
                  [dataSource]="dataSource" matSort>
-
-            <ng-container matColumnDef="select">
-              <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null"
-                              [checked]="selection.hasValue() && isAllSelected()"
-                              [indeterminate]="selection.hasValue() && !isAllSelected()">
-                </mat-checkbox>
-              </th>
-              <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()"
-                              (change)="$event ? selection.toggle(row) : null"
-                              [checked]="selection.isSelected(row)">
-                </mat-checkbox>
-              </td>
-            </ng-container>
-
 
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -54,10 +38,12 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+            <tr mat-row
+                *matRowDef="let element; columns: displayedColumns;"
                 class="example-element-row"
-                (click)="showDetails(element)">
+                (click)="loadCheckOutDetails(element)">
             </tr>
+            <!--<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>-->
           </table>
 
 

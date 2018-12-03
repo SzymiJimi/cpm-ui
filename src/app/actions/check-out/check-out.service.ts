@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {ActionModel} from '../shared/models/reservation.model';
+import {ActionModel} from '../../shared/models/reservation.model';
 import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {AppService} from '../shared/services/app.service';
-import {UserService} from '../shared/services/user.service';
+import {AppService} from '../../shared/services/app.service';
+import {UserService} from '../../shared/services/user.service';
 
 @Injectable()
 export class CheckOutService {
@@ -46,26 +46,4 @@ export class CheckOutService {
   }
 
 
-  getCheckOutsForItem(itemId): Observable<ActionModel[]> {
-    console.log('Pobiera checkouty');
-    this.app.options.responseType = 'json';
-    let reservationsForItem: ActionModel[];
-    return new Observable<ActionModel[]>((observer) => {
-      this.http.get(environment.endpointBase + 'checkout/item/' + itemId, this.app.options).subscribe(res => {
-          console.log('Zwrocone checkouty');
-          console.log(res['body'] as ActionModel[]);
-          reservationsForItem = res['body'] as ActionModel[];
-          observer.next(reservationsForItem);
-          observer.complete();
-        },
-        error => {
-          console.log('Zwrocony error');
-          console.log(error);
-          observer.error('error with send data');
-          observer.complete();
-        }
-      );
-
-    });
-  }
 }

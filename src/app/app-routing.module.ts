@@ -6,18 +6,19 @@ import {HomeComponent} from './home/home.component';
 import {ItemsComponent} from './items/items.component';
 import {ItemDetailsComponent} from './items/item-details/item-details.component';
 import {ItemNewComponent} from './items/item-new/item-new.component';
-import {ReservationsComponent} from './reservations/reservations.component';
-import {ReservationNewComponent} from './reservations/reservation-new/reservation-new.component';
-import {CheckOutComponent} from './check-out/check-out.component';
-import {CheckOutNewComponent} from './check-out/check-out-new/check-out-new.component';
+import {ReservationsComponent} from './actions/reservations/reservations.component';
+import {ReservationNewComponent} from './actions/reservations/reservation-new/reservation-new.component';
+import {CheckOutComponent} from './actions/check-out/check-out.component';
+import {CheckOutNewComponent} from './actions/check-out/check-out-new/check-out-new.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {UserProfilesListComponent} from './user-profile/user-profiles-list/user-profiles-list.component';
-import {RequestDetailsComponent} from './reservations/request-details/request-details.component';
+import {ActionDetailsComponent} from './actions/action-details/action-details.component';
 import {LocationComponent} from './location/location.component';
 import {LocationDetailsComponent} from './location/location-details/location-details.component';
 import {NewLocationComponent} from './location/new-location/new-location.component';
 import {NewReportComponent} from './report/new-report/new-report.component';
 import {UserReportsComponent} from './report/user-reports/user-reports.component';
+import {ReportDetailsComponent} from './report/report-details/report-details.component';
 
 
 const appRoutes: Routes = [
@@ -27,17 +28,19 @@ const appRoutes: Routes = [
   { path: 'item/new', component: ItemNewComponent },
   { path: 'item/:id', component: ItemDetailsComponent },
   { path: 'users', component: UserProfilesListComponent },
+  { path: 'profile/:id', component: UserProfileComponent },
   { path: 'locations', component: LocationComponent },
   { path: 'location/new', component: NewLocationComponent },
   { path: 'location/:id', component: LocationDetailsComponent },
   { path: 'reservation/new', component: ReservationNewComponent },
-  { path: 'reservation/:id', component: RequestDetailsComponent },
+  { path: 'reservation/:id', component: ActionDetailsComponent },
   { path: 'my/reservations', component: ReservationsComponent },
   { path: 'checkout/new', component: CheckOutNewComponent },
   { path: 'my/checkout', component: CheckOutComponent },
   { path: 'report/new', component: NewReportComponent },
   { path: 'reports/my', component: UserReportsComponent },
-  { path: 'profile/:id', component: UserProfileComponent },
+  { path: 'report/:id', component: ReportDetailsComponent },
+
   { path: '**', redirectTo: '' }
 ];
 

@@ -1,0 +1,87 @@
+.finish-button{
+  background-color: #258eaf;
+  color: white;
+  text-align: center;
+  width: 250px;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.report-button{
+  background-color: #cd3cff;
+  color: white;
+  text-align: center;
+  width: 250px;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.manage-btn{
+  display: inline-flex;
+}
+
+
+.item-image{
+  width: 130px;
+  margin-left: 5%;
+}
+
+.item-info-box{
+  display: -webkit-box;
+}
+
+.item-info{
+  margin-left: 5%;
+  min-width: 300px;
+}
+
+.tab-subpage-content{
+  margin-top: 1%;
+  border-radius: 8px;
+  background-color: rgba(0,0,0,0.06);
+  height: 600px;
+}
+
+
+.loading-data-spinner{
+  margin: auto;
+}
+
+.brand-info{
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+.properties-fields{
+  margin-top: 10px;
+  margin-left: 3%;
+}
+
+.info-tab{
+  width: 100%;
+}
+
+.info-column-left{
+  width: 60%;
+  margin: 1%;
+}
+
+.info-column-right{
+  width: 36%;
+  margin: 1%;
+}
+
+.property-value{
+  float: right;
+  color: rgba(0,0,0,0.6);
+}
+
+h3 {
+  margin: 0 0 10px;
+}
+
+pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+}
+

@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Finish report</h1>
+<mat-dialog-content>
+  Enter a message summarizing the report:
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="data.message">
+    </textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.message" cdkFocusInitial>Finish</button>
+</mat-dialog-actions>

@@ -12,7 +12,7 @@ import {
 import {colors} from '../demo-utils/colors';
 import {Observable, Subject} from 'rxjs';
 import {ActionModel} from '../../shared/models/reservation.model';
-import {ReservationsService} from '../../reservations/reservations.service';
+import {ActionsService} from '../../actions/actions.service';
 import {DatetimePipe} from '../../shared/pipes/datetime.pipe';
 import {UserService} from '../../shared/services/user.service';
 
@@ -55,7 +55,7 @@ export class ItemDetailsComponent implements OnInit {
               private itemService: ItemsService,
               private routerNav: Router,
               private userService: UserService,
-              private reservationService: ReservationsService) {
+              private reservationService: ActionsService) {
     // this.tenDays.setDate(this.tenDays.getDay()+4);
   }
 

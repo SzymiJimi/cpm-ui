@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {ActionModel} from '../../shared/models/reservation.model';
+import {ActionModel} from '../../../shared/models/reservation.model';
 import {MatDialog} from '@angular/material';
-import {ItemModel} from '../../shared/models/item.model';
-import {LocationService} from '../../location/location.service';
-import {ItemsService} from '../../items/items.service';
-import {UserService} from '../../shared/services/user.service';
+import {ItemModel} from '../../../shared/models/item.model';
+import {LocationService} from '../../../location/location.service';
+import {ItemsService} from '../../../items/items.service';
+import {UserService} from '../../../shared/services/user.service';
 import {FormControl} from '@angular/forms';
 import {ReservationListDialogComponent} from '../../reservations/reservation-new/reservations-dialog/reservation-list-dialog.component';
-import {ReservationsService} from '../../reservations/reservations.service';
+import {ActionsService} from '../../actions.service';
 import {CheckOutService} from '../check-out.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class CheckOutNewComponent implements OnInit {
   constructor( private locationService: LocationService,
                private user: UserService,
                private itemService: ItemsService,
-               private reservationService: ReservationsService,
+               private reservationService: ActionsService,
                private checkOutService: CheckOutService,
                public dialog: MatDialog) {
   }

@@ -79,6 +79,17 @@
   margin: 1%;
 }
 
+.list-item-column{
+  margin-left: 7%;
+  width: 86%;
+
+}
+
+.list-item-row:hover{
+  background-color: #258eaf;
+  color: white;
+}
+
 .info-column-right{
   width: 36%;
   margin: 1%;
@@ -86,6 +97,15 @@
 
 .property-value{
   float: right;
+  color: rgba(0,0,0,0.6);
+}
+
+.property-value-right{
+  float: right;
+  color: rgba(0,0,0,0.6);
+}
+
+.property-value{
   color: rgba(0,0,0,0.6);
 }
 
