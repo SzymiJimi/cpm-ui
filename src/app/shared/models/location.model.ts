@@ -1,3 +1,5 @@
+import {UserModel} from './user.model';
+
 export class LocationModel {
 
   idLocation: number;
@@ -5,5 +7,5 @@ export class LocationModel {
   coordinateX: number;
   coordinateY: number;
   address: string;
-
+  unitHead: UserModel;
 }

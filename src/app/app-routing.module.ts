@@ -19,6 +19,9 @@ import {NewLocationComponent} from './location/new-location/new-location.compone
 import {NewReportComponent} from './report/new-report/new-report.component';
 import {UserReportsComponent} from './report/user-reports/user-reports.component';
 import {ReportDetailsComponent} from './report/report-details/report-details.component';
+import {NewStocktakingComponent} from './stocktaking/new-stocktaking/new-stocktaking.component';
+import {StocktakingComponent} from './stocktaking/stocktaking.component';
+import {StartedStocktakingComponent} from './stocktaking/started-stocktaking/started-stocktaking.component';
 
 
 const appRoutes: Routes = [
@@ -40,6 +43,9 @@ const appRoutes: Routes = [
   { path: 'report/new', component: NewReportComponent },
   { path: 'reports/my', component: UserReportsComponent },
   { path: 'report/:id', component: ReportDetailsComponent },
+  { path: 'stocktaking/new', component: NewStocktakingComponent },
+  { path: 'stocktaking/location', component: StocktakingComponent },
+  { path: 'stocktaking/started/:id', component: StartedStocktakingComponent },
 
   { path: '**', redirectTo: '' }
 ];

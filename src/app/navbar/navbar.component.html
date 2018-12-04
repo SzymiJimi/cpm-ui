@@ -24,6 +24,11 @@
       <li class="items"><a routerLink="report/new">>New</a></li>
       <li class="items"><a routerLink="reports/my">>My</a></li>
     </div>
+    <li><a routerLink="stocktaking/new">Stocktaking</a></li>
+    <div *ngIf="showStocktakingSideBar()" >
+      <li class="items"><a routerLink="stocktaking/new">>New</a></li>
+      <li class="items"><a routerLink="stocktaking/all">>All</a></li>
+    </div>
     <li><a routerLink="users">Users</a></li>
     <li><a routerLink="locations">Locations</a></li>
 

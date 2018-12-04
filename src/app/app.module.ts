@@ -78,6 +78,9 @@ import { UserReportsComponent } from './report/user-reports/user-reports.compone
 import { ReportDetailsComponent } from './report/report-details/report-details.component';
 import {ConfirmDialog} from './shared/dialogs/confirm-dialog';
 import {FinishReportDialog} from './report/report-details/dialog/finish-report-dialog';
+import { StocktakingComponent } from './stocktaking/stocktaking.component';
+import { NewStocktakingComponent } from './stocktaking/new-stocktaking/new-stocktaking.component';
+import { StartedStocktakingComponent } from './stocktaking/started-stocktaking/started-stocktaking.component';
 
 
 @NgModule({
@@ -111,7 +114,10 @@ import {FinishReportDialog} from './report/report-details/dialog/finish-report-d
     UserReportsComponent,
     ReportDetailsComponent,
     ConfirmDialog,
-    FinishReportDialog
+    FinishReportDialog,
+    StocktakingComponent,
+    NewStocktakingComponent,
+    StartedStocktakingComponent
 
   ],
   exports: [

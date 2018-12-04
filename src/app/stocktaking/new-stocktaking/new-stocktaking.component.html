@@ -1,0 +1,48 @@
+<div class="container-fluid font main-card">
+  <div class="card">
+    <div *appAuthorized class="card-body">
+      <div *appManager>
+        <p class="subpage-info">>Stocktaking </p>
+        <hr>
+        <div class="button-row float-right manage-btn">
+          <mat-spinner class="loadingSpinner" [diameter]="50" [strokeWidth]="5" *ngIf="addingStarted"></mat-spinner>
+          <button mat-raised-button class="add-button" *ngIf="!addingStarted" (click)="startStocktaking()">Start</button>
+        </div>
+        <hr style="margin-top: 70px">
+        <div class="item-add-box">
+          <div class="item-info">
+            <div class="row">
+              <div class="input-label">
+                <h5>General infomation</h5>
+                <p>General information about stocktaking</p>
+              </div>
+              <div *ngIf="dataLoaded" class="card input-card">
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Inventory manager
+                      <span class="property-value">{{getInventoryManager()}}</span>
+                    </li>
+                    <li class="list-group-item">Location
+                      <span class="property-value">{{location.name}}</span>
+                    </li>
+                    <li class="list-group-item">Last stocktaking for this location
+                      <span *ngIf="!lastDateNull" class="property-value">{{lastDate | simpleDate}}</span>
+                      <span *ngIf="lastDateNull" class="property-value">{{lastDate}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="button-row float-right manage-btn">
+              <button mat-raised-button *ngIf="!addingStarted" class="add-button" (click)="startStocktaking()">Start</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *appUnauthorized class="card-body">
+        Welcome on our page sign in to see the content.
+      </div>
+    </div>
+  </div>
+</div>

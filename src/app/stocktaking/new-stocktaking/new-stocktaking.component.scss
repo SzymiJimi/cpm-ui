@@ -1,0 +1,66 @@
+.add-button{
+  background-color: #258eaf;
+  color: white;
+  text-align: center;
+  width: 110px;
+  margin-left: 2%;
+  margin-right: 2%;
+
+}
+
+.item-add-box{
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.06);
+  height: 370px;
+}
+
+.item-info{
+  width: 80%;
+  margin: auto;
+}
+
+.input-label{
+  margin-top: 20px;
+  width: 35%;
+}
+
+.input-card{
+  margin-top: 20px;
+  margin-left: 5%;
+  width: 60%;
+}
+
+
+.select-today{
+  border-color: #ced4da;
+  margin: 0 !important;
+  text-align-all: center;
+  height: 38px;
+  width: 25%;
+}
+
+.select-today:hover.select-period:hover{
+  background-color: rgba(0,0,0,0.5) !important;
+  color: white;
+
+}
+.select-period{
+  border-color: #ced4da;
+  text-align-all: center;
+  height: 38px;
+  width: 31%;
+  margin: 1% 1% 1% 0;
+}
+
+.warranty-select{
+
+}
+
+.input-date{
+  width: 63%;
+}
+
+.property-value{
+  float: right;
+  color: rgba(0,0,0,0.6);
+}

@@ -91,4 +91,16 @@ export class NavbarComponent implements OnInit{
     return false;
   }
 
+  showStocktakingSideBar(){
+    if(this.userService.user!==undefined){
+      if(this.userService.user.idRole.name===Roles.MANAGER)
+      {
+        if(this.router.url.includes('stocktaking')){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 }

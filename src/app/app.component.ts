@@ -12,13 +12,20 @@ import {ActionsService} from './actions/actions.service';
 import {CheckOutComponent} from './actions/check-out/check-out.component';
 import {CheckOutService} from './actions/check-out/check-out.service';
 import {ReportService} from './report/report.service';
+import {StocktakingService} from './stocktaking/stocktaking.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.None,
-  providers: [LoginService, LocationService, ItemsService, ActionsService, CheckOutService, ReportService]
+  providers: [LoginService,
+    LocationService,
+    ItemsService,
+    ActionsService,
+    CheckOutService,
+    ReportService,
+    StocktakingService]
 })
 export class AppComponent implements OnInit{
 

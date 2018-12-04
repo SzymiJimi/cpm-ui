@@ -3,8 +3,6 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ItemsService} from './items.service';
 import {ItemModel} from '../shared/models/item.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {LocationService} from '../location/location.service';
-import {LocationModel} from '../shared/models/location.model';
 import {Router} from '@angular/router';
 import {AppService} from '../shared/services/app.service';
 
@@ -13,7 +11,6 @@ import {AppService} from '../shared/services/app.service';
   selector: 'app-items',
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss'],
-  // encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),

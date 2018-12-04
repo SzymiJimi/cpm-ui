@@ -11,4 +11,5 @@ export class ReportModel extends Serializable{
   repairDate: Date;
   description: string;
   status: string;
+  serviceman: UserModel;
 }
