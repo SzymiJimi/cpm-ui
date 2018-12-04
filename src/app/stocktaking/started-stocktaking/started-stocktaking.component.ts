@@ -23,12 +23,14 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ]
 })
 export class StartedStocktakingComponent implements OnInit {
-  displayedColumns: string[] = ['code', 'unit', 'quantity', 'price','value', 'comments'];
+  displayedColumns: string[] = ['code', 'unit', 'quantity', 'price','value', 'comments', 'checked'];
 
   dataLoaded = false;
 
   private sub: any;
   id: number;
+
+  readyToFinish: boolean = false;
 
   dataSource: MatTableDataSource<SheetModel>;
   stocktaking: StocktakingModel;
@@ -90,6 +92,34 @@ export class StartedStocktakingComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  confirmSheetElement(element){
+    element.checked = 1;
+    this.expandedElement===undefined ? this.expandedElement = element: this.expandedElement = undefined;
+    this.checkPosibilityToFinish();
+  }
+
+  checkPosibilityToFinish() {
+    let ready = true;
+    this.dataSource.data.map(value=>{
+      if(value.checked ===0 ){
+        ready = false;
+      }
+    });
+    this.readyToFinish = ready;
+  }
+
+  saveState(){
+    this.stocktakingService.saveSheetsState(this.dataSource.data).subscribe((sheets)=>{
+      this.dataSource.data = sheets;
+    });
+  }
+
+  finishStocktaking(){
+    this.saveState();
+    this.stocktakingService.finishStocktaking(this.stocktaking).subscribe((value)=>{
+
+    });
+  }
 
 
   applyFilter(filterValue: string) {

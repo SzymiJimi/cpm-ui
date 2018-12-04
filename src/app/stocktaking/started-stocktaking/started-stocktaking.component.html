@@ -5,7 +5,8 @@
         <p class="subpage-info">>Stocktaking </p>
         <hr>
         <div>
-          <button mat-raised-button class="save-button" (click)="saveStocktake()">Save</button>
+          <button mat-raised-button class="save-button" (click)="saveState()">Save</button>
+          <button *ngIf="readyToFinish" mat-raised-button class="save-button" (click)="finishStocktaking()">Finish</button>
         </div>
         <hr style="margin-top: 70px">
         <div *ngIf="dataLoaded" class="tab-subpage-content">
@@ -49,32 +50,40 @@
 
             <ng-container matColumnDef="code">
               <th mat-header-cell *matHeaderCellDef> Code</th>
-              <td mat-cell *matCellDef="let element"> {{element.code}}</td>
+              <td mat-cell *matCellDef="let element" [ngClass]="'narrow-code-column'"> {{element.code}}</td>
             </ng-container>
 
             <ng-container matColumnDef="unit">
-              <th mat-header-cell *matHeaderCellDef> Unit of measure</th>
-              <td mat-cell *matCellDef="let element"> {{element.unit}}</td>
+              <th mat-header-cell *matHeaderCellDef [ngClass]="'narrow-column'"> Unit of measure</th>
+              <td mat-cell *matCellDef="let element" [ngClass]="'narrow-column'"> {{element.unit}}</td>
             </ng-container>
 
             <ng-container matColumnDef="quantity">
               <th mat-header-cell *matHeaderCellDef> Quantity</th>
-              <td mat-cell *matCellDef="let element"> {{element.quantity}}</td>
+              <td mat-cell *matCellDef="let element" [ngClass]="'narrow-column'"> {{element.quantity}}</td>
             </ng-container>
 
             <ng-container matColumnDef="price">
               <th mat-header-cell *matHeaderCellDef> Price</th>
-              <td mat-cell *matCellDef="let element"> {{element.price}}</td>
+              <td mat-cell *matCellDef="let element" [ngClass]="'value-column'"> {{element.price}}</td>
             </ng-container>
 
             <ng-container matColumnDef="value">
               <th mat-header-cell *matHeaderCellDef> Value</th>
-              <td mat-cell *matCellDef="let element"> {{element.value}}</td>
+              <td mat-cell *matCellDef="let element" [ngClass]="'value-column'"> {{element.value}}</td>
             </ng-container>
 
             <ng-container matColumnDef="comments">
               <th mat-header-cell *matHeaderCellDef> Comments</th>
-              <td mat-cell *matCellDef="let element"> {{element.comments}}</td>
+              <td mat-cell *matCellDef="let element"> {{element.comment}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="checked">
+              <th mat-header-cell *matHeaderCellDef  [ngClass]="'narrow-column'"> Checked</th>
+              <td mat-cell *matCellDef="let element" >
+                <mat-icon *ngIf="element.checked === 0" class="not-confirmed checked-icon-info" >clear</mat-icon>
+                <mat-icon *ngIf="element.checked === 1" class="confirmed checked-icon-info" >done</mat-icon>
+              </td>
             </ng-container>
 
 
@@ -115,7 +124,7 @@
                       </div>
                       <hr>
                       <div class="detailButtons">
-                        <button mat-raised-button class="more-button" (click)="loadDetails(element)">Confirm</button>
+                        <button mat-raised-button class="more-button" (click)="confirmSheetElement(element)">Confirm</button>
                       </div>
                     </div>
                   </div>
@@ -127,6 +136,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let element; columns: displayedColumns;"
                 class="example-element-row"
+                ngClass="{{element.checked ===1 ? 'checked-sheet' : ''}}"
                 [class.example-expanded-row]="expandedElement === element"
                 (click)="expandedElement===undefined ? expandedElement = element: expandedElement = undefined">
             </tr>

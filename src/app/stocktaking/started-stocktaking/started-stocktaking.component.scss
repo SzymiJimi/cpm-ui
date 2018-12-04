@@ -4,11 +4,6 @@
   width: 100%;
 }
 
-td, th {
-  width: 10%;
-}
-
-
 table {
   width: 100%;
 }
@@ -19,6 +14,10 @@ tr.example-detail-row {
 
 tr.example-element-row:not(.example-expanded-row):hover {
   background: #f5f5f5;
+}
+
+.checked-sheet{
+  background-color: #258eaf;
 }
 
 tr.example-element-row:not(.example-expanded-row):active {
@@ -85,4 +84,28 @@ tr.example-element-row:not(.example-expanded-row):active {
   width: 50% !important;
   right: 6%;
   position: absolute;
+}
+
+.narrow-column {
+  width: 9%;
+}
+
+.narrow-code-column{
+  width: 10%;
+}
+
+.value-column{
+  width: 13%;
+}
+
+.not-confirmed{
+  color: red;
+}
+
+.confirmed{
+  color: lawngreen;
+}
+
+.checked-icon-info{
+  margin-left: 20px;
 }

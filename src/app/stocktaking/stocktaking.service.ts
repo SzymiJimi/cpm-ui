@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {LocationModel} from '../shared/models/location.model';
 import {ActionModel} from '../shared/models/reservation.model';
 import {StocktakingModel} from '../shared/models/stocktaking.model';
+import {SheetModel} from '../shared/models/sheet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -107,6 +108,35 @@ export class StocktakingService {
         }
       );
     });
+  }
+
+  saveSheetsState(sheets: SheetModel[]){
+    return new Observable<any>((observer) => {
+      this.http.post(environment.endpointBase + 'sheet/save/state', sheets, this.app.options).subscribe(res => {
+          observer.next(res['body']);
+          observer.complete();
+        },
+        error => {
+          observer.error('error');
+          observer.complete();
+        }
+      );
+    });
+  }
+
+  finishStocktaking(stocktaking: StocktakingModel){
+    return new Observable<any>((observer) => {
+      this.http.post(environment.endpointBase + 'stocktaking/finish', stocktaking, this.app.options).subscribe(res => {
+          observer.next(res['body']);
+          observer.complete();
+        },
+        error => {
+          observer.error('error');
+          observer.complete();
+        }
+      );
+    });
+
   }
 
 }

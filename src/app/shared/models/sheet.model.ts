@@ -10,7 +10,7 @@ export class SheetModel extends Serializable{
   quantity: number;
   price: number;
   value: number;
-  comments: string;
+  comment: string;
   idStocktaking: StocktakingModel;
   idItem: ItemModel;
   checked: number;

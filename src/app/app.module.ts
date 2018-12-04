@@ -123,7 +123,8 @@ import { StartedStocktakingComponent } from './stocktaking/started-stocktaking/s
   exports: [
     MatProgressSpinnerModule,
     ItemDetailsComponent,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   imports: [
     OwlDateTimeModule,
