@@ -1,3 +1,83 @@
-<p>
-  report works!
-</p>
+<div class="container-fluid font main-card">
+  <div class="card">
+    <div *appAuthorized class="card-body">
+      <div *appServiceman>
+        <p class="subpage-info">>Reports </p>
+        <hr>
+        <div >
+          <mat-form-field class="report-select-left"  *ngIf="dataLoaded">
+            <mat-select (valueChange)="changeStatus($event)" placeholder="Show by status">
+              <mat-option value="ALL">ALL</mat-option>
+              <mat-option value="CREATED">CREATED</mat-option>
+              <mat-option value="REPAIRING">REPAIRING</mat-option>
+              <mat-option value="FINISHED">FINISHED</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field  class="report-select-right" *ngIf="dataLoaded">
+            <mat-select (valueChange)="changeType($event)" placeholder="Show by type">
+              <mat-option value="ALL">ALL</mat-option>
+              <mat-option value="DAMAGED">DAMAGED</mat-option>
+              <mat-option value="MAINTENANCE">MAINTENANCE</mat-option>
+              <mat-option value="DECOMMISSIONING">DECOMMISSIONING</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <hr>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+          <table mat-table
+                 [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+            <ng-container matColumnDef="brand">
+              <th mat-header-cell *matHeaderCellDef> Item brand </th>
+              <td mat-cell *matCellDef="let element"> {{element.itemId.brand}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="model">
+              <th mat-header-cell *matHeaderCellDef> Item model </th>
+              <td mat-cell *matCellDef="let element"> {{element.itemId.model}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Description </th>
+              <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="eventDate">
+              <th mat-header-cell *matHeaderCellDef> Report date </th>
+              <td mat-cell *matCellDef="let element"> {{element.eventDate | datetime}}  </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> Type </th>
+              <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+                class="example-element-row"
+            (click)="showReportDetail(element)">
+            </tr>
+
+          </table>
+
+
+          <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+      </div>
+    </div>
+    <div *appUnauthorized class="card-body">
+      Welcome on our page sign in to see the content.
+    </div>
+
+  </div>
+
+</div>

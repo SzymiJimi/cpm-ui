@@ -25,6 +25,8 @@ export class ReportDetailsComponent implements OnInit {
   available = false;
   src = require('../../shared/images/item.jpg');
 
+  selectedType;
+
   id: number;
   report: ReportModel;
   dataLoaded = false;
@@ -45,7 +47,7 @@ export class ReportDetailsComponent implements OnInit {
       this.id = +params['id'];
       this.reportService.getSingleReport(this.id).subscribe((report) => {
         this.report = report;
-        console.log(this.report);
+        this.selectedType = this.report.type;
         this.dataLoaded = true;
       });
     });
@@ -61,7 +63,7 @@ export class ReportDetailsComponent implements OnInit {
   }
 
   isConsidering(){
-    return this.report.status == ReportType.REPAIRING;
+    return this.report.status === ReportType.REPAIRING;
   }
 
   considerReport(){
@@ -83,6 +85,7 @@ export class ReportDetailsComponent implements OnInit {
   }
 
   finishReport(){
+    this.report.type = this.selectedType;
     const dialogRef = this.dialog.open(FinishReportDialog, {
       width: '450px'
     });

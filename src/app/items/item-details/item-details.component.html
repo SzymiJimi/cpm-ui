@@ -1,16 +1,17 @@
 <div class="container-fluid font main-card">
   <div class="card">
     <div *appAuthorized class="card-body">
-      <div *appManager>
+      <div *appUser>
         <p class="subpage-info">>Item </p>
         <hr>
         <div class="button-row float-right manage-btn">
           <button mat-button [matMenuTriggerFor]="menu" class="action-btn">Menu</button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item class="action-window" (click)="reportItem()">Report</button>
+            <button *appManager mat-menu-item class="action-window" (click)="reportItem()">Withdraw from operation</button>
           </mat-menu>
           <button mat-raised-button class="more-button" (click)="reserveItem()">Reserve</button>
-          <button mat-raised-button class="more-button">Check-out</button>
+          <button mat-raised-button class="more-button" (click)="checkoutItem()">Check-out</button>
         </div>
         <hr style="margin-top: 70px">
         <mat-spinner [diameter]="200" class="loading-data-spinner" *ngIf="!dataLoaded"></mat-spinner>
@@ -119,7 +120,14 @@
                           <span class="property-value">{{item.description}}</span>
                         </li>
                         <li class="list-group-item">Location
-                          <span class="property-value">{{item.location.name+' '+item.location.address}}</span>
+                          <mat-form-field *ngIf="locationChanging"  class="property-value">
+                            <mat-select [(ngModel)]="selectedLocation" (valueChange)="changeLocation($event)" placeholder="Location">
+                              <mat-option *ngFor="let location of locations" [value]="location">
+                                {{location.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <span *ngIf="!locationChanging"  class="property-value">{{item.location.name+' '+item.location.address}}</span>
                         </li>
                       </ul>
                     </div>
@@ -132,7 +140,9 @@
                         <li class="list-group-item">Creator
                           <span class="property-value">{{item.creationUser.idPersonaldata.name +' '+item.creationUser.idPersonaldata.surname}}</span>
                         </li>
-                        <li class="list-group-item">Modify data
+                        <li *appManager class="list-group-item">Modify data
+                          <button *ngIf="!locationChanging" mat-button class="change-location-button" (click)="changeLocation()">Change location</button>
+                          <button *ngIf="locationChanging" [disabled]="selectedLocation===undefined" mat-button class="change-location-button" (click)="saveNewLocationForItem()">Save location</button>
                         </li>
                       </ul>
                     </div>

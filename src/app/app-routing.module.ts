@@ -22,11 +22,14 @@ import {ReportDetailsComponent} from './report/report-details/report-details.com
 import {NewStocktakingComponent} from './stocktaking/new-stocktaking/new-stocktaking.component';
 import {StocktakingComponent} from './stocktaking/stocktaking.component';
 import {StartedStocktakingComponent} from './stocktaking/started-stocktaking/started-stocktaking.component';
+import {ReportComponent} from './report/report.component';
+import {RegistrationComponent} from './login/registration/registration.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
   { path: 'items', component: ItemsComponent },
   { path: 'item/new', component: ItemNewComponent },
   { path: 'item/:id', component: ItemDetailsComponent },
@@ -42,6 +45,7 @@ const appRoutes: Routes = [
   { path: 'my/checkout', component: CheckOutComponent },
   { path: 'report/new', component: NewReportComponent },
   { path: 'reports/my', component: UserReportsComponent },
+  { path: 'reports', component: ReportComponent },
   { path: 'report/:id', component: ReportDetailsComponent },
   { path: 'stocktaking/new', component: NewStocktakingComponent },
   { path: 'stocktaking/location', component: StocktakingComponent },

@@ -1,7 +1,7 @@
 <div class="container-fluid font main-card">
   <div class="card">
     <div *appAuthorized class="card-body">
-      <div *appManager>
+      <div *appUser>
         <p class="subpage-info">>Report > New </p>
         <hr>
         <div *ngIf="reportingItem!==undefined && itemChecked===true" class="button-row float-right manage-btn">
@@ -44,6 +44,7 @@
                       <select class="form-control" id="inputType" [(ngModel)]="newReport.type">
                         <option>DAMAGED</option>
                         <option>MAINTENANCE</option>
+                        <option *appManager>DECOMMISSIONING</option>
                       </select>
                     </div>
                     <div class="form-group">

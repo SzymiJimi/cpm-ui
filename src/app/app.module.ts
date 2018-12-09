@@ -81,6 +81,11 @@ import {FinishReportDialog} from './report/report-details/dialog/finish-report-d
 import { StocktakingComponent } from './stocktaking/stocktaking.component';
 import { NewStocktakingComponent } from './stocktaking/new-stocktaking/new-stocktaking.component';
 import { StartedStocktakingComponent } from './stocktaking/started-stocktaking/started-stocktaking.component';
+import { RaportGeneratorComponent } from './stocktaking/started-stocktaking/raport-generator/raport-generator.component';
+import { UserDirective } from './shared/directives/user.directive';
+import { ServicemanDirective } from './shared/directives/serviceman.directive';
+import { OwnerDirective } from './shared/directives/owner.directive';
+import { RegistrationComponent } from './login/registration/registration.component';
 
 
 @NgModule({
@@ -117,7 +122,12 @@ import { StartedStocktakingComponent } from './stocktaking/started-stocktaking/s
     FinishReportDialog,
     StocktakingComponent,
     NewStocktakingComponent,
-    StartedStocktakingComponent
+    StartedStocktakingComponent,
+    RaportGeneratorComponent,
+    UserDirective,
+    ServicemanDirective,
+    OwnerDirective,
+    RegistrationComponent
 
   ],
   exports: [

@@ -15,6 +15,8 @@ import {ActionModel} from '../../shared/models/reservation.model';
 import {ActionsService} from '../../actions/actions.service';
 import {DatetimePipe} from '../../shared/pipes/datetime.pipe';
 import {UserService} from '../../shared/services/user.service';
+import {LocationModel} from '../../shared/models/location.model';
+import {LocationService} from '../../location/location.service';
 
 declare var require: any;
 
@@ -41,6 +43,7 @@ function getTimezoneOffsetString(date: Date): string {
 })
 export class ItemDetailsComponent implements OnInit {
 
+  locationChanging= false;
   available = false;
   name = 'HP';
   src = require('../../shared/images/item.jpg');
@@ -50,12 +53,15 @@ export class ItemDetailsComponent implements OnInit {
   private sub: any;
   reservationsForItem: ActionModel[];
   refresh: Subject<any> = new Subject();
+  locations: LocationModel[];
+  selectedLocation: LocationModel;
 
   constructor(private router: ActivatedRoute,
               private itemService: ItemsService,
               private routerNav: Router,
               private userService: UserService,
-              private reservationService: ActionsService) {
+              private reservationService: ActionsService,
+              private locationService: LocationService) {
     // this.tenDays.setDate(this.tenDays.getDay()+4);
   }
 
@@ -70,6 +76,7 @@ export class ItemDetailsComponent implements OnInit {
 
   private getItemFromDb() {
     this.itemService.getSingleItem(this.id).subscribe((item) => {
+      this.getLocations();
       this.item = item;
       this.checkAvailability();
       this.getReservationsForItem();
@@ -121,9 +128,15 @@ export class ItemDetailsComponent implements OnInit {
     );
   }
 
-  reserveItem(element: ItemModel) {
+
+  reserveItem(){
     this.itemService.itemToReserve = this.item;
     this.routerNav.navigateByUrl('reservation/new');
+  }
+
+  checkoutItem(){
+    this.itemService.itemToCheckout = this.item;
+    this.routerNav.navigateByUrl('checkout/new');
   }
 
   checkAvailability() {
@@ -190,4 +203,31 @@ export class ItemDetailsComponent implements OnInit {
   }
 
 
+  changeLocation(){
+    this.locationChanging = true;
+  }
+
+  getLocations(){
+    if(this.locationService.locations!==undefined){
+      this.locations= this.locationService.locations;
+      this.dataLoaded = true;
+
+    }else{
+      this.locationService.loadLocations().subscribe((locations: LocationModel[])=>
+        {
+          this.locations= locations;
+          this.dataLoaded = true;
+        },
+        (error)=>{
+          alert('Error with fetching locations! Please let the administrator know about this error...');
+        })
+    }
+  }
+
+  saveNewLocationForItem(){
+    this.item.location=this.selectedLocation;
+    this.itemService.addItem(this.item).subscribe(()=>{
+      this.locationChanging = false;
+    });
+  }
 }

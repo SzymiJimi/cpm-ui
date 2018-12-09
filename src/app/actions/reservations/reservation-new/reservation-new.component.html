@@ -1,8 +1,8 @@
 <div class="container-fluid font main-card">
   <div class="card">
     <div *appAuthorized class="card-body">
-      <div *appManager>
-        <p class="subpage-info">>Reservation > New </p>
+      <div *appUser>
+        <p class="subpage-info">>Order > New </p>
         <hr>
         <div *ngIf="reservingItem!==undefined && itemChecked===true" class="button-row float-right manage-btn">
           <button mat-raised-button class="add-button" (click)="reserveItem()">Reserve</button>
@@ -14,8 +14,8 @@
             <div class="item-info">
               <div class="row">
                 <div class="input-label">
-                  <h5>General information about reservation</h5>
-                  <p>Select an item from a list</p>
+                  <h5>General information about order</h5>
+                  <p>Selected item</p>
                 </div>
                 <div class="card properties-fields input-card">
                   <ul class="list-group list-group-flush">
@@ -34,12 +34,12 @@
               <hr>
               <div class="row">
                 <div class="input-label">
-                  <h5>Reservation details</h5>
-                  <p>Select date from and date to and reason for reservation.</p>
+                  <h5>Order details</h5>
+                  <p>Select date from and date to and reason for order.</p>
                 </div>
                 <div class="card input-card">
                   <div class="card-body">
-                      <button mat-raised-button class="wide-styled-button float-right" (click)="openReservationListDialog()">Show reservations for this item</button>
+                      <button mat-raised-button class="wide-styled-button float-right" (click)="openReservationListDialog()">Show orders for this item</button>
                     <div class="form-group">
                       <label for="inputFromDate">From</label>
                       <div class="input-group">
@@ -88,11 +88,17 @@
               <hr>
               <div class="row">
                 <div class="input-label">
-                  <h5>Contact for </h5>
-                  <p>Write description of an item.</p>
+                  <h5>Location and contact</h5>
+                  <p>Select a location to which you want to move and write additional contact information</p>
                 </div>
                 <div class="card input-card">
                   <div class="card-body">
+                    <div class="form-group">
+                      <label for="selectLocation">Location</label>
+                      <select [(ngModel)]="newLocation" class="form-control" id="selectLocation">
+                        <option *ngFor="let location of locations" [ngValue]="location" >{{location.name + ', ' + location.address}}</option>
+                      </select>
+                    </div>
                     <div class="form-group">
                       <label for="inputDescription">Contact</label>
                       <textarea

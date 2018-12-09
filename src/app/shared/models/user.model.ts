@@ -1,6 +1,7 @@
 import {Serializable} from './serializable.model';
 import {RoleModel} from './role.model';
 import {PersonaldataModel} from './personaldata.model';
+import {LocationModel} from './location.model';
 
 export class UserModel extends Serializable{
 
@@ -10,5 +11,4 @@ export class UserModel extends Serializable{
   email: string;
   idRole: RoleModel;
   idPersonaldata: PersonaldataModel;
-
 }

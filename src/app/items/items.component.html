@@ -1,8 +1,25 @@
 <div class="container-fluid font main-card">
   <div class="card">
     <div *appAuthorized class="card-body">
-      <div *appManager>
+      <div *appUser>
         <p class="subpage-info">>Items </p>
+        <hr>
+
+        <div>
+          <p> Show items for specific location </p>
+          <mat-form-field  class="location-select" *ngIf="dataLoaded">
+            <mat-select (valueChange)="changeLocation($event)" placeholder="Location">
+              <mat-option  value="all">
+                All
+              </mat-option>
+              <mat-option *ngFor="let location of locations" [value]="location.name">
+                {{location.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <hr>
+
         <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
@@ -44,7 +61,7 @@
                       <hr>
                       <div class="detailButtons">
                         <button mat-raised-button class="more-button" (click)="loadDetails(element)">Show more details</button>
-                        <button mat-raised-button class="more-button" (click)="reserveItem(element)">Reserve item</button>
+                        <button mat-raised-button class="more-button" (click)="reserveItem(element)">Order item</button>
                         <button mat-raised-button class="more-button" (click)="checkoutItem(element)">Check-out</button>
                       </div>
                     </div>

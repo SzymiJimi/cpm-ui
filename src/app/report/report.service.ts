@@ -54,6 +54,22 @@ export class ReportService {
     });
   }
 
+  getAllReports(): Observable<ReportModel[]> {
+    return new Observable<ReportModel[]>((observer) => {
+      this.http.get(environment.endpointBase + 'reports', this.app.options).subscribe(res => {
+          observer.next(res['body'] as ReportModel[]);
+          observer.complete();
+        },
+        error => {
+          if (error.status == 401) {
+            observer.error('unauthorized');
+          }
+          observer.complete();
+        }
+      );
+    });
+  }
+
 
   getSingleReport(id: number): Observable<ReportModel> {
     return new Observable<ReportModel>((observer) => {

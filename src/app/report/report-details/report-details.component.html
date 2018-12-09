@@ -1,12 +1,14 @@
 <div class="container-fluid font main-card">
   <div class="card">
     <div *appAuthorized class="card-body">
-      <div *appManager>
+      <div >
         <p class="subpage-info">>Report </p>
         <hr>
         <div class="button-row float-right manage-btn">
           <div *ngIf="dataLoaded">
-            <button *ngIf="isCreated()" mat-raised-button class="finish-button" (click)="considerReport()">Consider</button>
+            <div *appServiceman>
+              <button *ngIf="isCreated()" mat-raised-button class="finish-button" (click)="considerReport()">Consider</button>
+            </div>
             <button *ngIf="isConsidering()" mat-raised-button class="finish-button" (click)="finishReport()">Finish</button>
           </div>
           <button mat-raised-button class="report-button" (click)="showItemDetails()">Show item details</button>
@@ -31,7 +33,14 @@
                 <div class="card properties-fields">
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">Type
-                      <span class="property-value">{{report.type}}</span>
+                      <span *ngIf="!isConsidering()" class="property-value">{{report.type}}</span>
+                      <mat-form-field *ngIf="isConsidering()"  class="property-value">
+                        <mat-select [(ngModel)]="selectedType" placeholder="Type">
+                          <mat-option value="DECOMMISSIONED">DECOMMISSIONED</mat-option>
+                          <mat-option value="REPAIRED">REPAIRED</mat-option>
+                          <mat-option value="CHECKED">CHECKED</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     </li>
                     <li class="list-group-item">Date of the event
                       <span class="property-value">{{report.eventDate | datetime}}</span>

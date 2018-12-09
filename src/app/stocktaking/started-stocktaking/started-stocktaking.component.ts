@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {ReportModel} from '../../shared/models/report.model';
 import {AppService} from '../../shared/services/app.service';
@@ -9,6 +9,10 @@ import {StocktakingService} from '../stocktaking.service';
 import {SheetModel} from '../../shared/models/sheet.model';
 import {StocktakingModel} from '../../shared/models/stocktaking.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
+declare var xepOnline: any;
+
 
 @Component({
   selector: 'app-started-stocktaking',
@@ -23,17 +27,22 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ]
 })
 export class StartedStocktakingComponent implements OnInit {
-  displayedColumns: string[] = ['code', 'unit', 'quantity', 'price','value', 'comments', 'checked'];
+  displayedColumns: string[] = ['name','code', 'unit', 'quantity', 'price','value', 'comments', 'checked'];
+  displayedColumnsForPDF: string[] = ['name','code', 'unit', 'quantity', 'price','value', 'comments'];
 
   dataLoaded = false;
+  generateRaportPDF = false;
 
   private sub: any;
   id: number;
 
   readyToFinish: boolean = false;
+  finished: boolean = false;
 
   dataSource: MatTableDataSource<SheetModel>;
   stocktaking: StocktakingModel;
+
+  @ViewChild('pdfile') content: ElementRef;
 
   expandedElement: any;
 
@@ -72,11 +81,14 @@ export class StartedStocktakingComponent implements OnInit {
   private getStocktakingData(){
     this.stocktakingService.getStocktakingById(this.id).subscribe((stocktaking)=>{
       this.stocktaking = stocktaking;
+      console.log(this.stocktaking);
+      if(this.stocktaking.finish){
+        this.finished = true;
+      }
     });
   }
   private getSheetData(){
     this.stocktakingService.getSheetListForStocktaking(this.id).subscribe((sheets) => {
-        console.log(sheets);
         this.dataLoaded = true;
         this.dataSource = new MatTableDataSource<SheetModel>(sheets);
         this.initialize();
@@ -88,6 +100,7 @@ export class StartedStocktakingComponent implements OnInit {
 
 
   initialize() {
+    this.checkPosibilityToFinish();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -129,4 +142,54 @@ export class StartedStocktakingComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  downloadFile(){
+
+  }
+
+  generate(){
+      let doc = new jsPDF('p','pt','a4');
+
+      let specialElementHandlers = {
+        '#editor': function (element, renderer) {
+          return true;
+        }
+      };
+
+      let content = this.content.nativeElement;
+
+      doc.fromHTML(content.innerHTML, 15,15,{
+          'width' : 240,
+          'elementHandlers' : specialElementHandlers},
+        function() { doc.save('Invoice.pdf');
+        });
+    // return xepOnline.Formatter.Format('pdfile', {render: 'download'});
+  }
+
+    // const filename  = 'test.pdf';
+    //
+    // html2canvas(document.querySelector('#pdfile'), {scale: 1}).then(canvas => {
+    //   let pdf = new jsPDF('p', 'mm', 'a4');
+    //   pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+    //   pdf.save(filename);
+    // });
+  //   this.generateRaportPDF = true;
+  //   console.log(this.content);
+  //   let doc = new jsPDF('p','pt','a4');
+  //
+  //   let specialElementHandlers = {
+  //     '#editor': function (element, renderer) {
+  //       return true;
+  //     }
+  //   };
+  //
+  //   let content = this.content.nativeElement;
+  //
+  //   doc.fromHTML(content.innerHTML, 15,15,{
+  //       'width' : 240,
+  //       'elementHandlers' : specialElementHandlers},
+  //     function() { doc.save('Invoice.pdf');
+  //     });
+  //
+  // }
 }

@@ -1,36 +1,53 @@
 <ul class="font">
   <li class="site-name" routerLink="/">Company property management</li>
   <div *appAuthorized>
-    <li><a routerLink="items">Items</a></li>
-    <div *ngIf="showItemSideBar()" >
-      <li class="items"><a routerLink="item/new">>New</a></li>
-      <li class="items"><a routerLink="items">>All</a></li>
-      <li class="items"><a routerLink="items/settings">>Settings</a></li>
+    <div *appUser>
+      <li ><a routerLink="items">Items</a></li>
+      <div *ngIf="showItemSideBar()" >
+        <li *appManager class="items"><a routerLink="item/new">>New</a></li>
+        <li class="items"><a routerLink="items">>All</a></li>
+      </div>
     </div>
-    <li><a routerLink="my/reservations">Reservations</a></li>
+    <div *appUser>
+    <li><a routerLink="my/reservations">Orders</a></li>
     <div *ngIf="showReservationSideBar()" >
       <li class="items"><a routerLink="reservation/new">>New</a></li>
       <li class="items"><a routerLink="my/reservations">>My</a></li>
-      <li class="items"><a routerLink="reservations/all">>All</a></li>
+      <li *appManager class="items"><a routerLink="reservations/all">>My location</a></li>
     </div>
+    </div>
+    <div *appUser>
     <li><a routerLink="my/checkout">Check-out</a></li>
     <div *ngIf="showCheckOutSideBar()" >
       <li class="items"><a routerLink="checkout/new">>New</a></li>
       <li class="items"><a routerLink="my/checkout">>My</a></li>
-      <li class="items"><a routerLink="checkout/all">>All</a></li>
+      <li *appManager class="items"><a routerLink="checkout/all">>My location</a></li>
     </div>
-    <li><a routerLink="report/new">Reports</a></li>
+    </div>
+    <div *appUser>
+    <li><a *appUser routerLink="reports/my">Reports</a></li>
     <div *ngIf="showReportsSideBar()" >
       <li class="items"><a routerLink="report/new">>New</a></li>
       <li class="items"><a routerLink="reports/my">>My</a></li>
     </div>
+    </div>
+    <div *appServiceman>
+      <li><a routerLink="reports">Reports</a></li>
+      <div *ngIf="showReportsSideBar()" >
+        <li class="items"><a routerLink="reports">>All</a></li>
+      </div>
+    </div>
+    <div *appManager>
     <li><a routerLink="stocktaking/new">Stocktaking</a></li>
     <div *ngIf="showStocktakingSideBar()" >
       <li class="items"><a routerLink="stocktaking/new">>New</a></li>
-      <li class="items"><a routerLink="stocktaking/all">>All</a></li>
+      <li class="items"><a routerLink="stocktaking/location">>All</a></li>
     </div>
+    </div>
+    <div *appManager>
     <li><a routerLink="users">Users</a></li>
     <li><a routerLink="locations">Locations</a></li>
+    </div>
 
 
   </div>

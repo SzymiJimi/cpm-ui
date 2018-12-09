@@ -1,0 +1,29 @@
+<div id="pdfile" >
+  <div #pdfile class="pdf-file">
+    <h1> Raport z inwentaryzacji</h1>
+    <table>
+      <tr>
+        <th style="font-size: 5pt">Product name</th>
+        <th class="head-table-pdf">Code</th>
+        <th class="head-table-pdf">Unit of measure</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Value</th>
+        <th>Comments</th>
+      </tr>
+      <tr *ngFor="let element of dataSource">
+        <td>{{element.idItem.brand +
+          ' ' +
+          element.idItem.model+
+          ' ' +
+          element.idItem.serialNumber}}</td>
+        <td>{{element.code}}</td>
+        <td>{{element.unit}}</td>
+        <td>{{element.quantity}}</td>
+        <td>{{element.price}}</td>
+        <td>{{element.value}}</td>
+        <td>{{element.comment}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,158 @@
+<div class="card login-card">
+  <div class="card-body input-body">
+    <form #userLogin (ngSubmit) = "login()">
+
+      <h2 class="headline">Register</h2>
+      <p *ngIf="loginFinished">{{callbackMessage}}</p>
+      <p class="input-headline">Username</p>
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i>
+        <input mdbInputDirective
+               data-error="wrong email"
+               [formControl]="emailFormEx"
+               data-success="valid email"
+               minLength="8"
+               maxLength="25"
+               type="email"
+               class="form-control"
+               id="login"
+               name="name"
+               mdbInputDirective
+               [(ngModel)]="model.username">
+        <label for="login" class="small-text">Type your username</label>
+      </div>
+      <p class="input-headline">Password</p>
+      <div class="md-form">
+        <i class="fa fa-lock prefix"></i>
+        <input mdbInputDirective
+               data-error="wrong password"
+               [formControl]="passwordFormEx"
+               data-success="valid password"
+               minLength="5"
+               maxLength="25"
+               type="password"
+               class="form-control"
+               id="pass"
+               name="password"
+               [(ngModel)]="model.password">
+        <label for="pass"
+               class="small-text">Type your password</label>
+      </div>
+
+      <p class="input-headline">Repeat password</p>
+      <div class="md-form">
+        <i class="fa fa-lock prefix"></i>
+        <input mdbInputDirective
+               data-error="wrong password"
+               [formControl]="passwordFormEx"
+               data-success="valid password"
+               minLength="5"
+               maxLength="25"
+               type="password"
+               class="form-control"
+               id="secPass"
+               name="password"
+               [(ngModel)]="model.password">
+        <label for="secPass"
+               class="small-text">Repeat your password</label>
+      </div>
+
+      <p class="input-headline">Email</p>
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i>
+        <input mdbInputDirective
+               data-error="wrong password"
+               [formControl]="passwordFormEx"
+               data-success="valid password"
+               minLength="4"
+               maxLength="25"
+               type="text"
+               class="form-control"
+               id="email"
+               name="email"
+               [(ngModel)]="model.password">
+        <label for="email"
+               class="small-text">Type your email</label>
+      </div>
+
+      <p class="input-headline">Name</p>
+      <div class="md-form">
+        <i class="fa fa-user prefix"></i>
+        <input mdbInputDirective
+               data-error="wrong password"
+               [formControl]="passwordFormEx"
+               data-success="valid password"
+               minLength="4"
+               maxLength="25"
+               type="text"
+               class="form-control"
+               id="name"
+               name="name"
+               [(ngModel)]="model.password">
+        <label for="name"
+               class="small-text">Type your name</label>
+      </div>
+
+      <p class="input-headline">Surname</p>
+      <div class="md-form">
+        <i class="fa fa-user prefix"></i>
+        <input mdbInputDirective
+               data-error="wrong password"
+               [formControl]="passwordFormEx"
+               data-success="valid password"
+               minLength="10"
+               maxLength="25"
+               type="text"
+               class="form-control"
+               id="surname"
+               name="surname"
+               [(ngModel)]="model.password">
+        <label for="surname"
+               class="small-text">Type your surname</label>
+      </div>
+
+      <p class="input-headline">Date of birth</p>
+      <div class="row select-box">
+        <div class="md-form">
+          <i class="fa fa-user prefix"></i>
+        </div>
+        <mat-form-field class="select-gender">
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker [startAt]="startAt" [startView]="'multi-year'" #picker></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+
+      <p class="input-headline-small">Gender</p>
+      <div class="row select-box">
+        <div class="md-form">
+        <i class="fa fa-user prefix"></i>
+        </div>
+        <mat-form-field  class="select-gender" >
+        <mat-select id="gender" placeholder="Choose a gender">
+          <mat-option value="" disabled selected>Choose your option</mat-option>
+          <mat-option value="M">Male</mat-option>
+          <mat-option value="F">Female</mat-option>
+        </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+      <mat-spinner class="loadingSpinner" [diameter]="50" [strokeWidth]="5"  *ngIf="loginStarted"></mat-spinner>
+      <button mdbBtn
+              *ngIf="!loginStarted"
+              class="login-button"
+              type="submit"
+              gradient="purple"
+              mdbWavesEffect
+              (click)="login()">Register</button>
+    </form>
+
+  </div>
+
+
+
+</div>
+

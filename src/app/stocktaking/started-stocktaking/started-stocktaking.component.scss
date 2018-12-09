@@ -46,6 +46,13 @@ tr.example-element-row:not(.example-expanded-row):active {
   height: 450px;
 }
 
+.tab-small-subpage-content{
+  margin-top: 1%;
+  border-radius: 8px;
+  background-color: rgba(0,0,0,0.06);
+  height: 350px;
+}
+
 .info-tab{
   width: 80%;
 
@@ -60,6 +67,13 @@ tr.example-element-row:not(.example-expanded-row):active {
   float: right;
   color: rgba(0,0,0,0.6);
 }
+
+.property-value-expandable{
+  right: 5%;
+  color: black;
+  position: absolute;
+}
+
 .properties-fields{
   margin-top: 60px;
   margin-bottom: 200px;
@@ -108,4 +122,45 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .checked-icon-info{
   margin-left: 20px;
+}
+
+.name-column{
+   width: 20%;
+ }
+
+.name-column-pdf{
+  width: 25%;
+}
+.narrow-column-pdf{
+  width: 9%;
+}
+
+.narrow-code-column-pdf{
+  width: 10%;
+}
+
+.value-column{
+  width: 16%;
+}
+
+tr.pdf-element-row {
+  height: 0 !important;
+}
+
+
+tr.pdf-element-row:not(.pdf-element-row):active {
+  background: #efefef;
+}
+
+.pdf-element-row td {
+  font-size: 12pt;
+  border-bottom-width: 0;
+}
+
+.pdf-file{
+  width: 100%;
+}
+
+.head-table-pdf{
+  font-size: 5pt;
 }

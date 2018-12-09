@@ -1,12 +1,11 @@
 import {Directive, TemplateRef, ViewContainerRef} from '@angular/core';
-import {AppService} from '../services/app.service';
-import {UserService} from '../services/user.service';
 import {Roles} from '../enums/roles.enum';
+import {UserService} from '../services/user.service';
 
 @Directive({
-  selector: '[appManager]'
+  selector: '[appOwner]'
 })
-export class ManagerDirective {
+export class OwnerDirective {
 
   constructor(private templateRef: TemplateRef<any>, private vcRef: ViewContainerRef, private userService: UserService) {
   }
@@ -14,7 +13,7 @@ export class ManagerDirective {
   showed = false;
 
   ngOnInit() {
-    if (this.userService.user.idRole.name===Roles.MANAGER) {
+    if (this.userService.user.idRole.name === Roles.OWNER) {
       if (this.showed === false) {
         this.show();
       }
@@ -33,5 +32,4 @@ export class ManagerDirective {
     this.vcRef.clear();
     this.showed = false;
   }
-
 }

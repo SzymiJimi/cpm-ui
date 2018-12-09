@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ItemsService} from '../../../items/items.service';
 import {UserService} from '../../../shared/services/user.service';
 import {ItemModel} from '../../../shared/models/item.model';
@@ -9,6 +9,7 @@ import {ActionsService} from '../../actions.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {ReservationListDialogComponent} from './reservations-dialog/reservation-list-dialog.component';
 import {Router} from '@angular/router';
+import {LocationModel} from '../../../shared/models/location.model';
 
 @Component({
   selector: 'app-reservation-new',
@@ -21,6 +22,8 @@ export class ReservationNewComponent implements OnInit {
   reservingStarted= false;
   allReservationsForItem: ActionModel[];
   reservingItem: ItemModel;
+  locations: LocationModel[];
+  newLocation: LocationModel;
 
   newReservation: ActionModel = new ActionModel();
 
@@ -40,6 +43,8 @@ export class ReservationNewComponent implements OnInit {
   if(this.reservingItem!==undefined){
     this.reservationService.getAllReservationsForItem(this.reservingItem.idItem).subscribe((value)=>{
         this.allReservationsForItem = value;
+        this.newLocation = this.reservingItem.location;
+        this.getLocations();
       },
       (error)=>{
 
@@ -47,7 +52,7 @@ export class ReservationNewComponent implements OnInit {
   }
   }
 
-
+  @ViewChild('selectLocation') select1 : TemplateRef<LocationModel>;
 
   reserveItem(){
     if(!this.checkDates()){
@@ -116,6 +121,20 @@ export class ReservationNewComponent implements OnInit {
         reservations: this.allReservationsForItem
       }
     });
+  }
+
+  getLocations(){
+    if(this.locationService.locations!==undefined){
+      this.locations= this.locationService.locations;
+    }else{
+      this.locationService.loadLocations().subscribe((locations: LocationModel[])=>
+        {
+          this.locations= locations;
+        },
+        (error)=>{
+          alert('Error with fetching locations! Please let the administrator know about this error...');
+        })
+    }
   }
 
 }

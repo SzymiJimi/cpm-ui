@@ -1,5 +1,6 @@
 import {UserModel} from './user.model';
 import {ItemModel} from './item.model';
+import {LocationModel} from './location.model';
 
 export class ActionModel {
 
@@ -11,5 +12,6 @@ export class ActionModel {
   type: string;
   reserverUser: UserModel;
   itemId: ItemModel;
+  location: LocationModel;
 
 }

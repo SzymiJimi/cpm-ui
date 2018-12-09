@@ -1,0 +1,109 @@
+.login-card{
+  min-width: 300px !important;
+  min-height: 250px !important;
+  height: 50%;
+  width: 30%;
+  font-family: 'Poppins', sans-serif;
+  top: 10vh;
+  margin: auto;
+}
+
+.input-body{
+  min-width: 250px !important;
+  min-height: 150px !important;
+  width: 80%;
+  margin: auto;
+}
+
+.login-button {
+  width: 98% !important;
+  height: 45px;
+  border-radius: 30vh;
+  margin-top: 15%;
+  position: center;
+}
+
+.headline{
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 15%;
+  font-weight: bold !important;
+}
+
+.input-headline{
+  margin-top: 7vh;
+  margin-bottom: -1vh;
+}
+
+.small-text{
+  font-size: small;
+}
+
+.gray-text {
+  color: #797e7d;
+}
+
+.forgot-pass{
+  font-size: small;
+  right: 0;
+  position: absolute;
+}
+
+.center-text{
+  text-align: center;
+}
+
+.bg1{
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.social-button{
+  margin-left: 9vw;
+}
+
+.fb{
+  width: 20%;
+  background-color: #3a4cff;
+}
+
+.twt{
+  width: 20%;
+  background-color: #32b7ff;
+}
+
+.gp{
+  width: 20%;
+  background-color: #a40b0c;
+}
+
+.bottom-space-md{
+  margin-bottom: 10%;
+}
+
+.top-space-lg{
+  margin-top: 15%;
+}
+
+.loadingSpinner {
+  margin: 15% auto 0 auto;
+}
+
+.select-box{
+  margin: auto;
+  display: inline;
+
+}
+
+.select-gender{
+  margin-left: 12%;
+  width: 88%;
+}
+
+
+.input-headline-small{
+  margin-top: 4vh;
+  margin-bottom: -1vh;
+}
