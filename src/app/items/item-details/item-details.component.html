@@ -8,7 +8,8 @@
           <button mat-button [matMenuTriggerFor]="menu" class="action-btn">Menu</button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item class="action-window" (click)="reportItem()">Report</button>
-            <button *appManager mat-menu-item class="action-window" (click)="reportItem()">Withdraw from operation</button>
+            <button *appManager mat-menu-item class="action-window" (click)="reportItem()">Withdraw from operation
+            </button>
           </mat-menu>
           <button mat-raised-button class="more-button" (click)="reserveItem()">Reserve</button>
           <button mat-raised-button class="more-button" (click)="checkoutItem()">Check-out</button>
@@ -28,38 +29,34 @@
           <hr>
           <mat-tab-group>
             <mat-tab label="Dashboard">
-              <div class="tab-subpage-content">
-                <div class="center-block">
-                  <div class="col-md-4">
-                    <div class="btn-group">
-                      <div
-                        class="btn btn-primary"
-                        mwlCalendarPreviousView
-                        [view]="view"
-                        [(viewDate)]="viewDate"
-                        (viewDateChange)="activeDayIsOpen = false">
-                        Previous
-                      </div>
-                      <div
-                        class="btn btn-outline-secondary"
-                        mwlCalendarToday
-                        [(viewDate)]="viewDate">
-                        Today
-                      </div>
-                      <div
-                        class="btn btn-primary"
-                        mwlCalendarNextView
-                        [view]="view"
-                        [(viewDate)]="viewDate"
-                        (viewDateChange)="activeDayIsOpen = false">
-                        Next
-                      </div>
+              <div class="tab-subpage-dash">
+                <div >
+                  <div class="center-buttons">
+                    <div
+                      class="btn btn-primary custom-btn-left"
+                      mwlCalendarPreviousView
+                      [view]="view"
+                      [(viewDate)]="viewDate"
+                      (viewDateChange)="activeDayIsOpen = false">
+                      Previous
+                    </div>
+                    <div
+                      class="btn btn-outline-secondary custom-btn-sec"
+                      mwlCalendarToday
+                      [(viewDate)]="viewDate">
+                      Current
+                    </div>
+                    <div
+                      class="btn btn-primary custom-btn-right"
+                      mwlCalendarNextView
+                      [view]="view"
+                      [(viewDate)]="viewDate"
+                      (viewDateChange)="activeDayIsOpen = false">
+                      Next
                     </div>
                   </div>
-                  <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+                  <h3 class="center-month">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
                 </div>
-
-
 
 
                 <ng-template #loading>
@@ -71,17 +68,18 @@
                 </ng-template>
 
 
-                  <div [ngSwitch]="view">
-                    <mwl-calendar-month-view
-                      [viewDate]="viewDate"
-                      [refresh]="refresh"
-                      [events]="events"
-                      [activeDayIsOpen]="activeDayIsOpen"
-                      (dayClicked)="dayClicked($event.day)"
-                      (eventClicked)="eventClicked($event.event)">
-                    </mwl-calendar-month-view>
+                <div [ngSwitch]="view">
+                  <mwl-calendar-month-view
+                    class="calendar-style"
+                    [viewDate]="viewDate"
+                    [refresh]="refresh"
+                    [events]="events"
+                    [activeDayIsOpen]="activeDayIsOpen"
+                    (dayClicked)="dayClicked($event.day)"
+                    (eventClicked)="eventClicked($event.event)">
+                  </mwl-calendar-month-view>
 
-                   </div>
+                </div>
 
               </div>
             </mat-tab>
@@ -105,7 +103,8 @@
                           <span class="property-value">{{item.value}}</span>
                         </li>
                         <li class="list-group-item">Residual value
-                          <span class="property-value">{{item.residualValue===null ? 'not set' : item.residualValue}}</span>
+                          <span
+                            class="property-value">{{item.residualValue===null ? 'not set' : item.residualValue}}</span>
                         </li>
                         <li class="list-group-item">Warranty date
                           <span class="property-value">{{item.warrantyDate | simpleDate}}</span>
@@ -120,14 +119,15 @@
                           <span class="property-value">{{item.description}}</span>
                         </li>
                         <li class="list-group-item">Location
-                          <mat-form-field *ngIf="locationChanging"  class="property-value">
-                            <mat-select [(ngModel)]="selectedLocation" (valueChange)="changeLocation($event)" placeholder="Location">
+                          <mat-form-field *ngIf="locationChanging" class="property-value">
+                            <mat-select [(ngModel)]="selectedLocation" (valueChange)="changeLocation($event)"
+                                        placeholder="Location">
                               <mat-option *ngFor="let location of locations" [value]="location">
                                 {{location.name}}
                               </mat-option>
                             </mat-select>
                           </mat-form-field>
-                          <span *ngIf="!locationChanging"  class="property-value">{{item.location.name+' '+item.location.address}}</span>
+                          <span *ngIf="!locationChanging" class="property-value">{{item.location.name+' '+item.location.address}}</span>
                         </li>
                       </ul>
                     </div>
@@ -141,8 +141,12 @@
                           <span class="property-value">{{item.creationUser.idPersonaldata.name +' '+item.creationUser.idPersonaldata.surname}}</span>
                         </li>
                         <li *appManager class="list-group-item">Modify data
-                          <button *ngIf="!locationChanging" mat-button class="change-location-button" (click)="changeLocation()">Change location</button>
-                          <button *ngIf="locationChanging" [disabled]="selectedLocation===undefined" mat-button class="change-location-button" (click)="saveNewLocationForItem()">Save location</button>
+                          <button *ngIf="!locationChanging" mat-button class="change-location-button"
+                                  (click)="changeLocation()">Change location
+                          </button>
+                          <button *ngIf="locationChanging" [disabled]="selectedLocation===undefined" mat-button
+                                  class="change-location-button" (click)="saveNewLocationForItem()">Save location
+                          </button>
                         </li>
                       </ul>
                     </div>
@@ -152,12 +156,7 @@
 
               </div>
             </mat-tab>
-            <mat-tab label="Comments">
-              <div class="tab-subpage-content"> Komentarz na temat produktu</div>
-            </mat-tab>
-            <mat-tab label="Depreciation">
-              <div class="tab-subpage-content"> Aktualna wartość, data zakupu, cena zakupu, (?wykres z ceną)</div>
-            </mat-tab>
+            
           </mat-tab-group>
         </div>
       </div>

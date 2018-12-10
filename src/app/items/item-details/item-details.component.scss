@@ -47,6 +47,13 @@
   height: 600px;
 }
 
+.tab-subpage-dash{
+  margin-top: 1%;
+  border-radius: 8px;
+  background-color: rgba(0,0,0,0.06);
+  height: 900px;
+}
+
 
 .loading-data-spinner{
   margin: auto;
@@ -117,4 +124,45 @@ pre {
   margin-left: 2%;
   margin-right: 2%;
   float: right;
+}
+
+.custom-btn-sec{
+  width:  20% !important;
+  background-color: #cd3cff !important;
+  color: white  !important;
+  margin-left: 2% !important;
+  margin-right: 2% !important;
+  border-radius: 4px !important;
+}
+
+.custom-btn-left{
+  width: 20% !important;
+  background-color: #258eaf !important;
+  color: white !important;
+  border-radius: 4px !important;
+  margin-left: 18%;
+}
+
+.custom-btn-right{
+  width: 20% !important;
+  background-color: #258eaf !important;
+  color: white !important;
+  border-radius: 4px !important;
+
+}
+
+.center-buttons{
+  margin-top: 2vh;
+
+}
+
+.center-month{
+  margin-bottom: 2vh;
+  text-align: center;
+  margin-top: 2vh;
+}
+
+.calendar-style{
+  margin-left: 20px !important;
+  margin-right: 20px !important;
 }

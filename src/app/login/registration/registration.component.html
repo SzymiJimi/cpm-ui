@@ -1,6 +1,6 @@
 <div class="card login-card">
   <div class="card-body input-body">
-    <form #userLogin (ngSubmit) = "login()">
+    <form [formGroup]="registerForm" (ngSubmit) = "register()">
 
       <h2 class="headline">Register</h2>
       <p *ngIf="loginFinished">{{callbackMessage}}</p>
@@ -8,33 +8,31 @@
       <div class="md-form">
         <i class="fa fa-envelope prefix"></i>
         <input mdbInputDirective
-               data-error="wrong email"
-               [formControl]="emailFormEx"
-               data-success="valid email"
-               minLength="8"
+               data-error="Wrong username"
+               formControlName="username"
+               data-success="OK"
+               minLength="6"
                maxLength="25"
                type="email"
                class="form-control"
                id="login"
                name="name"
-               mdbInputDirective
-               [(ngModel)]="model.username">
+               mdbInputDirective>
         <label for="login" class="small-text">Type your username</label>
       </div>
       <p class="input-headline">Password</p>
       <div class="md-form">
         <i class="fa fa-lock prefix"></i>
         <input mdbInputDirective
-               data-error="wrong password"
-               [formControl]="passwordFormEx"
-               data-success="valid password"
+               data-error="Wrong password"
+               formControlName="password"
+               data-success="OK"
                minLength="5"
                maxLength="25"
                type="password"
                class="form-control"
                id="pass"
-               name="password"
-               [(ngModel)]="model.password">
+               name="password">
         <label for="pass"
                class="small-text">Type your password</label>
       </div>
@@ -43,16 +41,15 @@
       <div class="md-form">
         <i class="fa fa-lock prefix"></i>
         <input mdbInputDirective
-               data-error="wrong password"
-               [formControl]="passwordFormEx"
-               data-success="valid password"
+               data-error="Wrong password"
+               formControlName="secondPassword"
+               data-success="OK"
                minLength="5"
                maxLength="25"
                type="password"
                class="form-control"
                id="secPass"
-               name="password"
-               [(ngModel)]="model.password">
+               name="password">
         <label for="secPass"
                class="small-text">Repeat your password</label>
       </div>
@@ -61,16 +58,15 @@
       <div class="md-form">
         <i class="fa fa-envelope prefix"></i>
         <input mdbInputDirective
-               data-error="wrong password"
-               [formControl]="passwordFormEx"
-               data-success="valid password"
+               data-error="Wrong email"
+               formControlName="email"
+               data-success="OK"
                minLength="4"
                maxLength="25"
                type="text"
                class="form-control"
                id="email"
-               name="email"
-               [(ngModel)]="model.password">
+               name="email">
         <label for="email"
                class="small-text">Type your email</label>
       </div>
@@ -80,15 +76,14 @@
         <i class="fa fa-user prefix"></i>
         <input mdbInputDirective
                data-error="wrong password"
-               [formControl]="passwordFormEx"
+               formControlName="name"
                data-success="valid password"
                minLength="4"
                maxLength="25"
                type="text"
                class="form-control"
                id="name"
-               name="name"
-               [(ngModel)]="model.password">
+               name="nameUser">
         <label for="name"
                class="small-text">Type your name</label>
       </div>
@@ -97,16 +92,14 @@
       <div class="md-form">
         <i class="fa fa-user prefix"></i>
         <input mdbInputDirective
-               data-error="wrong password"
-               [formControl]="passwordFormEx"
-               data-success="valid password"
+               data-error="Wrong surname"
+               formControlName="surname"
+               data-success="OK"
                minLength="10"
                maxLength="25"
                type="text"
                class="form-control"
-               id="surname"
-               name="surname"
-               [(ngModel)]="model.password">
+               id="surname">
         <label for="surname"
                class="small-text">Type your surname</label>
       </div>
@@ -116,8 +109,12 @@
         <div class="md-form">
           <i class="fa fa-user prefix"></i>
         </div>
-        <mat-form-field class="select-gender">
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-form-field  class="select-gender">
+          <input
+            matInput
+            formControlName="dateOfBirth"
+            [matDatepicker]="picker"
+            placeholder="Choose a date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker [startAt]="startAt" [startView]="'multi-year'" #picker></mat-datepicker>
         </mat-form-field>
@@ -130,7 +127,10 @@
         <i class="fa fa-user prefix"></i>
         </div>
         <mat-form-field  class="select-gender" >
-        <mat-select id="gender" placeholder="Choose a gender">
+        <mat-select
+          id="gender"
+          formControlName="gender"
+          placeholder="Choose a gender">
           <mat-option value="" disabled selected>Choose your option</mat-option>
           <mat-option value="M">Male</mat-option>
           <mat-option value="F">Female</mat-option>
@@ -142,12 +142,13 @@
 
       <mat-spinner class="loadingSpinner" [diameter]="50" [strokeWidth]="5"  *ngIf="loginStarted"></mat-spinner>
       <button mdbBtn
-              *ngIf="!loginStarted"
+              [disabled]="!registerForm.valid || registerForm.value.password !== registerForm.value.secondPassword"
+              *ngIf="(!loginStarted)"
               class="login-button"
               type="submit"
               gradient="purple"
               mdbWavesEffect
-              (click)="login()">Register</button>
+              (click)="register()">Register</button>
     </form>
 
   </div>

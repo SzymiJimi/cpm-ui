@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {AppService} from './app.service';
 import {UserService} from './user.service';
+import {UserModel} from '../models/user.model';
+import {ReportModel} from '../models/report.model';
 
 @Injectable()
 export class LoginService{
@@ -49,6 +51,27 @@ export class LoginService{
     this.userService.loadUser().subscribe(()=> {
       this.app.changeAuthenticated(true);
       this.router.navigateByUrl('/');
+    });
+  }
+
+
+  register(newUser: UserModel){
+    return new Observable<any>((observer) => {
+      this.http.post(environment.endpointBase + 'register/new', newUser ,
+        {observe: 'response',
+                  headers: { 'Content-Type': 'application/json' },
+                  responseType: 'text'})
+        .subscribe(res => {
+          console.log(res['body']);
+          observer.next(res['body']);
+          observer.complete();
+        },
+        error => {
+          console.log(error);
+          observer.error(error.message);
+          observer.complete();
+        }
+      );
     });
   }
 
