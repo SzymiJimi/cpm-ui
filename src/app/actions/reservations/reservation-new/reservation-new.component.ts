@@ -47,7 +47,7 @@ export class ReservationNewComponent implements OnInit {
         this.getLocations();
       },
       (error)=>{
-
+        this.openErrorSnackBar('Error with fetching reservations! Reload page, or contact administrator!');
       });
   }
   }
@@ -62,9 +62,9 @@ export class ReservationNewComponent implements OnInit {
       {
         this.openSuccessSnackBar();
         this.itemService.itemToReserve = new ItemModel();
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/my/reservations');
       },(error)=>{
-        this.openErrorSnackBar();
+        this.openErrorSnackBar('Error with creating reservation!');
       });
 
     }else{
@@ -81,8 +81,8 @@ export class ReservationNewComponent implements OnInit {
     });
   }
 
-  openErrorSnackBar() {
-    this.snackBar.open('Error with creating reservation!' , 'Ok', {
+  openErrorSnackBar(message: string) {
+    this.snackBar.open( message, 'Ok', {
       duration: 15000,
       panelClass: ['red-snackbar'],
       horizontalPosition: 'end'

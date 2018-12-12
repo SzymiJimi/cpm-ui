@@ -56,7 +56,6 @@ import { SimpleDatePipe } from './shared/pipes/simple-date.pipe';
 import { ItemDetailsComponent } from './items/item-details/item-details.component';
 import { ItemNewComponent } from './items/item-new/item-new.component';
 import { LocationComponent } from './location/location.component';
-import { ItemDetailInfoComponent } from './items/item-details/item-detail-info/item-detail-info.component';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {CommonModule} from '@angular/common';
@@ -103,7 +102,6 @@ import { RegistrationComponent } from './login/registration/registration.compone
     ItemDetailsComponent,
     ItemNewComponent,
     LocationComponent,
-    ItemDetailInfoComponent,
     ReservationsComponent,
     ReservationNewComponent,
     ReservationListDialogComponent,

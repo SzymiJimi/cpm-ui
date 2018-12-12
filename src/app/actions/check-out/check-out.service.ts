@@ -36,13 +36,19 @@ export class CheckOutService {
   checkOutItem(reservation: ActionModel) {
     let newHeader = this.app.options;
     newHeader.responseType = 'text';
-    this.http.post(environment.endpointBase + 'checkout/new', reservation, this.app.options).subscribe(res => {
-        newHeader.responseType = 'json';
-      },
-      error => {
-        newHeader.responseType = 'json';
-      }
-    );
+    return new Observable<any>((observer) => {
+      this.http.post(environment.endpointBase + 'checkout/new', reservation, this.app.options).subscribe(res => {
+          newHeader.responseType = 'json';
+          observer.next('Success!');
+          observer.complete();
+        },
+        error => {
+          newHeader.responseType = 'json';
+          observer.error('Error with creating check-out');
+          observer.complete();
+        }
+      );
+    });
   }
 
 
