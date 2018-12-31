@@ -17,6 +17,7 @@ import {DatetimePipe} from '../../shared/pipes/datetime.pipe';
 import {UserService} from '../../shared/services/user.service';
 import {LocationModel} from '../../shared/models/location.model';
 import {LocationService} from '../../location/location.service';
+import {UserModel} from '../../shared/models/user.model';
 
 declare var require: any;
 
@@ -55,6 +56,9 @@ export class ItemDetailsComponent implements OnInit {
   refresh: Subject<any> = new Subject();
   locations: LocationModel[];
   selectedLocation: LocationModel;
+  currentUser: UserModel;
+  checkedCurrent = false;
+
 
   constructor(private router: ActivatedRoute,
               private itemService: ItemsService,
@@ -152,6 +156,9 @@ export class ItemDetailsComponent implements OnInit {
     this.reservationService.getAllReservationsForItem(this.item.idItem).subscribe((value) => {
       this.reservationsForItem = value;
       this.insertReservationsToCalendar();
+      if(this.available !== true){
+        this.checkCurrentUser();
+      }
     });
   }
 
@@ -229,5 +236,16 @@ export class ItemDetailsComponent implements OnInit {
     this.itemService.addItem(this.item).subscribe(()=>{
       this.locationChanging = false;
     });
+  }
+
+  checkCurrentUser(){
+    this.reservationsForItem.forEach((action)=>{
+      let from = new Date(action.from);
+      let to = new Date(action.to);
+      if(from.getTime() < Date.now() && to.getTime() >Date.now()){
+          this.currentUser = action.reserverUser;
+      }
+      this.checkedCurrent = true;
+    })
   }
 }

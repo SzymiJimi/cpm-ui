@@ -118,9 +118,11 @@ export class UserProfileComponent implements OnInit {
     if(this.userService.user === undefined){
       this.userService.personData.subscribe(()=>{
         this.user = this.userService.user;
+        this.dataLoaded = true;
       });
     }else{
       this.user = this.userService.user;
+      this.dataLoaded = true;
     }
   }
 

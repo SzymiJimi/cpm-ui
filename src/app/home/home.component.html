@@ -8,22 +8,45 @@
         <div class="row">
           <div class="card card-style">
             <div class="card-header">
-              Open reservations
+              Open orders
             </div>
             <div class="card-body">
-              <p class="card-text">In this window you will see your opened reservations.</p>
+              <p *ngIf="activeReservations === undefined || activeReservations?.length===0" class="card-text">In this window you will see your opened reservations.</p>
+
+                <table *ngIf="activeReservations?.length>0" mat-table
+                       [dataSource]="dataSourceActiveOrders" matSort style="width: 100%;">
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef style="width: 45%!important;"> Name </th>
+                    <td mat-cell *matCellDef="let element" style="width: 45%!important;"><span class="proprty-title">Name: </span>{{element.itemId.brand+' '+ element.itemId.model}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="to">
+                    <th mat-header-cell *matHeaderCellDef style="width: 45%!important;"> To </th>
+                    <td mat-cell *matCellDef="let element" style="width: 45%!important;"><span class="proprty-title">To: </span> {{element.to | simpleDate}} </td>
+                  </ng-container>
+
+                  <tr mat-row
+                      *matRowDef="let element; columns: displayedActiveColumns;"
+                      class="example-element-row"
+                      (click)="loadCheckOutDetails(element)">
+                  </tr>
+
+                </table>
             </div>
-            <div class="card-footer text-muted"><a href="#" class="btn btn-primary btn-md">Go to reservations</a></div>
+            <div class="card-footer text-muted"><a class="btn btn-primary btn-md" routerLink="my/reservations">Go to reservations</a></div>
           </div>
           <div class="card card-style">
             <div class="card-header">
-              Reservations
+              Orders
             </div>
             <div class="card-body">
-              <p class="info-digit centered">0</p>
-              <p class="centered">booked</p>
-              <p class="info-digit centered">0</p>
-              <p class="centered">previous</p>
+              <div *ngIf="ordersPrevLoaded && ordersActiveLoaded">
+                <p class="info-digit centered">{{activeReservations!==undefined ? activeReservations.length : '0'}}</p>
+                <p class="centered">open</p>
+                <p class="info-digit centered">{{prevReservations !==undefined ? prevReservations.length : '0'}}</p>
+                <p class="centered">previous</p>
+              </div>
             </div>
           </div>
         </div>
@@ -33,9 +56,30 @@
               Open chech-outs
             </div>
             <div class="card-body">
-              <p class="card-text">In this window you will see your opened reservations.</p>
+              <p *ngIf="activeCheckout === undefined || activeCheckout?.length===0" class="card-text">In this window you will see your opened checkouts.</p>
+              <table *ngIf="activeCheckout?.length>0" mat-table
+                     [dataSource]="dataSourceActiveCheckout" matSort style="width: 100%;">
+
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef style="width: 45%!important;"> Name </th>
+                  <td mat-cell *matCellDef="let element" style="width: 45%!important;"><span class="proprty-title">Name: </span>{{element.itemId.brand+' '+ element.itemId.model}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="to">
+                  <th mat-header-cell *matHeaderCellDef style="width: 45%!important;"> To </th>
+                  <td mat-cell *matCellDef="let element" style="width: 45%!important;"><span class="proprty-title">To: </span> {{element.to | simpleDate}} </td>
+                </ng-container>
+
+
+                <tr mat-row
+                    *matRowDef="let element; columns: displayedActiveColumns;"
+                    class="example-element-row"
+                    (click)="loadCheckOutDetails(element)">
+                </tr>
+
+              </table>
             </div>
-            <div class="card-footer text-muted"><a href="#" class="btn btn-primary btn-md">Go to check-outs</a>
+            <div class="card-footer text-muted"><a routerLink="my/checkout" class="btn btn-primary btn-md">Go to check-outs</a>
             </div>
           </div>
           <div class="card card-style">
@@ -43,10 +87,12 @@
               Check-outs
             </div>
             <div class="card-body">
-              <p class="info-digit centered">0</p>
-              <p class="centered">open</p>
-              <p class="info-digit centered">0</p>
-              <p class="centered">previous</p>
+              <div *ngIf="checkoutPrevLoaded && checkoutActiveLoaded">
+                <p class="info-digit centered">{{activeCheckout!==undefined ? activeCheckout?.length : '0'}}</p>
+                <p class="centered">open</p>
+                <p class="info-digit centered">{{prevCheckout !==undefined ? prevCheckout?.length : '0'}}</p>
+                <p class="centered">previous</p>
+              </div>
             </div>
           </div>
         </div>

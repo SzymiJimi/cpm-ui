@@ -24,6 +24,7 @@
               <p>{{item.model}}</p>
               <p *ngIf="available"><span class="dot-green"></span>Available</p>
               <p *ngIf="!available"><span class="dot-red"></span>Not available</p>
+              <p style="color: rgba(0 , 0, 0 ,0.4);" *ngIf="!available && checkedCurrent">Currently using: <span style="color: black">{{currentUser?.idPersonaldata.name + ' ' + currentUser?.idPersonaldata.surname}}</span></p>
             </div>
           </div>
           <hr>
@@ -111,9 +112,6 @@
                         </li>
                         <li class="list-group-item">Serial number
                           <span class="property-value">{{item.serialNumber}}</span>
-                        </li>
-                        <li class="list-group-item">Owner
-                          <span class="property-value">OWNER</span>
                         </li>
                         <li class="list-group-item">Description
                           <span class="property-value">{{item.description}}</span>

@@ -35,8 +35,6 @@ export class StocktakingService {
     return new Observable<any>((observer) => {
       let newHeader = this.app.options;
       newHeader.responseType = 'text';
-      console.log('Weszło');
-      console.log(stocktaking);
       this.http.post(environment.endpointBase + 'stocktaking/new', stocktaking, this.app.options).subscribe(res => {
         console.log(res);
           newHeader.responseType = 'json';
@@ -44,8 +42,6 @@ export class StocktakingService {
           observer.complete();
         },
         error => {
-          console.log(error);
-
           newHeader.responseType = 'json';
           observer.error('error');
           observer.complete();

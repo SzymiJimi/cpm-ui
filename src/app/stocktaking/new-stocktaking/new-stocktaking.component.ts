@@ -79,7 +79,7 @@ export class NewStocktakingComponent implements OnInit {
     stocktaking.location = this.location;
     stocktaking.manager = this.user.user;
     this.stocktakingService.startNewStocktaking(stocktaking).subscribe((value) => {
-
+        this.router.navigateByUrl('stocktaking/started/'+value);
     },(error)=>{
 
     });

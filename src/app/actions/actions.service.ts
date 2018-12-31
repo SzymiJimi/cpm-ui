@@ -121,4 +121,40 @@ export class ActionsService {
     });
   }
 
+  getAllActiveUserReservations() {
+    console.log('No jestem w serwisie');
+    return new Observable<ActionModel[]>((observer) => {
+      console.log('Przed pobraniem');
+      console.log( this.user.user);
+      this.http.get(environment.endpointBase + 'orders/get/active/amount/user/' + this.user.user.idUser, this.app.options).subscribe(res => {
+          console.log(res['body']);
+          observer.next(res['body'] as ActionModel[]);
+          observer.complete();
+        },
+        error => {
+          console.log(error);
+          observer.error('Error with fetching data');
+          observer.complete();
+        }
+      );
+    });
+  }
+
+  getAllPreviousUserReservations() {
+    return new Observable<ActionModel[]>((observer) => {
+      this.http.get(environment.endpointBase + 'orders/get/prev/amount/user/' + this.user.user.idUser, this.app.options).subscribe(res => {
+          console.log(res['body']);
+          observer.next(res['body'] as ActionModel[]);
+          observer.complete();
+        },
+        error => {
+          console.log(error);
+          observer.error('error with send data');
+          observer.complete();
+        }
+      );
+    });
+  }
+
+
 }
