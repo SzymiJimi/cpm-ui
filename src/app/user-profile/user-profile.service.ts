@@ -41,7 +41,7 @@ export class UserProfileService {
 
   changeRole(newUserRole: string): Observable<string> {
     return new Observable<string>((observer) => {
-      this.userProfileOpened.idRole.name = newUserRole;
+      this.userProfileOpened.role.name = newUserRole;
       let newHeader = this.app.options;
       newHeader.responseType = 'text';
       this.http.post(environment.endpointBase + 'personaldata/update/role', this.userProfileOpened, this.app.options).subscribe(res => {
@@ -60,7 +60,7 @@ export class UserProfileService {
 
   changePersonalData(personalData: PersonaldataModel): Observable<string> {
     return new Observable<string>((observer) => {
-      this.userProfileOpened.idPersonaldata = personalData;
+      this.userProfileOpened.personal_data = personalData;
       let newHeader = this.app.options;
       newHeader.responseType = 'text';
       this.http.post(environment.endpointBase + 'personaldata/update/own', this.userProfileOpened, this.app.options).subscribe(res => {
@@ -82,7 +82,7 @@ export class UserProfileService {
 
   changePassword(newUserRole: string): Observable<string> {
     return new Observable<string>((observer) => {
-      this.userProfileOpened.idRole.name = newUserRole;
+      this.userProfileOpened.role.name = newUserRole;
       let newHeader = this.app.options;
       newHeader.responseType = 'text';
       this.http.post(environment.endpointBase + 'personaldata/update/role', this.userProfileOpened, this.app.options).subscribe(res => {

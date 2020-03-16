@@ -9,6 +9,6 @@ export class UserModel extends Serializable{
   username: string;
   password: string;
   email: string;
-  idRole: RoleModel;
-  idPersonaldata: PersonaldataModel;
+  role: RoleModel;
+  personal_data: PersonaldataModel;
 }

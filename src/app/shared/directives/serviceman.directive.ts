@@ -13,7 +13,7 @@ export class ServicemanDirective {
   showed = false;
 
   ngOnInit() {
-    if (this.userService.user.idRole.name === Roles.SERVICE) {
+    if (this.userService.user.role.name === Roles.SERVICE) {
       if (this.showed === false) {
         this.show();
       }

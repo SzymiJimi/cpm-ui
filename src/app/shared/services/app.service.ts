@@ -22,9 +22,9 @@ export class AppService {
 
   setHeadersAndOptions(){
     this.headers = new HttpHeaders({
-      'Authorization': 'Basic ' + sessionStorage.getItem('token')
+      "Content-Type": "application/json"
     });
-    this.options = {observe: 'response', headers: this.headers, responseType: 'json'};
+    this.options = {observe: 'response', headers: this.headers, responseType: 'json', withCredentials: true};
   }
 
 }

@@ -14,7 +14,7 @@ export class ManagerDirective {
   showed = false;
 
   ngOnInit() {
-    if (this.userService.user.idRole.name===Roles.MANAGER) {
+    if (this.userService.user.role.name===Roles.MANAGER) {
       if (this.showed === false) {
         this.show();
       }

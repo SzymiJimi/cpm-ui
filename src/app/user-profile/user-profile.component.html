@@ -19,8 +19,8 @@
           <div class="item-info-box">
             <img [src]="src" alt="{{name}}" class="img-responsive item-image">
             <div class="item-info">
-              <p class="brand-info">{{user.idPersonaldata.surname}}</p>
-              <p>{{user.idPersonaldata.name}}</p>
+              <p class="brand-info">{{user.personal_data.surname}}</p>
+              <p>{{user.personal_data.name}}</p>
             </div>
           </div>
           <hr>
@@ -39,7 +39,7 @@
                           <span class="property-value-right">{{user.email}}</span>
                         </li>
                         <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Role
-                          <span *ngIf="!changingRole" class="property-value-right">{{user.idRole.name}}</span>
+                          <span *ngIf="!changingRole" class="property-value-right">{{user.role.name}}</span>
                           <mat-form-field class="property-value-right" *ngIf="changingRole">
                             <mat-select   [(value)]="newUserRole">
                               <mat-option *ngFor="let role of availableRoles" value="{{role}}">{{role}}</mat-option>
@@ -47,22 +47,22 @@
                           </mat-form-field>
                         </li>
                         <li class="list-group-item">Name
-                          <span *ngIf="!changingPersonalData" class="property-value-right">{{user.idPersonaldata.name}}</span>
+                          <span *ngIf="!changingPersonalData" class="property-value-right">{{user.personal_data.name}}</span>
                           <mat-form-field class="property-value-right" *ngIf="changingPersonalData">
                             <input [(ngModel)]="newPersonalData.name" matInput placeholder="Name" value="Sushi">
                           </mat-form-field>
                         </li>
                         <li class="list-group-item">Surname
-                          <span *ngIf="!changingPersonalData" class="property-value-right">{{user.idPersonaldata.surname}}</span>
+                          <span *ngIf="!changingPersonalData" class="property-value-right">{{user.personal_data.surname}}</span>
                           <mat-form-field class="property-value-right" *ngIf="changingPersonalData">
                             <input [(ngModel)]="newPersonalData.surname" matInput placeholder="Surname" value="Sushi">
                           </mat-form-field>
                         </li>
                         <li ngClass="{{changingPersonalData ? 'high-row' : ''}}" class="list-group-item">Date of birth
-                          <span class="property-value-right">{{user.idPersonaldata.dateOfBirth | simpleDate}}</span>
+                          <span class="property-value-right">{{user.personal_data.date_of_birth | simpleDate}}</span>
                         </li>
                         <li class="list-group-item">Gender
-                          <span *ngIf="!changingPersonalData" class="property-value-right">{{user.idPersonaldata.gender}}</span>
+                          <span *ngIf="!changingPersonalData" class="property-value-right">{{user.personal_data.gender}}</span>
                           <mat-form-field class="property-value-right" *ngIf="changingPersonalData" >
                             <input [(ngModel)]="newPersonalData.gender" matInput placeholder="Gender" value="Sushi">
                           </mat-form-field>

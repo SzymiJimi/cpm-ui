@@ -43,7 +43,7 @@ export class AppComponent implements OnInit{
       ()=>{
         this.app.changeAuthenticated(true);
         this.dataChecked = true;
-        this.personData= this.userService.user.idPersonaldata.name + ' ' + this.userService.user.idPersonaldata.surname;
+        this.personData= this.userService.user.personal_data.name + ' ' + this.userService.user.personal_data.surname;
     },
       ()=>{
         this.app.changeAuthenticated(false);

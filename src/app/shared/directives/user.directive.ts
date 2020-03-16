@@ -13,7 +13,7 @@ export class UserDirective {
   showed = false;
 
   ngOnInit() {
-    if ((this.userService.user.idRole.name===Roles.MANAGER) || (this.userService.user.idRole.name===Roles.USER)) {
+    if ((this.userService.user.role.name===Roles.MANAGER) || (this.userService.user.role.name===Roles.USER)) {
       if (this.showed === false) {
         this.show();
       }

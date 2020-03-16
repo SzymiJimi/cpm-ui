@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit{
   logout() {
     this.app.changeAuthenticated(false);
     this.userService.user = new UserModel();
-    sessionStorage.setItem('token', '');
+
     this.router.navigateByUrl('/login');
 
   }
@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit{
 
   showItemSideBar(){
     if(this.userService.user!==undefined){
-      if((this.userService.user.idRole.name===Roles.MANAGER) || (this.userService.user.idRole.name===Roles.USER))
+      if((this.userService.user.role.name===Roles.MANAGER) || (this.userService.user.role.name===Roles.USER))
       {
         if(this.router.url.includes('item')){
           return true;
@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit{
 
   showReservationSideBar(){
     if(this.userService.user!==undefined){
-      if((this.userService.user.idRole.name===Roles.MANAGER) || (this.userService.user.idRole.name===Roles.USER))
+      if((this.userService.user.role.name===Roles.MANAGER) || (this.userService.user.role.name===Roles.USER))
       {
         if(this.router.url.includes('reservation')){
           return true;
@@ -69,7 +69,7 @@ export class NavbarComponent implements OnInit{
 
   showCheckOutSideBar(){
     if(this.userService.user!==undefined){
-      if((this.userService.user.idRole.name===Roles.MANAGER) || (this.userService.user.idRole.name===Roles.USER) )
+      if((this.userService.user.role.name===Roles.MANAGER) || (this.userService.user.role.name===Roles.USER) )
       {
         if(this.router.url.includes('checkout')){
           return true;
@@ -81,7 +81,7 @@ export class NavbarComponent implements OnInit{
 
   showReportsSideBar(){
     if(this.userService.user!==undefined){
-      if((this.userService.user.idRole.name===Roles.MANAGER) || (this.userService.user.idRole.name===Roles.USER)|| (this.userService.user.idRole.name===Roles.SERVICE))
+      if((this.userService.user.role.name===Roles.MANAGER) || (this.userService.user.role.name===Roles.USER)|| (this.userService.user.role.name===Roles.SERVICE))
       {
         if(this.router.url.includes('report')){
           return true;
@@ -93,7 +93,7 @@ export class NavbarComponent implements OnInit{
 
   showStocktakingSideBar(){
     if(this.userService.user!==undefined){
-      if(this.userService.user.idRole.name===Roles.MANAGER)
+      if(this.userService.user.role.name===Roles.MANAGER)
       {
         if(this.router.url.includes('stocktaking')){
           return true;

@@ -48,7 +48,7 @@ export class NewStocktakingComponent implements OnInit {
 
 
   getInventoryManager(){
-    return this.user.user.idPersonaldata.name+ ' '+ this.user.user.idPersonaldata.surname;
+    return this.user.user.personal_data.name+ ' '+ this.user.user.personal_data.surname;
   }
 
   findLocationForInventoryManager(){

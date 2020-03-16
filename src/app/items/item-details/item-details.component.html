@@ -24,7 +24,7 @@
               <p>{{item.model}}</p>
               <p *ngIf="available"><span class="dot-green"></span>Available</p>
               <p *ngIf="!available"><span class="dot-red"></span>Not available</p>
-              <p style="color: rgba(0 , 0, 0 ,0.4);" *ngIf="!available && checkedCurrent">Currently using: <span style="color: black">{{currentUser?.idPersonaldata.name + ' ' + currentUser?.idPersonaldata.surname}}</span></p>
+              <p style="color: rgba(0 , 0, 0 ,0.4);" *ngIf="!available && checkedCurrent">Currently using: <span style="color: black">{{currentUser?.personal_data.name + ' ' + currentUser?.personal_data.surname}}</span></p>
             </div>
           </div>
           <hr>
@@ -136,7 +136,7 @@
                     <div class="card properties-fields">
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item">Creator
-                          <span class="property-value">{{item.creationUser.idPersonaldata.name +' '+item.creationUser.idPersonaldata.surname}}</span>
+                          <span class="property-value">{{item.creationUser.personal_data.name +' '+item.creationUser.personal_data.surname}}</span>
                         </li>
                         <li *appManager class="list-group-item">Modify data
                           <button *ngIf="!locationChanging" mat-button class="change-location-button"

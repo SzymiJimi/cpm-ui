@@ -2,10 +2,10 @@ import {Serializable} from './serializable.model';
 
 export class PersonaldataModel extends Serializable{
 
-  idPersonalData: number;
+  id_personal_data: number;
   name: string;
   surname: string;
-  dateOfBirth: Date;
+  date_of_birth: Date;
   gender: string;
 
 }

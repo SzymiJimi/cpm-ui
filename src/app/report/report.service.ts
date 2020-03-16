@@ -132,9 +132,9 @@ export class ReportService {
                         + ' // On: '
                         + new DatetimePipe().transform(dateString)
                         + '  '
-                        + this.user.user.idPersonaldata.name
+                        + this.user.user.personal_data.name
                         + ' '
-                        + this.user.user.idPersonaldata.surname
+                        + this.user.user.personal_data.surname
                         + ' wrote: '+ message;
     return report;
   }

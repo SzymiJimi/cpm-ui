@@ -96,11 +96,11 @@ export class RegistrationComponent implements OnInit {
     this.newUser.username=this.registerForm.value.username;
     this.newUser.email = this.registerForm.value.email;
     this.newUser.password = this.registerForm.value.password;
-    this.newUser.idPersonaldata = new PersonaldataModel();
-    this.newUser.idPersonaldata.name = this.registerForm.value.name;
-    this.newUser.idPersonaldata.surname = this.registerForm.value.surname;
-    this.newUser.idPersonaldata.dateOfBirth =  this.registerForm.value.dateOfBirth;
-    this.newUser.idPersonaldata.gender =  this.registerForm.value.gender;
+    this.newUser.personal_data = new PersonaldataModel();
+    this.newUser.personal_data.name = this.registerForm.value.name;
+    this.newUser.personal_data.surname = this.registerForm.value.surname;
+    this.newUser.personal_data.date_of_birth =  this.registerForm.value.dateOfBirth;
+    this.newUser.personal_data.gender =  this.registerForm.value.gender;
 
     this.loginService.register(this.newUser).subscribe((message)=>{
       this.callbackMessage = message;

@@ -18,7 +18,7 @@ export class UserService {
   loadUser(): Observable<UserModel> {
     this.app.setHeadersAndOptions();
     return new Observable<UserModel>((observer) => {
-      this.http.post<any>(environment.endpointBase + 'user', {}, this.app.options).subscribe(res => {
+      this.http.post<any>(environment.endpointBase + 'api/user', {}, this.app.options).subscribe(res => {
           this.user = res['body'] as UserModel;
           this.app.changeAuthenticated(true);
           this.changeNavbarPersonData();
@@ -55,7 +55,7 @@ export class UserService {
   }
 
   changeNavbarPersonData(){
-    this.personData.next(this.user.idPersonaldata.name + ' ' + this.user.idPersonaldata.surname);
+    this.personData.next(this.user.personal_data.name + ' ' + this.user.personal_data.surname);
   }
 
 }

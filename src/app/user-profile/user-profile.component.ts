@@ -59,13 +59,13 @@ export class UserProfileComponent implements OnInit {
 
   changeUserRole(){
     this.responseMessage= '';
-    this.newUserRole = this.user.idRole.name;
+    this.newUserRole = this.user.role.name;
     this.changingRole = true;
   }
 
   changePersonalData(){
     this.responseMessage= '';
-    this.newPersonalData = this.user.idPersonaldata;
+    this.newPersonalData = this.user.personal_data;
     this.changingPersonalData = true;
   }
 

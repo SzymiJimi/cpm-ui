@@ -26,7 +26,7 @@ export class LoginService{
     this.http.post<Observable<boolean>>(url, {
       username: credentials.username,
       password: credentials.password
-    }).subscribe(isValid => {
+    }, this.app.options).subscribe(isValid => {
       if (isValid) {
         this.logUserIn(credentials);
       } else {

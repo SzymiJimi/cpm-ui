@@ -13,7 +13,7 @@ export class OwnerDirective {
   showed = false;
 
   ngOnInit() {
-    if (this.userService.user.idRole.name === Roles.OWNER) {
+    if (this.userService.user.role.name === Roles.OWNER) {
       if (this.showed === false) {
         this.show();
       }
